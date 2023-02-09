@@ -37,6 +37,14 @@ router.delete("/:id",async (req: Request, res:Response) => {
     }
 })
 
-
+// find all hotels
+router.get("/", async(req: Request, res:Response)=> {
+    try {
+        const findAllHotels = await Hotel.find();
+        res.status(200).json(findAllHotels)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
 export default router;
 
