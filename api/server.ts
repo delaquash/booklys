@@ -15,10 +15,11 @@ app.get("/", (req:Request, res:Response)=> {
 })
 
 // middleware
-app.use("/auth", authRoute);
-app.use("/user", userRoute);
-app.use("/room", roomRoute);
-app.use("/hotel", hotelRoute);
+app.use(express.json())
+app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/user", userRoute);
+app.use("/api/v1/room", roomRoute);
+app.use("/api/v1/hotel", hotelRoute);
 
 app.listen(PORT, async ()=> {
     logger.info(`Server running in mode on ${PORT}`);
