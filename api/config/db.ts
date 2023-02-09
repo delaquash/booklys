@@ -1,9 +1,16 @@
 import mongoose from "mongoose";
-import  config  from "./config";
+import  config  from "config";
 
-const connect = async() => {
-     const conn =  await mongoose.connect(config.MONGO_URI)
-        console.log(`MongoDB Connected: ${conn.connection.host}`);
+const connectDB = async() => {
+    const MONGO_URI = config.get<string>("MONGO_URI")
+    try {
+        mongoose.set('strictQuery', true);
+        await mongoose.connect(MONGO_URI)
+        console.log("DB is Connected");
+    } catch (error) {
+        console.error("Could not connect to DB")
+        process.exit(1)
+    }
 }
 
-export default connect;
+export default connectDB;
