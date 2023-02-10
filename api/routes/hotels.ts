@@ -31,7 +31,7 @@ router.put("/:id", async(req: Request, res: Response)=> {
 router.delete("/:id",async (req: Request, res:Response) => {
     try {
         const deletedHotel = await Hotel.findByIdAndDelete(req.params.id)
-        res.status(201).json(deletedHotel)
+        res.status(201).json("Hotel has been deleted successfully.")
     } catch (error) {
         res.status(500).json(error)
     }
