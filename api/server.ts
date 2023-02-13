@@ -21,7 +21,7 @@ const errorHandlerMiddleware: ErrorRequestHandler =(err, req, res, next)=> {
         success: false,
         status: errorStatus,
         message: errorMessage,
-        err: err.stack 
+        stack: err.stack 
     })
 }
 // middleware
