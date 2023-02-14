@@ -1,4 +1,4 @@
-import express, {  Request, Response, ErrorRequestHandler } from "express";
+import express, {  Request, Response, ErrorRequestHandler, NextFunction } from "express";
 import connectDB from "./config/db";
 import config from "config";
 import authRoute from "./routes/auth";
@@ -14,7 +14,7 @@ app.get("/", (req:Request, res:Response)=> {
     res.send("Welcome")
 })
 
-const errorHandlerMiddleware: ErrorRequestHandler =(err, req, res, next)=> {
+const errorHandlerMiddleware: ErrorRequestHandler =(err, req:Request, res: Response, next:NextFunction)=> {
     const errorStatus = err.status || 500;
     const errorMessage= err.message || "Something went wrong";
     return res.status(errorStatus).json({

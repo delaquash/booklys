@@ -4,8 +4,11 @@ const router = express.Router();
 
 // creating new hotel
 router.post("/", createHotel)
+// deleting a hotel
 router.delete("/:id", deleteHotel)
+// updating a hotel
 router.put("/:id", updateHotel)
+// get all hotels
 router.get("/", findAllHotels)
 
 export default router;
