@@ -1,8 +1,12 @@
+class ErrorException extends Error {
+    status: number;
+    message: string;
 
-
-export const createError =(message: string, status?: any, )=> {
-    const err = new Error()
-    console.log(err);
-    err.message = message;
-    return err
+    constructor(status: number, message: string) {
+        super(message);
+        this.status = status;
+        this.message = message;
+      }
 }
+
+export default ErrorException;

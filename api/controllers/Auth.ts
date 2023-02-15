@@ -1,7 +1,7 @@
 import { Response, Request, NextFunction } from "express";
 import User from "../models/User";
 import bcrypt from 'bcryptjs';
-import { genSaltSync, hashSync } from "bcryptjs";
+import ErrorException from "../utils/error";
 
 export const RegisterUser = async (
   req: Request,
@@ -25,3 +25,13 @@ export const RegisterUser = async (
     next(err);
   }
 };
+
+export const LoginUser = async (req: Request, res: Response, next:NextFunction)=> {
+    try {
+        const user = await User.findOne({username: req.body.username})
+        // if there is no user
+        if(!user) return next(new ErrorException(404, "User does not exist"))
+    } catch (error) {
+        
+    }
+}
