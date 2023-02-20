@@ -11,8 +11,7 @@ interface IUser {
     isAdmin: boolean;
 }
 
-const UserSchema = new Schema<IUser>(
-    {
+const UserSchema = new Schema<IUser>({
       username: {
         type: String,
         required: true,
@@ -45,7 +44,7 @@ const UserSchema = new Schema<IUser>(
       isAdmin: {
         type: Boolean,
         default: false,
-      },
+      }
     },
     { timestamps: true }
   );

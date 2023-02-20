@@ -1,16 +1,23 @@
 import { Response, Request, NextFunction } from "express";
 import User from "../models/User";
-import bcrypt from 'bcryptjs';
+import bcrypt from "bcryptjs";
 import ErrorException from "../utils/error";
+import jwt from "jsonwebtoken";
 
-export const RegisterUser = async (
+declare var process: {
+  env: {
+    NODE_ENV: string;
+  };
+};
+
+export const register = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(req.body.password, salt )
+    const hash = bcrypt.hashSync(req.body.password, salt);
     const newUser = new User({
       username: req.body.username,
       email: req.body.email,
@@ -26,12 +33,30 @@ export const RegisterUser = async (
   }
 };
 
-export const LoginUser = async (req: Request, res: Response, next:NextFunction)=> {
-    try {
-        const user = await User.findOne({username: req.body.username})
-        // if there is no user
-        if(!user) return next(new ErrorException(404, "User does not exist"))
-    } catch (error) {
-        
-    }
-}
+export const login = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const user = await User.findOne({ username: req.body.username });
+    // if there is no user
+    if (!user) return next(new ErrorException(404, "User does not exist"));
+    // if password does not match
+    const isPasswordCorrect = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+    if (!isPasswordCorrect)
+      return next(new ErrorException(400, "Password is incorrect."));
+    const token = jwt.sign(
+      { id: user._id, isAdmin: user.isAdmin },
+      process.env.JWT_Secret
+    );
+    const { password, isAdmin, ...otherDetails } = user;
+
+    res.status(200).json({ ...otherDetails });
+  } catch (err) {
+    next(err);
+  }
+};
