@@ -22,6 +22,20 @@ export const deleteUser = async(req: Request, res: Response, next: NextFunction)
     }
 }
 
+
+export const findUser = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const findUser = await User.findById(req.params.id);
+      res.status(200).json(findUser);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  };
+
 export const findAllUsers = async(req: Request, res: Response, next: NextFunction)=> {
     try {
          const findAllUsers = await User.find();
