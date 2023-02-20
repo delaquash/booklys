@@ -43,13 +43,13 @@ export const login = async (
     );
     if (!isPasswordCorrect)
       return next(new ErrorException(400, "Password is incorrect."));
- /* Creating a token for the user. */
+    /* Creating a token for the user. */
     const token = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
       process.env.JWT_SECRET ?? ""
     );
     /* Destructuring the user object and removing the password and isAdmin properties. */
-    const { password, isAdmin, ...otherDetails } = user;
+    const { password, isAdmin, ...otherDetails } = user._doc;
     /* Setting a cookie on the client side. */
     res
       .cookie("access_token", token, {

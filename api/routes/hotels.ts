@@ -1,5 +1,5 @@
 import express from "express";
-import  { createHotel, deleteHotel, findAllHotels, updateHotel }  from "../controllers/Hotel";
+import  { createHotel, deleteHotel, findAllHotels, findHotel, updateHotel }  from "../controllers/Hotel";
 const router = express.Router();
 
 // creating new hotel
@@ -10,6 +10,8 @@ router.delete("/:id", deleteHotel)
 router.put("/:id", updateHotel)
 // get all hotels
 router.get("/", findAllHotels)
+// get single hostel
+router.get("/:id", findHotel)
 
 export default router;
 
