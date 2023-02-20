@@ -4,12 +4,6 @@ import bcrypt from "bcryptjs";
 import ErrorException from "../utils/error";
 import jwt from "jsonwebtoken";
 
-declare var process: {
-  env: {
-    NODE_ENV: string;
-  };
-};
-
 export const register = async (
   req: Request,
   res: Response,
@@ -49,13 +43,20 @@ export const login = async (
     );
     if (!isPasswordCorrect)
       return next(new ErrorException(400, "Password is incorrect."));
+ /* Creating a token for the user. */
     const token = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
-      process.env.JWT_Secret
+      process.env.JWT_SECRET ?? ""
     );
+    /* Destructuring the user object and removing the password and isAdmin properties. */
     const { password, isAdmin, ...otherDetails } = user;
-
-    res.status(200).json({ ...otherDetails });
+    /* Setting a cookie on the client side. */
+    res
+      .cookie("access_token", token, {
+        httpOnly: true,
+      })
+      .status(200)
+      .json({ ...otherDetails });
   } catch (err) {
     next(err);
   }

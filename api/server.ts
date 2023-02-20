@@ -7,6 +7,8 @@ import hotelRoute from "./routes/hotels";
 import roomRoute from "./routes/rooms";
 import logger  from "./logger";
 import ErrorException from "./utils/error";
+import cookieParser from "cookie-parser";
+
 
 const PORT = config.get<number>("PORT")
 const app = express();
@@ -29,6 +31,7 @@ const errorHandlerMiddleware:ErrorRequestHandler = (error: ErrorException, req: 
 
 // middleware
 app.use(express.json())
+app.use(cookieParser())
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/room", roomRoute);
