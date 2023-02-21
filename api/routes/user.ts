@@ -3,7 +3,7 @@ import { deleteUser, findAllUsers, findUser, updateUser } from "../controllers/U
 const router = express.Router()
 
 // privately update a user
-router.get("/:id", updateUser);
+router.post("/:id", updateUser);
 // privately delete user
 router.delete("/:id", deleteUser);
 // publicly find all user
