@@ -1,25 +1,15 @@
 import express from "express";
-import { Response, Request, NextFunction } from "express";
 import { deleteUser, findAllUsers, findUser, updateUser } from "../controllers/User";
-import { isAdmin, verifyToken, verifyUser } from "../utils/verifyToken";
+import { isAdmin, verifyUser } from "../utils/verifyToken";
 const router = express.Router()
 
-router.get("/checkAuth", verifyToken, (req: Request, res:Response, next:NextFunction)=> {
-    res.send("You are a verified user.")
-})
-
-router.get("/checkUser", isAdmin,(req: Request, res: Response) => {
-    res.send("You are verified Admin")
-})
-
-
 // privately update a user
-router.put("/:id", updateUser);
+router.put("/:id", verifyUser, updateUser);
 // privately delete user
-router.delete("/:id", deleteUser);
+router.delete("/:id",verifyUser, deleteUser);
 // publicly find all user
-router.get("/", findAllUsers);
+router.get("/", isAdmin, findAllUsers);
 // privately find user
-router.get("/:id", findUser)
+router.get("/:id", verifyUser, findUser);
 
 export default router;
