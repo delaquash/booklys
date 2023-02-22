@@ -46,3 +46,24 @@ export const verifyUser = (
     }
   });
 };
+
+export const isAdmin = (
+  err: any,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  verifyToken(req, res, () => {
+    if (req.user.isAdmin) {
+      next();
+    } else {
+      if (err)
+        return next(
+          new ErrorException(
+            403,
+            "You are not authorised to perform this action."
+          )
+        );
+    }
+  });
+};
