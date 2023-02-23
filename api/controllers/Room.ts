@@ -19,7 +19,7 @@ export const createRoom = async (
           rooms: savedRoom._id,
         },
       });
-      res.status(200).json("Room has been created successfully")
+      res.status(200).json("Room has been created successfully");
     } catch (err) {
       next(err);
     }
@@ -28,10 +28,21 @@ export const createRoom = async (
   }
 };
 
-export const updateRoom = async(req: Request, res: Response, next:NextFunction)=> {
-    try {
-        const updatedRoom = 
-    } catch (error) {
-        
-    }
-}
+export const updateRoom = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const updatedRoom = await Room.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      {
+        new: true,
+      }
+    );
+    res.status(201).json(updatedRoom)
+  } catch (error) {}
+};
