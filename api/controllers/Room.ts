@@ -43,36 +43,47 @@ export const updateRoom = async (
         new: true,
       }
     );
-    res.status(201).json(updatedRoom)
+    res.status(201).json(updatedRoom);
   } catch (err) {
-    next(err)
+    next(err);
   }
 };
 
 export const deleteRoom = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    try {
-      await Room.findByIdAndDelete(req.params.id);
-      res.status(201).json("Room has been deleted successfully.");
-    } catch (err) {
-      next(err)
-    }
-  };
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    await Room.findByIdAndDelete(req.params.id);
+    res.status(201).json("Room has been deleted successfully.");
+  } catch (err) {
+    next(err);
+  }
+};
 
-  
 export const findRoom = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    try {
-      const findRoom = await Room.findById(req.params.id);
-      res.status(200).json(findRoom);
-    } catch (err) {
-      next(err)
-    }
-  };
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const findRoom = await Room.findById(req.params.id);
+    res.status(200).json(findRoom);
+  } catch (err) {
+    next(err);
+  }
+};
 
+export const findAllRoom = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const findAllRoom = await Room.find();
+    res.status(200).json(findAllRoom);
+  } catch (err) {
+    next(err);
+  }
+};
