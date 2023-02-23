@@ -61,3 +61,18 @@ export const deleteRoom = async (
       next(err)
     }
   };
+
+  
+export const findRoom = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const findRoom = await Room.findById(req.params.id);
+      res.status(200).json(findRoom);
+    } catch (err) {
+      next(err)
+    }
+  };
+
