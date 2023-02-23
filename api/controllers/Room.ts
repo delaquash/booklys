@@ -44,5 +44,20 @@ export const updateRoom = async (
       }
     );
     res.status(201).json(updatedRoom)
-  } catch (error) {}
+  } catch (err) {
+    next(err)
+  }
 };
+
+export const deleteRoom = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      await Room.findByIdAndDelete(req.params.id);
+      res.status(201).json("Room has been deleted successfully.");
+    } catch (err) {
+      next(err)
+    }
+  };
