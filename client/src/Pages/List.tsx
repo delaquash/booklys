@@ -1,8 +1,13 @@
+import Header from "../Components/Header";
+import Navbar from "../Components/Navbar";
 
 const List = () => {
   return (
-    <div>List</div>
-  )
-}
+    <div>
+      <Navbar />
+      <Header type="list" />
+    </div>
+  );
+};
 
-export default List
+export default List;
