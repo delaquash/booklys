@@ -8,7 +8,7 @@ const MailList = () => {
         Sign up and we'll send the best deals to you.
       </span>
       <div className="inputContainer">
-        <input type="text" placeholder="Enter your mail" />\
+        <input type="text" placeholder="Enter your mail" />
         <button>Suscribe</button>
       </div>
     </div>
