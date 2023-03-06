@@ -19,6 +19,9 @@
   position: sticky;
   margin-top: 10px;
 }
+.listOptions {
+  padding: 5px;
+}
 
 .listResult {
   flex: 3;
@@ -67,4 +70,24 @@
 
 .ListOptionInput {
   width: 150px;
+}
+.isOptionText {
+  padding: 2px;
+}
+
+.listSearch > button {
+  padding: 10px;
+  background-color: #0071c2;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.listSearch > button:hover {
+    background-color: #000;
+    color: #fff;
 }

@@ -38,7 +38,7 @@ const List = () => {
                 />
               )}
             </div>
-            <div className="lstitem">
+            <div className="listItem">
               <label>Options</label>
               <div className="listOptions">
                 <div className="ListOptionItem">
@@ -88,6 +88,7 @@ const List = () => {
                 </div>
               </div>
             </div>
+            <button>Search</button>
           </div>
           <div className="listResult"></div>
         </div>
