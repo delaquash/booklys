@@ -54,15 +54,15 @@ const Header: FC<IProps> = ({ type }) => {
     adult: 1,
     rooms: 1,
   });
- 
-  const navigate = useNavigate()
 
-  const inputOnchange = (e:React.ChangeEvent<HTMLInputElement>) => {
-      setDestination(e.target.value)
-  }
+  const navigate = useNavigate();
+
+  const inputOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDestination(e.target.value);
+  };
 
   const handleSearch = () => {
-    navigate("/hotel", {state: {destination, date, options}})
+    navigate("/hotel", { state: { destination, date, options } });
   };
   const handleOption = (name: any, operation: string) => {
     setOptions((prev) => {
@@ -140,6 +140,7 @@ const Header: FC<IProps> = ({ type }) => {
                     moveRangeOnFirstSelection={false}
                     ranges={date}
                     className="date"
+                    minDate={new Date()}
                   />
                 )}
               </div>
