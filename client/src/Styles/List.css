@@ -1,0 +1,32 @@
+.listContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.listWrapper {
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    gap: 20px;
+}
+
+.listSearch {
+    flex: 1;
+    background-color: #fff000;
+    padding: 10px;
+    border-radius: 10px;
+    position: sticky;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.listResult {
+    flex: 3;
+}
+.isTitle {
+    margin-bottom: 10px;
+    color: #555;
+    font-size: 20px;
+}

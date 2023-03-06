@@ -2,7 +2,7 @@ import "../Styles/Footer.css";
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <footer>
       <div className="fLists">
         <ul className="fList">
           <li className="fListItem">Countries</li>
@@ -12,48 +12,47 @@ const Footer = () => {
           <li className="fListItem">Airports</li>
           <li className="fListItem">Hotel</li>
         </ul>
+
+      <ul className="fList">
+        <li className="fListItem">Countries</li>
+        <li className="fListItem">Region</li>
+        <li className="fListItem">District</li>
+        <li className="fListItem">Cities</li>
+        <li className="fListItem">Airports</li>
+        <li className="fListItem">Hotel</li>
+      </ul>
+
+      <ul className="fList">
+        <li className="fListItem">Countries</li>
+        <li className="fListItem">Region</li>
+        <li className="fListItem">District</li>
+        <li className="fListItem">Cities</li>
+        <li className="fListItem">Airports</li>
+        <li className="fListItem">Hotel</li>
+      </ul>
+
+      <ul className="fList">
+        <li className="fListItem">Countries</li>
+        <li className="fListItem">Region</li>
+        <li className="fListItem">District</li>
+        <li className="fListItem">Cities</li>
+        <li className="fListItem">Airports</li>
+        <li className="fListItem">Hotel</li>
+      </ul>
+
+      <ul className="fList">
+        <li className="fListItem">Countries</li>
+        <li className="fListItem">Region</li>
+        <li className="fListItem">District</li>
+        <li className="fListItem">Cities</li>
+        <li className="fListItem">Airports</li>
+        <li className="fListItem">Hotel</li>
+      </ul>
       </div>
-      <div className="fLists">
-        <ul className="fList">
-          <li className="fListItem">Countries</li>
-          <li className="fListItem">Region</li>
-          <li className="fListItem">District</li>
-          <li className="fListItem">Cities</li>
-          <li className="fListItem">Airports</li>
-          <li className="fListItem">Hotel</li>
-        </ul>
+      <div className="fText">
+            Copyright © 2023
       </div>
-      <div className="fLists">
-        <ul className="fList">
-          <li className="fListItem">Countries</li>
-          <li className="fListItem">Region</li>
-          <li className="fListItem">District</li>
-          <li className="fListItem">Cities</li>
-          <li className="fListItem">Airports</li>
-          <li className="fListItem">Hotel</li>
-        </ul>
-      </div>
-      <div className="fLists">
-        <ul className="fList">
-          <li className="fListItem">Countries</li>
-          <li className="fListItem">Region</li>
-          <li className="fListItem">District</li>
-          <li className="fListItem">Cities</li>
-          <li className="fListItem">Airports</li>
-          <li className="fListItem">Hotel</li>
-        </ul>
-      </div>
-      <div className="fLists">
-        <ul className="fList">
-          <li className="fListItem">Countries</li>
-          <li className="fListItem">Region</li>
-          <li className="fListItem">District</li>
-          <li className="fListItem">Cities</li>
-          <li className="fListItem">Airports</li>
-          <li className="fListItem">Hotel</li>
-        </ul>
-      </div>
-    </div>
+    </footer>
   );
 };
 
