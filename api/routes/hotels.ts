@@ -17,6 +17,8 @@ router.delete("/:id", isAdmin, deleteHotel);
 router.put("/:id", isAdmin, updateHotel);
 // get all hotels
 router.get("/", findAllHotels);
+router.get("/countByCity", findAllHotels);
+router.get("/countByType", findAllHotels);
 // get single hostel
 router.get("/:id", findHotel);
 

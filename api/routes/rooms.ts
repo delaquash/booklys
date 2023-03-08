@@ -1,13 +1,7 @@
 import express from "express";
 const router = express.Router();
 import { isAdmin } from "../utils/verifyToken";
-import {
-  createRoom,
-  deleteRoom,
-  findAllRoom,
-  findRoom,
-  updateRoom,
-} from "../controllers/Room";
+import { createRoom, deleteRoom, findAllRoom, findRoom, updateRoom } from "../controllers/Room";
 
 // creating new hotel
 router.post("/", isAdmin, createRoom);
