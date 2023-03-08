@@ -1,0 +1,81 @@
+.searchItem {
+  border: 1px solid #d3d3d3;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.sImg {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+}
+
+.iDesc {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex: 2;
+  font-weight: bold;
+}
+
+.siTitle {
+  font-size: 18px;
+  color: #0071c2;
+}
+
+.siDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.siDistance {
+  font-size: 20px;
+}
+
+.siTaxiOp {
+  font-size: 20px;
+  background-color: #0071c2;
+  color: #fff;
+  width: max-content;
+  border-radius: 5px;
+  padding: 6px;
+}
+
+.siSubtitle {
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.siFeatures {
+  font-size: 1rem;
+}
+.siCancelOp {
+  font-size: 1rem;
+  color: #008909;
+  font-weight: bold;
+}
+.isCanOpSubtitle {
+  font-size: 1rem;
+  color: #008909;
+}
+
+.siRatings {
+  display: flex;
+  justify-content: space-between;
+}
+.siRatings > span {
+  font-weight: 500;
+}
+.siRatings > button {
+  background-color: #003580;
+  color: #fff;
+  padding: 10px;
+  font-weight: bold;
+  border: none;
+}
