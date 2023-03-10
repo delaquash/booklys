@@ -7,7 +7,6 @@ import Hotel from "./Pages/Hotel";
 
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <Routes>
