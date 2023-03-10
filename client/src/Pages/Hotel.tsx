@@ -3,6 +3,8 @@ import Header from "../Components/Header";
 import Navbar from "../Components/Navbar";
 import "../Styles/Hotel.css";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import MailList from "../Components/MailList";
+import Footer from "../Components/Footer";
 
 const Hotel = () => {
   const photos = [
@@ -31,10 +33,11 @@ const Hotel = () => {
       <Header type="list" />
       <div className="hotelContainer">
         <div className="hotelWrapper">
+          <button className="bookNow">Reserve or Book Now</button>
           <h1 className="hotelTitle">Grand Hotel</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
-            <span> %6, Eko Hotel and Suite Driveway</span>
+            <span> 25 Eko Hotel and Suite Driveway</span>
           </div>
           <span className="hotelDistance">
             Excellent location - 500m from center
@@ -43,7 +46,7 @@ const Hotel = () => {
             Book a stay over $150 at this hotel and get a free taxi ride from
             airport
           </span>
-          <div className="hotelImg">
+          <div className="hotelImages">
             {photos.map((photo) => (
               <div className="hotelImgWrapper">
                 <img src={photo.src} alt="Image" className="hotelImg" />
@@ -81,6 +84,8 @@ const Hotel = () => {
             </div>
           </div>
         </div>
+        <MailList />
+        <Footer />
       </div>
     </div>
   );
