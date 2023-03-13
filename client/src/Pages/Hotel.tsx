@@ -2,11 +2,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../Components/Header";
 import Navbar from "../Components/Navbar";
 import "../Styles/Hotel.css";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircle,
+  faCircleArrowLeft,
+  faCircleArrowRight,
+  faCircleXmark,
+  faLocationDot,
+} from "@fortawesome/free-solid-svg-icons";
 import MailList from "../Components/MailList";
 import Footer from "../Components/Footer";
+import { SetStateAction, useState } from "react";
+
+interface Props {
+  // toggle: boolean;
+  handleSlider: (x: number) => void;
+}
 
 const Hotel = () => {
+  const [slideNumber, setSlideNumber] = useState(0);
+  const [open, setOpen] = useState(false);
   const photos = [
     {
       src: "https://images.unsplash.com/photo-1522798514-97ceb8c4f1c8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80",
@@ -27,11 +41,27 @@ const Hotel = () => {
       src: "https://images.unsplash.com/photo-1615460549969-36fa19521a4f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
     },
   ];
+  const handleSliderOpen = (
+    i: React.MouseEvent<HTMLImageElement, MouseEvent>
+  ) => {
+    setSlideNumber(i);
+    setOpen(true);
+  };
   return (
     <div>
       <Navbar />
       <Header type="list" />
       <div className="hotelContainer">
+        {open && (
+          <div className="slider">
+            <FontAwesomeIcon icon={faCircleXmark} />
+            <FontAwesomeIcon icon={faCircleArrowLeft} />
+            <div className="sliderWrapper">
+              <img src={photos[slideNumber].src} alt="" className="sliderImg" />
+            </div>
+            <FontAwesomeIcon icon={faCircleArrowRight} />
+          </div>
+        )}
         <div className="hotelWrapper">
           <button className="bookNow">Reserve or Book Now</button>
           <h1 className="hotelTitle">Grand Hotel</h1>
@@ -47,9 +77,14 @@ const Hotel = () => {
             airport
           </span>
           <div className="hotelImages">
-            {photos.map((photo) => (
+            {photos.map((photo, i) => (
               <div className="hotelImgWrapper">
-                <img src={photo.src} alt="Image" className="hotelImg" />
+                <img
+                  onClick={()=>handleSliderOpen(i)}
+                  src={photo.src}
+                  alt="Image"
+                  className="hotelImg"
+                />
               </div>
             ))}
           </div>
