@@ -3,7 +3,6 @@ import Header from "../Components/Header";
 import Navbar from "../Components/Navbar";
 import "../Styles/Hotel.css";
 import {
-
   faCircleArrowLeft,
   faCircleArrowRight,
   faCircleXmark,
@@ -11,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import MailList from "../Components/MailList";
 import Footer from "../Components/Footer";
-import {  useState } from "react";
+import { useState } from "react";
 
 interface Props {
   // toggle: boolean;
@@ -48,16 +47,16 @@ const Hotel = () => {
     setOpen(true);
   };
 
-  const handleSlide=(direction: string)=> {
+  const handleSlide = (direction: string) => {
     let newSlideNumber;
-    if(direction === "l") {
+    if (direction === "l") {
       /* A ternary operator. It is a shorthand way of writing an if/else statement. */
-      newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1
+      newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
     } else {
-      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1
+      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
     }
-    setSlideNumber(newSlideNumber)
-  }
+    setSlideNumber(newSlideNumber);
+  };
   return (
     <div>
       <Navbar />
@@ -70,11 +69,19 @@ const Hotel = () => {
               className="close"
               onClick={() => setOpen(!open)}
             />
-            <FontAwesomeIcon icon={faCircleArrowLeft} onClick={()=>handleSlide("l")} className="arrow"/>
+            <FontAwesomeIcon
+              icon={faCircleArrowLeft}
+              onClick={() => handleSlide("l")}
+              className="arrow"
+            />
             <div className="sliderWrapper">
               <img src={photos[slideNumber].src} alt="" className="sliderImg" />
             </div>
-            <FontAwesomeIcon icon={faCircleArrowRight} onClick={()=>handleSlide("r")} className="arrow"/>
+            <FontAwesomeIcon
+              icon={faCircleArrowRight}
+              onClick={() => handleSlide("r")}
+              className="arrow"
+            />
           </div>
         )}
         <div className="hotelWrapper">
