@@ -17,9 +17,9 @@ interface Props {
   // toggle: boolean;
   handleSlider: (x: number) => void;
 }
-
+import "../Styles/Hotel.css";
 const Hotel = () => {
-  const [slideNumber, setSlideNumber] = useState(0);
+  const [slideNumber, setSlideNumber] = useState<number>(0);
   const [open, setOpen] = useState(false);
   const photos = [
     {
@@ -47,6 +47,17 @@ const Hotel = () => {
     setSlideNumber(i);
     setOpen(true);
   };
+
+  const handleSlide=(direction: string)=> {
+    let newSlideNumber;
+    if(direction === "l") {
+      /* A ternary operator. It is a shorthand way of writing an if/else statement. */
+      newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1
+    } else {
+      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1
+    }
+    setSlideNumber(newSlideNumber)
+  }
   return (
     <div>
       <Navbar />
@@ -54,12 +65,16 @@ const Hotel = () => {
       <div className="hotelContainer">
         {open && (
           <div className="slider">
-            <FontAwesomeIcon icon={faCircleXmark} />
-            <FontAwesomeIcon icon={faCircleArrowLeft} />
+            <FontAwesomeIcon
+              icon={faCircleXmark}
+              className="close"
+              onClick={() => setOpen(!open)}
+            />
+            <FontAwesomeIcon icon={faCircleArrowLeft} onClick={()=>handleSlide("l")} className="arrow"/>
             <div className="sliderWrapper">
               <img src={photos[slideNumber].src} alt="" className="sliderImg" />
             </div>
-            <FontAwesomeIcon icon={faCircleArrowRight} />
+            <FontAwesomeIcon icon={faCircleArrowRight} onClick={()=>handleSlide("r")} className="arrow"/>
           </div>
         )}
         <div className="hotelWrapper">
@@ -80,7 +95,7 @@ const Hotel = () => {
             {photos.map((photo, i) => (
               <div className="hotelImgWrapper">
                 <img
-                  onClick={()=>handleSliderOpen(i)}
+                  onClick={() => handleSliderOpen(i)}
                   src={photo.src}
                   alt="Image"
                   className="hotelImg"
