@@ -3,7 +3,7 @@ import Header from "../Components/Header";
 import Navbar from "../Components/Navbar";
 import "../Styles/Hotel.css";
 import {
-  faCircle,
+
   faCircleArrowLeft,
   faCircleArrowRight,
   faCircleXmark,
@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import MailList from "../Components/MailList";
 import Footer from "../Components/Footer";
-import { SetStateAction, useState } from "react";
+import {  useState } from "react";
 
 interface Props {
   // toggle: boolean;
