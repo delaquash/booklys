@@ -70,3 +70,29 @@ export const findAllHotels = async (
     next(err);
   }
 };
+
+interface IHotels {
+  split(arg0: string): unknown;
+  cities: any;
+}
+
+export const findHotelByCity = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+/* Splitting the cities by comma. */
+  const cities: any = req.query.cities;
+  const splitedCity = cities.split(",");
+  try {
+    /* Counting the number of documents in the database. */
+    const list = await Promise.all(
+      splitedCity.map((city: any) => {
+        return Hotel.countDocuments({ city });
+      })
+    );
+    res.status(200).json(list);
+  } catch (err) {
+    next(err);
+  }
+};
