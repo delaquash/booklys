@@ -81,10 +81,11 @@ export const findHotelByCity = async (
   res: Response,
   next: NextFunction
 ) => {
+/* Splitting the cities by comma. */
   const cities: any = req.query.cities;
   const splitedCity = cities.split(",");
-  console.log(cities);
   try {
+    /* Counting the number of documents in the database. */
     const list = await Promise.all(
       splitedCity.map((city: any) => {
         return Hotel.countDocuments({ city });
