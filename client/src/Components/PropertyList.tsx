@@ -1,52 +1,36 @@
+import useFetch from "../Hooks/useFetch";
 import "../Styles/PropertyList.css";
 
 const PropertyList = () => {
+  const { data, loading, error } = useFetch(
+    "http://localhost:5000/api/v1/hotel/findByType"
+  );
+  console.log(data);
+  const images = [
+    "https://cf.bstatic.com/xdata/images/xphoto/square300/57584488.webp?k=bf724e4e9b9b75480bbe7fc675460a089ba6414fe4693b83ea3fdd8e938832a6&o=",
+    "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-apartments_300/9f60235dc09a3ac3f0a93adbc901c61ecd1ce72e.jpg",
+    "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/bg_resorts/6f87c6143fbd51a0bb5d15ca3b9cf84211ab0884.jpg",
+    "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-villas_300/dd0d7f8202676306a661aa4f0cf1ffab31286211.jpg",
+    "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg",
+  ];
+
   return (
     <div className="pList">
-      <div className="pListItem">
-        <img
-          src="https://cf.bstatic.com/xdata/images/city/max500/957801.webp?k=a969e39bcd40cdcc21786ba92826063e3cb09bf307bcfeac2aa392b838e9b7a5&o="
-          alt=""
-          className="pListImg"
-        />
-        <div className="pListTitles">
-          <h1>Hotels</h1>
-          <h2>233 Hotels</h2>
-        </div>
-      </div>
-      <div className="pListItem">
-        <img
-          src="https://cf.bstatic.com/xdata/images/city/max500/957801.webp?k=a969e39bcd40cdcc21786ba92826063e3cb09bf307bcfeac2aa392b838e9b7a5&o="
-          alt=""
-          className="pListImg"
-        />
-        <div className="pListTitles">
-          <h1>Hotels</h1>
-          <h2>233 Hotels</h2>
-        </div>
-      </div>
-      <div className="pListItem">
-        <img
-          src="https://cf.bstatic.com/xdata/images/city/max500/957801.webp?k=a969e39bcd40cdcc21786ba92826063e3cb09bf307bcfeac2aa392b838e9b7a5&o="
-          alt=""
-          className="pListImg"
-        />
-        <div className="pListTitles">
-          <h1>Hotels</h1>
-          <h2>233 Hotels</h2>
-        </div>
-      </div>
-      <div className="pListItem">
-        <img
-          src="https://cf.bstatic.com/xdata/images/city/max500/957801.webp?k=a969e39bcd40cdcc21786ba92826063e3cb09bf307bcfeac2aa392b838e9b7a5&o="
-          alt=""
-          className="pListImg"
-        />
-        <div className="pListTitles">
-          <h1>Hotels</h1>
-          <h2>233 Hotels</h2>
-        </div>
-      </div>
+      {loading ? (
+        "loading"
+      ) : (
+        <>
+          {data.map((info, i) => (
+            <div className="pListItem">
+              <img src={""} alt="" className="pListImg" />
+              <div className="pListTitles">
+                <h1>{info}</h1>
+                <h2> Hotels</h2>
+              </div>
+            </div>
+          ))}
+        </>
+      )}
     </div>
   );
 };
