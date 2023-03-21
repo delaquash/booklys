@@ -64,7 +64,7 @@ export const findAllHotels = async (
   next: NextFunction
 ) => {
   try {
-    const findAllHotels = await Hotel.find();
+    const findAllHotels = await Hotel.find(req.query);
     res.status(200).json(findAllHotels);
   } catch (err) {
     next(err);
@@ -108,11 +108,11 @@ export const findHotelByType = async (
     const villaCount = await Hotel.countDocuments({ type: "villa" });
     const cabinCount = await Hotel.countDocuments({ type: "cabin" });
     res.status(200).json([
-      { type: "hotel", count: "hotelCount" },
-      { type: "cabin", count: "cabinCount" },
-      { type: "appartment", count: "appartmentCount" },
-      { type: "resort", count: "resortCount" },
-      { type: "villa", count: "villaCount" },
+      { type: "hotel", count: hotelCount },
+      { type: "cabin", count: cabinCount },
+      { type: "appartment", count: appartmentCount },
+      { type: "resort", count: resortCount },
+      { type: "villa", count: villaCount },
     ]);
   } catch (err) {
     next(err);

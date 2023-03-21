@@ -20,7 +20,7 @@ router.put("/:id", isAdmin, updateHotel);
 // get all hotels
 router.get("/", findAllHotels);
 router.get("/countByCity", findHotelByCity);
-router.get("/countByType", findHotelByType);
+router.get("/findByType", findHotelByType);
 // get single hostel
 router.get("/:id", findHotel);
 
