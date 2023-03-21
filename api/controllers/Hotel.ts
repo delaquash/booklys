@@ -63,8 +63,9 @@ export const findAllHotels = async (
   res: Response,
   next: NextFunction
 ) => {
+  const limitedResult:any = req.query.limit;
   try {
-    const findAllHotels = await Hotel.find(req.query);
+    const findAllHotels = await Hotel.find(req.query).limit(limitedResult);
     res.status(200).json(findAllHotels);
   } catch (err) {
     next(err);
