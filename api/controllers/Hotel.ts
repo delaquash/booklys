@@ -58,19 +58,47 @@ export const findHotel = async (
   }
 };
 
+interface IReq {
+  min: number;
+  max: number;
+}
 export const findAllHotels = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const limitedResult:any = req.query.limit;
+  const { min, max, ...others } = req.query;
+  const {} = req.query;
+  const limitedResult: any = req.query.limit;
+
   try {
-    const findAllHotels = await Hotel.find(req.query).limit(limitedResult);
+    const findAllHotels = await Hotel.find({
+      ...others,
+      cheapestPrice: {
+        $gt: min || 1,
+        $lt: max || 9000,
+      },
+    }).limit(limitedResult);
     res.status(200).json(findAllHotels);
   } catch (err) {
     next(err);
   }
 };
+
+// export const findAllHotels = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   const limitedResult: any = req.query.limit;
+//   const { min, max, ...others } = req.query;
+//   try {
+//     const findAllHotels = await Hotel.find();
+//     res.status(200).json(findAllHotels);
+//   } catch (err) {
+//     next(err);
+//   }
+// };
 
 interface IHotels {
   split(arg0: string): unknown;
