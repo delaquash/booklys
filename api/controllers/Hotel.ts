@@ -75,8 +75,8 @@ export const findAllHotels = async (
     const findAllHotels = await Hotel.find({
       ...others,
       cheapestPrice: {
-        $gt: min || 1,
-        $lt: max || 9000,
+        gt: min || 1,
+        lt: max || 9000,
       },
     }).limit(limitedResult);
     res.status(200).json(findAllHotels);
