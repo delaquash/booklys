@@ -1,11 +1,14 @@
 import useFetch from "../Hooks/useFetch";
 import "../Styles/Featured.css";
 
+
+// using map function in react typescript
+
 const Featured = () => {
   const { data, loading, error } = useFetch(
     "http://localhost:5000/api/v1/hotel/countByCity?cities=abuja,port-harcourt,ogun,lagos"
   );
-
+// console.log(data);
   return (
     <div className="featured">
       {loading ? (
