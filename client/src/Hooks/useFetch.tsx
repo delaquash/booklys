@@ -5,31 +5,31 @@ interface IData {
   id?: string;
   name: string;
   address: string;
-  city: string;
-  cheapestPrice: number;
-  desc: string;
-  featured: boolean;
-  photos?: [];
-  rating: number;
-  rooms: string[];
-  title: string;
-  type: string;
-  distance: string;
-  price?: number;
-  maxPeople?: number;
-  roomNumbers?: number;
+  // city: string;
+  // cheapestPrice: number;
+  // desc: string;
+  // featured: boolean;
+  // photos?: [];
+  // rating: number;
+  // rooms: string[];
+  // title: string;
+  // type: string;
+  // distance: string;
+  // price?: number;
+  // maxPeople?: number;
+  // roomNumbers?: number;
 }
 
 const useFetch = (url: string) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
-  const [data, setData] = useState<IData | string[]>([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       // setLoading(true)
       try {
-        const res = await axios.get(url);
+        const res = await axios.get(url)
         setData(res.data);
       } catch (err: any) {
         setError(err);
