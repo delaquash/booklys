@@ -1,19 +1,30 @@
+import axios from "axios";
+import { format } from "date-fns";
+import { useEffect, useState } from "react";
+import { DateRange } from "react-date-range";
 import { useLocation } from "react-router-dom";
 import Header from "../Components/Header";
 import Navbar from "../Components/Navbar";
-import "../Styles/List.css";
-import { useState } from "react";
-import { format } from "date-fns";
-import { DateRange } from "react-date-range";
 import SearchItem from "../Components/SearchItem";
+import "../Styles/List.css";
 
 const List = () => {
   const location = useLocation();
-  console.log(location);
   const [destination, setDestination] = useState(location.state.destination);
   const [date, setDate] = useState(location.state.date);
   const [openDate, setOpenDate] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [options, setOptions] = useState(location.state.options);
+
+  const URL = `http://localhost:5000/api/v1/hotel?city=${destination}`;
+
+  useEffect(() => {
+    const resList = async () => {
+      const res = await axios.get(URL);
+      const resData = res.data();
+      console.log(resData);
+    };
+  }, []);
   return (
     <div>
       <Navbar />
@@ -93,15 +104,15 @@ const List = () => {
             <button>Search</button>
           </div>
           <div className="listResult">
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
+            {/* {loading ? "Loading" :  */}
+            <>
+              {/* {data.map((item)=>( */}
+              <SearchItem
+              // key={item._id}
+              />
+              {/* ))} */}
+            </>
+            {/* } */}
           </div>
         </div>
       </div>

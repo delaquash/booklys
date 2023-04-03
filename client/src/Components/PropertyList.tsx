@@ -1,11 +1,6 @@
 import useFetch from "../Hooks/useFetch";
 import "../Styles/PropertyList.css";
 
-export interface IData {
-  count: number;
-  type: string;
-}
-
 const PropertyList = () => {
   const { data, loading, error } = useFetch(
     "http://localhost:5000/api/v1/hotel/findByType"
