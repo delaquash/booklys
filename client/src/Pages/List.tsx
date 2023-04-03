@@ -13,6 +13,8 @@ const List = () => {
   const [destination, setDestination] = useState(location.state.destination);
   const [date, setDate] = useState(location.state.date);
   const [openDate, setOpenDate] = useState(false);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [options, setOptions] = useState(location.state.options);
 
@@ -20,9 +22,9 @@ const List = () => {
 
   useEffect(() => {
     const resList = async () => {
-      const res = await axios.get(URL);
-      const resData = res.data();
-      console.log(resData);
+      const { data } = await axios.get(URL);
+      setData(data);
+      console.log(data);
     };
   }, []);
   return (

@@ -27,9 +27,13 @@ const useFetch = (url: string) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true)
+      setLoading(true);
       try {
-        const res = await axios.get(url)
+        const res = await axios.get(url, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         setData(res.data);
       } catch (err: any) {
         setError(err);
