@@ -15,14 +15,14 @@ const List = () => {
   const [openDate, setOpenDate] = useState(false);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [loading, setLoading] = useState(false);
+
   const [options, setOptions] = useState(location.state.options);
 
   const URL = `http://localhost:5000/api/v1/hotel?city=${destination}`;
 
   useEffect(() => {
     const resList = async () => {
-      const { data } = await axios.get(URL);
+      const { data  } = await axios.get(URL);
       setData(data);
       console.log(data);
     };
@@ -106,15 +106,15 @@ const List = () => {
             <button>Search</button>
           </div>
           <div className="listResult">
-            {/* {loading ? "Loading" :  */}
+            {loading ? "Loading" : 
             <>
-              {/* {data.map((item)=>( */}
+              {data.map((item)=>( 
               <SearchItem
-              // key={item._id}
+               key={item.id}
               />
-              {/* ))} */}
-            </>
-            {/* } */}
+              ))}
+            </>}
+          
           </div>
         </div>
       </div>
