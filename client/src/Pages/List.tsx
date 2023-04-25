@@ -8,12 +8,30 @@ import Navbar from "../Components/Navbar";
 import SearchItem from "../Components/SearchItem";
 import "../Styles/List.css";
 
+// interface IData {
+//   id?: string;
+//   name: string;
+//   address: string;
+//   city: string;
+//   cheapestPrice: number;
+//   desc: string;
+//   featured: boolean;
+//   photos?: string[];
+//   rating: number;
+//   rooms: string[];
+//   title: string;
+//   type: string;
+//   distance: string;
+//   price?: number;
+//   maxPeople?: number;
+//   roomNumbers?: number;
+// }
 const List = () => {
   const location = useLocation();
   const [destination, setDestination] = useState(location.state.destination);
   const [date, setDate] = useState(location.state.date);
   const [openDate, setOpenDate] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const [options, setOptions] = useState(location.state.options);
@@ -22,7 +40,7 @@ const List = () => {
 
   useEffect(() => {
     const resList = async () => {
-      const { data  } = await axios.get(URL);
+      const { data } = await axios.get(URL);
       setData(data);
       console.log(data);
     };
@@ -106,15 +124,18 @@ const List = () => {
             <button>Search</button>
           </div>
           <div className="listResult">
-            {loading ? "Loading" : 
-            <>
-              {data.map((item)=>( 
-              <SearchItem
-               key={item.id}
-              />
-              ))}
-            </>}
-          
+            {loading ? (
+              "Loading"
+            ) : (
+              <>
+                {data.map((item) => (
+                  <SearchItem
+                    item={item}
+                     key={item.id}
+                  />
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>
