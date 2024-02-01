@@ -17,7 +17,6 @@ import cors from "cors";
 /* Loading the environment variables from the .env file. */
 require("dotenv").config();
 
-const PORT = config.get<number>("PORT");
 const app = express();
 
 app.get("/", (req: Request, res: Response) => {
@@ -49,6 +48,7 @@ app.use("/api/v1/hotel", hotelRoute);
 
 // error middleware
 app.use(errorHandlerMiddleware);
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, async () => {
   logger.info(`Server running in mode on ${PORT}`);
