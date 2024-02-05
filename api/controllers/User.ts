@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import User from "../models/User";
 import jwt from "jsonwebtoken";
 import { check, validationResult } from "express-validator";
@@ -14,7 +14,7 @@ const userValidationRules = [
   }),
 ];
 
-const register = async (req: Request, res: Response)=>{
+const register = async (req: Request, res: Response, next: NextFunction)=>{
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ message: errors.array() });
@@ -48,7 +48,7 @@ const register = async (req: Request, res: Response)=>{
     return res.status(200).send({ message: "User registered successfully" });
   } catch (error) {
     console.log(error);
-    res.status(500).send({ message: "Something went wrong" });
+    next(error)
   }
 }
 
