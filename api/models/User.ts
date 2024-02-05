@@ -1,4 +1,5 @@
 import mongoose, { Schema, model } from "mongoose";
+import bcrypt from "bcryptjs";
 
 interface MongoResult {
   _doc: any;
@@ -58,6 +59,13 @@ const UserSchema = new Schema<IUser>(
   },
   { timestamps: true }
 );
+
+UserSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 8);
+  }
+  next();
+});
 
 const User = model<IUser>("User", UserSchema);
 export default User;
