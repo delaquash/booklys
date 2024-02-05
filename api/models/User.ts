@@ -1,23 +1,9 @@
 import mongoose, { Schema, model } from "mongoose";
 import bcrypt from "bcryptjs";
+import { UserType } from "../types/data";
 
-interface MongoResult {
-  _doc: any;
-}
-interface IUser extends MongoResult {
-  // username: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  // country: string;
-  // img: string;
-  // city: string;
-  // phone: string;
-  password: string;
-  // isAdmin: boolean;
-}
 
-const UserSchema = new Schema<IUser>(
+const UserSchema = new Schema<UserType>(
   {
     // username: {
     //   type: String,
@@ -67,5 +53,5 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-const User = model<IUser>("User", UserSchema);
+const User = model<UserType>("User", UserSchema);
 export default User;

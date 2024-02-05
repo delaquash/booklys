@@ -8,16 +8,15 @@ import express, {
 } from "express";
 import connectDB from "./config/db";
 import logger from "./logger";
-import authRoute from "./routes/auth";
-import hotelRoute from "./routes/hotels";
-import roomRoute from "./routes/rooms";
+// import authRoute from "./routes/auth";
+// import hotelRoute from "./routes/hotels";
+// import roomRoute from "./routes/rooms";
 import userRoute from "./routes/user";
 import ErrorException from "./utils/error";
 import cors from "cors";
 /* Loading the environment variables from the .env file. */
 require("dotenv").config();
 
-const PORT = config.get<number>("PORT");
 const app = express();
 
 app.get("/", (req: Request, res: Response) => {
@@ -42,13 +41,14 @@ const errorHandlerMiddleware: ErrorRequestHandler = (
 app.use(cors())
 app.use(express.json());
 app.use(cookieParser());
-app.use("/api/v1/auth", authRoute);
+// app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/user", userRoute);
-app.use("/api/v1/room", roomRoute);
-app.use("/api/v1/hotel", hotelRoute);
+// app.use("/api/v1/room", roomRoute);
+// app.use("/api/v1/hotel", hotelRoute);
 
 // error middleware
 app.use(errorHandlerMiddleware);
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, async () => {
   logger.info(`Server running in mode on ${PORT}`);

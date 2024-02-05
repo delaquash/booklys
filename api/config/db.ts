@@ -1,18 +1,17 @@
 import mongoose from "mongoose";
-import  config  from "config";
+import config from "config";
 import logger from "../logger";
 
-
-const connectDB = async() => {
-    const MONGO_URI = config.get<string>("MONGO_URI")
+const connectDB = async () => {
+  if (process.env.MONGO_URI !== undefined) {
     try {
-        mongoose.set('strictQuery', true);
-        await mongoose.connect(MONGO_URI)
-       logger.info("DB is Connected");
+      const con = await mongoose.connect(process.env.MONGO_URI);
+      logger.info("MongoDB is connected");
     } catch (error) {
-        logger.error("Could not connect to DB")
-        process.exit(1)
+      logger.error("Could not connect to DB: ${error.message}");
+      process.exit(1);
     }
-}
+  }
+};
 
 export default connectDB;
