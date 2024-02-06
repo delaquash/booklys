@@ -23,11 +23,7 @@ const UserSchema = new Schema<UserType>(
     password: {
       type: String,
       required: true,
-    },
-    // isAdmin: {
-    //   type: Boolean,
-    //   default: false,
-    // },
+    }
   },
   { timestamps: true }
 );
