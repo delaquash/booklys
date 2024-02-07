@@ -1,6 +1,7 @@
 import React from 'react'
 import { Router, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './layout/Layout'
+import Register from './Pages/Register'
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           </Layout>
         }
       />
+      <Route path='/register' element={<Register/> }/>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
     // </Router>
