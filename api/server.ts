@@ -8,7 +8,7 @@ import express, {
 } from "express";
 import connectDB from "./config/db";
 import logger from "./logger";
-// import authRoute from "./routes/auth";
+import authRoute from "./routes/auth";
 // import hotelRoute from "./routes/hotels";
 // import roomRoute from "./routes/rooms";
 import userRoute from "./routes/user";
@@ -41,7 +41,7 @@ const errorHandlerMiddleware: ErrorRequestHandler = (
 app.use(cors())
 app.use(express.json());
 app.use(cookieParser());
-// app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/user", userRoute);
 // app.use("/api/v1/room", roomRoute);
 // app.use("/api/v1/hotel", hotelRoute);

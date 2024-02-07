@@ -46,5 +46,6 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
         console.log(error)
         next(error)
     }
-
 }
+
+export { login }
