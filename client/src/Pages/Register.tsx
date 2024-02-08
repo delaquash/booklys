@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import * as apiClient from "../Hooks/api-client";
+import { useMutation } from "react-query";
 
 export interface formProps {
   firstName: string;
@@ -20,6 +22,16 @@ const Register = () => {
   const onSubmit = handleSubmit((data) => {
     console.log(data);
   });
+  
+  const mutation = useMutation(apiClient.register, {
+    onSuccess:() => {
+
+    }, 
+    onError:(error: Error)=>{
+
+    }
+  })
+
   return (
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
       <h2 className="font-bold text-3xl">Create an account</h2>
@@ -32,6 +44,9 @@ const Register = () => {
             })}
             className="border rounded w-full py-1 px-2 font-normal"
           ></input>
+          {errors.email && (
+            <span className="text-red-500">{errors.firstName?.message}</span>
+          )}
         </label>
         <label className="text-gray-700 text-sm font-bold flex-1">
           Last Name
@@ -39,6 +54,9 @@ const Register = () => {
             {...register("lastName", { required: "This is a required field." })}
             className="border rounded w-full py-1 px-2 font-normal"
           ></input>
+          {errors.email && (
+            <span className="text-red-500">{errors.lastName?.message}</span>
+          )}
         </label>
         </div>
         <label className="text-gray-700 text-sm font-bold flex-1">
