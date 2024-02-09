@@ -38,7 +38,7 @@ const errorHandlerMiddleware: ErrorRequestHandler = (
 };
 
 const corsOptions = {
-  origin: 'http://localhost:5173', // Allow only this origin to send requests
+  origin: process.env.FRONT_END_URL, // Allow only this origin to send requests
   credentials: true, // Allowing credentials
 };
 
