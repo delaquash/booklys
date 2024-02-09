@@ -51,6 +51,6 @@ app.use(errorHandlerMiddleware);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, async () => {
-  logger.info(`Server running in mode on ${PORT}`);
+  logger.info(`Server is running in mode on ${PORT}`);
   await connectDB();
 });

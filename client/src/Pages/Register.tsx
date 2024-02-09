@@ -19,18 +19,21 @@ const Register = () => {
     formState: { errors },
   } = useForm<formProps>();
 
+  const mutation = useMutation(apiClient.register, {
+    onSuccess:() => {
+      console.log("Regstration successful")
+    }, 
+    onError:(error: Error)=>{
+      console.log(`Registration failed ${error.message}`)
+    }
+  })
+
   const onSubmit = handleSubmit((data) => {
+    mutation.mutate(data)
     console.log(data);
   });
   
-  const mutation = useMutation(apiClient.register, {
-    onSuccess:() => {
 
-    }, 
-    onError:(error: Error)=>{
-
-    }
-  })
 
   return (
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
