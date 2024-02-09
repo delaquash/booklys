@@ -36,7 +36,6 @@ const Register = () => {
   });
   
 
-
   return (
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
       <h2 className="font-bold text-3xl">Create an account</h2>
