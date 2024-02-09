@@ -21,7 +21,9 @@ export const AppContextProvider = ({
   return (
     <AppContext.Provider
       value={{
-        showToast: () => undefined,
+        showToast: (toastMessage) => {
+            console.log(toastMessage)
+        }
       }}
     >
       {children}
