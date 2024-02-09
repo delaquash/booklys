@@ -1,57 +1,39 @@
 import mongoose, { Schema, model } from "mongoose";
+import bcrypt from "bcryptjs";
+import { UserType } from "../types/data";
 
-interface MongoResult {
-  _doc: any;
-}
-interface IUser extends MongoResult {
-  username: string;
-  email: string;
-  country: string;
-  img: string;
-  city: string;
-  phone: string;
-  password: string;
-  isAdmin: boolean;
-}
 
-const UserSchema = new Schema<IUser>(
+const UserSchema = new Schema<UserType>(
   {
-    username: {
-      type: String,
-      required: true,
-      unique: true,
-    },
+    // username: {
+    //   type: String,
+    //   required: true,
+    //   unique: true,
+    // },
     email: {
       type: String,
       required: true,
       unique: true,
     },
-    country: {
+    firstName: {
       type: String,
       required: true,
     },
-    img: {
-      type: String,
-    },
-    city: {
-      type: String,
-      required: true,
-    },
-    phone: {
-      type: String,
-      required: true,
-    },
+   
     password: {
       type: String,
       required: true,
-    },
-    isAdmin: {
-      type: Boolean,
-      default: false,
-    },
+    }
   },
   { timestamps: true }
 );
 
-const User = model<IUser>("User", UserSchema);
+UserSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 8);
+  }
+  next();
+});
+
+const User = model<UserType>("User", UserSchema);
 export default User;

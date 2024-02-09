@@ -1,13 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import "./index.css";
 import { BrowserRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { AppContextProvider } from "./context/AppContext";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 0,
+    }
+  }
+})
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <BrowserRouter>
-    <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+    <AppContextProvider>
       <App />
-    </React.StrictMode>
-    ,
-  </BrowserRouter>
+    </AppContextProvider>
+    </BrowserRouter>
+  </QueryClientProvider>
+  
 );

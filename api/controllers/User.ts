@@ -1,58 +1,55 @@
-import { Response, Request, NextFunction } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import User from "../models/User";
+import jwt from "jsonwebtoken";
+import { check, validationResult } from "express-validator";
 
-export const updateUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+
+// Validation middleware array
+const userValidationRules = [
+  check("firstName", "First Name is required").isString(),
+  check("lastName", "Last Name is required").isString(),
+  check("email", "Email is required").isEmail(),
+  check("password", "Password with 6 or more characters required").isLength({
+    min: 6,
+  }),
+];
+
+const register = async (req: Request, res: Response, next: NextFunction)=>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ message: errors.array() });
+  }
+
   try {
-    const updateUser = await User.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
-      { new: true }
+    let user = await User.findOne({
+      email: req.body.email,
+    });
+
+    if (user) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
+    user = new User(req.body);
+    await user.save();
+
+    const token = jwt.sign(
+      { userId: user.id },
+      process.env.JWT_SECRET_KEY as string,
+      {
+        expiresIn: "60d",
+      }
     );
-    res.status(201).json(updateUser);
-  } catch (error) {
-    next(error);
-  }
-};
 
-export const deleteUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    await User.findByIdAndDelete(req.params.id);
-    res.status(201).json("User has been deleted successfully.");
+    res.cookie("auth_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 86400000,
+    });
+    return res.status(200).send({ message: "User registered successfully" });
   } catch (error) {
+    console.log(error);
     next(error)
   }
-};
+}
 
-export const findUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const findUser = await User.findById(req.params.id);
-    res.status(200).json(findUser);
-  } catch (error) {
-    next(error)
-  }
-};
-
-export const findAllUsers = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const findAllUsers = await User.find();
-    res.status(200).json(findAllUsers);
-  } catch (error) {
-    next(error)
-  }
-};
+export { register, userValidationRules }
