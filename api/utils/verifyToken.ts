@@ -2,6 +2,14 @@ import jwt from "jsonwebtoken";
 import ErrorException from "./error";
 import { Response, Request, NextFunction } from "express";
 
+declare global {
+  namespace Express {
+      interface Request {
+          user: any;
+      }
+  }
+}
+
 export const verifyToken = (
   req: Request,
   res: Response,
