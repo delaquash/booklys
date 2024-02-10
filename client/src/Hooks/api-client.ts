@@ -24,3 +24,16 @@ export const register = async (formData: formProps) => {
   }
 };
 
+export const validateToken = async( )=> {
+  const res = await axios.get(`${API_BASE_URL}/auth/validateToken`, {
+    withCredentials: true
+  })
+
+  if(!res) {
+    throw new Error("Token  validation failed")
+  }
+  
+  return res.data
+
+}
+
