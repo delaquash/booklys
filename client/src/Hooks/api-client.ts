@@ -38,5 +38,5 @@ export const validateToken = async( )=> {
 }
 
 export const signin = async() => {
-  const res = await axios.post(`${API_BASE_URL}/auth/signIn`)
+  const res = await axios.post(`${API_BASE_URL}/auth/login`)
 }
