@@ -1,5 +1,6 @@
 import {Request, Response, NextFunction} from "express";
 import jwt , {JwtPayload }from "jsonwebtoken";
+import ErrorException from "../utils/error";
 
 declare global {
     namespace Express {
@@ -11,12 +12,11 @@ declare global {
 
 const verifyToken= async (req: Request, res: Response, next: NextFunction) => {
     const token = res.cookie["auth_token"];
-    if(!token) return res.status(401).json({message: "User unauthorized."})
-   
+    if(!token) return next(new ErrorException(401,"No auth token provided"));
     try {
         const decode = jwt.verify(token, process.env.JWT_SECRET as string)
         req.userId = (decode as JwtPayload).userId;
     } catch (error) {
-        res.status(401).json({message: "User unauthorized."})
+        next(new ErrorException(403, "Token not valid"));
     }
 }

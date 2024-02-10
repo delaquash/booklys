@@ -27,7 +27,7 @@ export const verifyToken = (
     );
   }
 
-  jwt.verify(token, process.env.JWT_SECRET ?? "", (err: any, user: any) => {
+  jwt.verify(token, process.env.JWT_SECRET as string, (err: any, user: any) => {
     if (err) return next(new ErrorException(403, "Token not valid"));
     req.user = user;
     next();
