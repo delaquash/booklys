@@ -43,9 +43,14 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
           });
           res.status(200).json({ userId: user._id });
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }
 
-export { login }
+const validateToken =async ( req: Request,
+  res: Response,
+  next: NextFunction ) => {
+    res.status(200).send({userId: req.userId})
+  }
+
+export { login, validateToken}

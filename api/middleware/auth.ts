@@ -16,6 +16,7 @@ const verifyToken= async (req: Request, res: Response, next: NextFunction) => {
     try {
         const decode = jwt.verify(token, process.env.JWT_SECRET as string)
         req.userId = (decode as JwtPayload).userId;
+        next();
     } catch (error) {
         next(new ErrorException(403, "Token not valid"));
     }
