@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {useForm } from "react-hook-form";
+import { useMutation } from "react-query";
 
 interface SignInProps {
     email: string
@@ -8,6 +9,7 @@ interface SignInProps {
 }
 
 const SignIn = () => {
+
     const {
         register,
         watch,
@@ -15,6 +17,19 @@ const SignIn = () => {
         formState: { errors },
       } = useForm<SignInProps>();
 
+      const mutation = useMutation(apiClient.register, {
+        onSuccess:() => {
+          showToast({message: "Registration successful", type: "SUCCESS"});
+          navigate("/");
+        }, 
+        onError:(error: Error)=>{
+          showToast({message: error.message, type: "ERROR"})
+        }
+      })
+
+      const onSubmit = handleSubmit((data)=>{
+        mutation.mutate(data)
+      })
   return (
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
     <h2 className="text-3xl font-bold">Sign In</h2>
@@ -65,3 +80,7 @@ const SignIn = () => {
 }
 
 export default SignIn
+
+function showToast(arg0: { message: string; type: string; }) {
+    throw new Error('Function not implemented.');
+}
