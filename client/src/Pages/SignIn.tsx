@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {useForm } from "react-hook-form";
 import { useMutation } from "react-query";
+
 
 interface SignInProps {
     email: string
@@ -9,7 +10,7 @@ interface SignInProps {
 }
 
 const SignIn = () => {
-
+    const navigate = useNavigate()
     const {
         register,
         watch,
