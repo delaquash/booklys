@@ -1,5 +1,6 @@
 import { formProps } from "../Pages/Register";
 import axios from 'axios';
+import { SignInProps } from "../Pages/SignIn";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
@@ -24,7 +25,7 @@ export const register = async (formData: formProps) => {
   }
 };
 
-export const validateToken = async( )=> {
+export const validateToken = async(formData: SignInProps )=> {
   const res = await axios.get(`${API_BASE_URL}/auth/validateToken`, {
     withCredentials: true
   })

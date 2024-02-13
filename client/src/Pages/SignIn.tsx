@@ -2,9 +2,9 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {useForm } from "react-hook-form";
 import { useMutation } from "react-query";
+import * as apiClient from "../Hooks/api-client";
 
-
-interface SignInProps {
+export interface SignInProps {
     email: string
     password: string
 }
@@ -18,7 +18,7 @@ const SignIn = () => {
         formState: { errors },
       } = useForm<SignInProps>();
 
-      const mutation = useMutation(apiClient.register, {
+      const mutation = useMutation(apiClient.signin, {
         onSuccess:() => {
           showToast({message: "Registration successful", type: "SUCCESS"});
           navigate("/");
