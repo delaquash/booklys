@@ -25,20 +25,17 @@ export const register = async (formData: formProps) => {
   }
 };
 
-export const validateToken = async(formData: SignInProps )=> {
+export const validateToken = async ()=> {
   const res = await axios.get(`${API_BASE_URL}/auth/validateToken`, {
     withCredentials: true
   })
-
   if(!res) {
     throw new Error("Token  validation failed")
   }
-  
   return res.data
-
 }
 
-export const signin = async() => {
+export const signin = async(formData: SignInProps ) => {
   try {
     const res = await axios.post(`${API_BASE_URL}/auth/login`, {
       withCredentials: true,
