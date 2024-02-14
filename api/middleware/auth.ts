@@ -1,5 +1,5 @@
 import {Request, Response, NextFunction} from "express";
-import jwt , {JwtPayload }from "jsonwebtoken";
+import jwt , { JwtPayload }from "jsonwebtoken";
 import ErrorException from "../utils/error";
 
 declare global {
