@@ -21,3 +21,5 @@ const verifyToken= async (req: Request, res: Response, next: NextFunction) => {
         next(new ErrorException(403, "Token not valid"));
     }
 }
+
+export default verifyToken;
