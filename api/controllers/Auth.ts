@@ -4,6 +4,14 @@ import User from "../models/User";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+declare global {
+  namespace Express {
+      interface Request {
+          userId: string;
+      }
+  }
+}
+
 const loginValidator = 
     [
         check("email", "Email is required").isEmail(),
