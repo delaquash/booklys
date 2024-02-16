@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import {useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import * as apiClient from "../Hooks/api-client";
+import { useAppContext } from '../context/AppContext';
 
 export interface SignInProps {
     email: string
@@ -10,7 +11,8 @@ export interface SignInProps {
 }
 
 const SignIn = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { showToast } = useAppContext();
     const {
         register,
         watch,
@@ -18,7 +20,7 @@ const SignIn = () => {
         formState: { errors },
       } = useForm<SignInProps>();
 
-      const mutation = useMutation(apiClient.signin, {
+      const mutation = useMutation(apiClient.signIn, {
         onSuccess:() => {
           showToast({message: "Registration successful", type: "SUCCESS"});
           navigate("/");
@@ -82,6 +84,3 @@ const SignIn = () => {
 
 export default SignIn
 
-function showToast(arg0: { message: string; type: string; }) {
-    throw new Error('Function not implemented.');
-}

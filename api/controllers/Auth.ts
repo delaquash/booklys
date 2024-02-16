@@ -56,10 +56,8 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 }
 
 
-const validateToken =async ( req: Request,
-  res: Response,
-  next: NextFunction ) => {
+const validateToken = (req: Request, res: Response ) => {
     res.status(200).send({userId: req.userId})
-  }
+}
 
 export { login, validateToken}

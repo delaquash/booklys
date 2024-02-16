@@ -35,23 +35,40 @@ export const validateToken = async ()=> {
   return res.data
 }
 
-export const signin = async(formData: SignInProps ) => {
-  try {
-    const res = await axios.post(`${API_BASE_URL}/auth/login`, {
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    return res.data;
-  } catch (error:any) {
-    if (error.response) {
-      throw new Error(error.response.data.message);
-    } else if (error.request) {
-      throw new Error("No response was received from the server");
-    } else {
-      throw new Error("Error: " + error.message);
-      console.log(error.message)
-    }
+export const signIn = async (formData: SignInProps) => {
+  const response = await fetch(`${API_BASE_URL}/auth/login`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  });
+
+  const body = await response.json();
+  if (!response.ok) {
+    throw new Error(body.message);
   }
-}
+  return body;
+};
+
+// export const signin = async(formData: SignInProps ) => {
+//   try {
+//     const { data }= await axios.post(`${API_BASE_URL}/auth/login`, {
+//       withCredentials: true,
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+//     return data;
+//   } catch (error:any) {
+//     if (error.response) {
+//       throw new Error(error.response.data.message);
+//     } else if (error.request) {
+//       throw new Error("No response was received from the server");
+//     } else {
+//       throw new Error("Error: " + error.message);
+//       console.log(error.message)
+//     }
+//   }
+// }
