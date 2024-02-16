@@ -52,6 +52,16 @@ export const signIn = async (formData: SignInProps) => {
   return body;
 };
 
+
+export const signout = async () => {
+  const res = await fetch (`${API_BASE_URL}/auth/logout`, {
+    credentials: "include",
+    method: "POST"
+  })
+  if (!res.ok) {
+    throw new Error("Error during sign out");
+  }
+}
 // export const signin = async(formData: SignInProps ) => {
 //   try {
 //     const { data }= await axios.post(`${API_BASE_URL}/auth/login`, {
