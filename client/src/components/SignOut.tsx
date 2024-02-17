@@ -1,18 +1,25 @@
 import { useActionData } from "react-router-dom";
 import { useAppContext } from "../context/AppContext"
 import * as apiClient from "../Hooks/api-client";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
 const SignOut = () => {
-    const {showToast} = useAppContext();
+    const queryClient = useQueryClient();
+    const { showToast } = useAppContext();
+  
     const mutation = useMutation(apiClient.signout, {
-        onSuccess:()=>{},
-        onError:()=>{}
-    })
-
-    const handleClick =()=> {
-        mutation.mutate()
-    }
+      onSuccess: async () => {
+        await queryClient.invalidateQueries("validateToken");
+        showToast({ message: "Signed Out!", type: "SUCCESS" });
+      },
+      onError: (error: Error) => {
+        showToast({ message: error.message, type: "ERROR" });
+      },
+    });
+  
+    const handleClick = () => {
+      mutation.mutate();
+    };
 
   return (
     <button
