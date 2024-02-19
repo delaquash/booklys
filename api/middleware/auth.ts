@@ -10,7 +10,7 @@ declare global {
     }
 }
 
-const verifyToken= async (req: Request, res: Response, next: NextFunction) => {
+const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
     const token = res.cookie["auth_token"];
     if(!token) return next(new ErrorException(401,"No auth token provided"));
     try {
