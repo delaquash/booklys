@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node --files server.ts",
     "start": "nodemon server",
-    "server": "nodemon server"
+    "server": "nodemon server",
+    "e2e": "cross-env DOTENV_CONFIG_PATH=.env.e2e nodemon"
   },
   "author": "Olaide Emmanuel",
   "license": "MIT",

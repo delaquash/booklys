@@ -11,7 +11,7 @@ declare global {
 }
 
 const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
-    const token = res.cookie["auth_token"];
+    const token = req.cookies["auth_token"];
     if(!token) return next(new ErrorException(401,"No auth token provided"));
     try {
         const decode = jwt.verify(token, process.env.JWT_SECRET as string)
