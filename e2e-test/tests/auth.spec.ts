@@ -1,16 +1,16 @@
 import { test, expect } from '@playwright/test';
 
+const UI_URL = "http://localhost:5173/"
 
+test('should allow the user to sign in', async ({ page }) => {
+  await page.goto(UI_URL);
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+  // get the sign in button
+  await page.getByRole("link", {name: "Sign In"}).click()
 });
 
 test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await page.goto(UI_URL);
 
   // Click the get started link.
   await page.getByRole('link', { name: 'Get started' }).click();
