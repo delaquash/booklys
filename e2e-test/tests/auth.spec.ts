@@ -14,8 +14,8 @@ test('should allow the user to sign in', async ({ page }) => {
   await expect(page.getByRole("heading", {name: "Sign In"})).toBeVisible()
 
   // testing the email and password input 
-  await page.locator("[name=email]").fill("")
-  await page.locator("[name=password]").fill("")
+  await page.locator("[name=email]").fill("local@local.gmail")
+  await page.locator("[name=password]").fill("Equarshie85")
 
   // testing the login button
   await page.getByRole("button", {name: "Login"}).click();
@@ -28,12 +28,12 @@ test('should allow the user to sign in', async ({ page }) => {
       await expect(page.getByRole("button", {name: "Sign Out"})).toBeVisible();
 });
 
-test('get started link', async ({ page }) => {
-  await page.goto(UI_URL);
+// test('get started link', async ({ page }) => {
+//   await page.goto(UI_URL);
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+//   // Click the get started link.
+//   await page.getByRole('link', { name: 'Get started' }).click();
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
+//   // Expects page to have a heading with the name of Installation.
+//   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+// });
