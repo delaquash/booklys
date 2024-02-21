@@ -22,6 +22,10 @@ test('should allow the user to sign in', async ({ page }) => {
 
   // Testing the response after login
   await expect(page.getByText("Sign in Successful!")).toBeVisible();
+  // testing the link and sign out button
+  await expect(page.getByRole("link", {name: "My Bookings"})).toBeVisible();
+    await expect(page.getByRole("link", {name: "My Hotels"})).toBeVisible();
+      await expect(page.getByRole("button", {name: "Sign Out"})).toBeVisible();
 });
 
 test('get started link', async ({ page }) => {
