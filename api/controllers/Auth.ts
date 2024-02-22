@@ -3,6 +3,8 @@ import { check, validationResult } from "express-validator";
 import User from "../models/User";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import verifyToken from "../middleware/auth";
+
 
 declare global {
   namespace Express {
@@ -56,7 +58,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 }
 
 
-const validateToken =( req: Request, res: Response ) => {
+const validateToken = (req: Request, res: Response) => {
     res.status(200).send({userId: req.userId})
   }
 
