@@ -9,17 +9,20 @@ declare global {
         }
     }
 }
-
-const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
+const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     const token = req.cookies["auth_token"];
-    if(!token) return next(new ErrorException(401,"No auth token provided"));
-    try {
-        const decode = jwt.verify(token, process.env.JWT_SECRET as string)
-        req.userId = (decode as JwtPayload).userId;
-        next();
-    } catch (error) {
-        next(new ErrorException(403, "Token not valid"));
+    if (!token) {
+      return res.status(401).json({ message: "unauthorized" });
     }
-}
+  
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY as string);
+      req.userId = (decoded as JwtPayload).userId;
+      next();
+    } catch (error) {
+      return res.status(401).json({ message: "unauthorized" });
+    }
+  };
+  
 
 export default verifyToken;
