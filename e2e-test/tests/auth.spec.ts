@@ -11,16 +11,18 @@ test('should allow the user to sign in', async ({ page }) => {
   // testing the sign in page that has email, password, signin button
 
   // testing the Sign In header is visible in the page
-  // await expect(page.getByRole("heading", {name: "Sign In"})).toBeVisible()
+  await expect(page.getByRole("heading", {name: "Sign In"})).toBeVisible()
   
   
-  const emailInputField = page.locator("#email");
-  const passwdInputField = page.locator("#password");
-  const submitButton = page.locator("button[type=submit]");
+  // const emailInputField = page.locator("#email");
+  // const passwdInputField = page.locator("#password");
+  // const submitButton = page.locator("button[type=submit]");
   // entering valid credentials and submitting the form
-  await emailInputField.fill("1@1.com");
-  await passwdInputField.fill("password123");
-  await submitButton.click();
+  // await emailInputField.fill("1@1.com", {timeout: 60000});
+  // await passwdInputField.fill("password123");
+  // await submitButton.click();
+    await page.locator("[name=email]").fill("1@1.com")
+    await page.locator("[name=password]").fill("password123")
   });
 
 

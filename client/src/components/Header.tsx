@@ -13,7 +13,7 @@ const Header = () => {
                 <Link to="/">Delabookings.com</Link>
             </span>
             <span className="flex space-x-2">
-          {isLoggedIn ? (
+          { isLoggedIn ? (
             <>
               <Link
                 className="flex items-center text-white px-3 font-bold hover:bg-blue-600"

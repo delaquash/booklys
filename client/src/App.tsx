@@ -30,7 +30,7 @@ const App = () => {
             <Register/> 
           </Layout>  
         }/>
-        <Route path='/signin' 
+        <Route path='/sign-in' 
         element={
           <Layout>
             <SignIn /> 

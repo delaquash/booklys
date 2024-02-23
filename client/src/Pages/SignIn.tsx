@@ -23,20 +23,20 @@ const SignIn = () => {
       } = useForm<SignInProps>();
 
       const mutation = useMutation(apiClient.signIn, {
-        onSuccess:async() => {
-          showToast({message: "Registration successful", type: "SUCCESS"});
+        onSuccess: async () => {
+          showToast({message: "Sign in successful", type: "SUCCESS"});
           await queryClient.invalidateQueries("validateToken")
           navigate(location.state?.from?.pathname || "/");
         }, 
         onError:(error: Error)=>{
-          showToast({message: error.message, type: "ERROR"})
-          console.log(error.message)
+          showToast({ message: error.message, type: "ERROR"})
         }
       })
 
       const onSubmit = handleSubmit((data)=>{
         mutation.mutate(data)
       })
+
   return (
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
     <h2 className="text-3xl font-bold">Sign In</h2>

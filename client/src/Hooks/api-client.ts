@@ -38,14 +38,14 @@ export const signIn = async (formData: SignInProps) => {
 
   const body = await response.json();
   if (!response.ok) {
-    throw new Error(body.message);
+    throw new Error(body.message  || "Invalid Credentials");
   }
   return body;
 };
 
 
 export const validateToken = async () => {
-  const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
+  const response = await fetch(`${API_BASE_URL}/auth/validate-token`, {
     credentials: "include",
   });
 
