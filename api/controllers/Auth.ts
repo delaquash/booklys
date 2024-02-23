@@ -5,7 +5,6 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import verifyToken from "../middleware/auth";
 
-
 declare global {
   namespace Express {
       interface Request {
@@ -34,17 +33,14 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
             return res.status(401).json({ msg: "Invalid credentials"})
         }
 
-        const isMatch = bcrypt.compare(password, user.password)
+        const isMatch = await bcrypt.compare(password, user.password)
         if(!isMatch){
             return res.status(400).json({msg:"Invalid credentials"});
         }
 
         const token = jwt.sign(
             { userId: user.id },
-            process.env.JWT_SECRET_KEY as string,
-            {
-              expiresIn: "60d",
-            }
+            process.env.JWT_SECRET_KEY as string
           );
           res.cookie("auth_token", token, {
             httpOnly: true,
@@ -59,7 +55,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
 
 const validateToken = (req: Request, res: Response) => {
-    res.status(200).send({userId: req.userId})
+    res.status(200).send({ userId: req.userId })
   }
 
 

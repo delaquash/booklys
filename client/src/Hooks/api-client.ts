@@ -25,15 +25,6 @@ export const register = async (formData: formProps) => {
   }
 };
 
-export const validateToken = async ()=> {
-  const res = await axios.get(`${API_BASE_URL}/auth/validate-token`, {
-    withCredentials: true
-  })
-  if(!res) {
-    throw new Error("Token  validation failed")
-  }
-  return res.data
-}
 
 export const signIn = async (formData: SignInProps) => {
   const response = await fetch(`${API_BASE_URL}/auth/login`, {
@@ -52,6 +43,15 @@ export const signIn = async (formData: SignInProps) => {
   return body;
 };
 
+export const validateToken = async () => {
+  const res = await axios.get(`${API_BASE_URL}/auth/validate-token`, {
+    withCredentials: true
+  })
+  if(!res) {
+    throw new Error("Token  validation failed")
+  }
+  return res.data
+};
 
 export const signout = async () => {
   const res = await fetch (`${API_BASE_URL}/auth/logout`, {
