@@ -59,11 +59,13 @@ const validateToken = (req: Request, res: Response) => {
   }
 
 
- const logout = async (req: Request, res:Response )=> {
+ const logout = (req: Request, res:Response )=> {
     res.cookie("auth_token", "", {
-      expires: new Date(90)
+      expires: new Date(0)
     })
+    res.send()
  }
+
 
     
 export { login, validateToken, logout}

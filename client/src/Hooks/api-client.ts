@@ -43,15 +43,19 @@ export const signIn = async (formData: SignInProps) => {
   return body;
 };
 
+
 export const validateToken = async () => {
-  const res = await axios.get(`${API_BASE_URL}/auth/validate-token`, {
-    withCredentials: true
-  })
-  if(!res) {
-    throw new Error("Token  validation failed")
+  const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Token invalid");
   }
-  return res.data
+
+  return response.json();
 };
+
 
 export const signout = async () => {
   const res = await fetch (`${API_BASE_URL}/auth/logout`, {
@@ -62,6 +66,14 @@ export const signout = async () => {
     throw new Error("Error during sign out");
   }
 }
+
+
+
+
+
+
+
+
 // export const signin = async(formData: SignInProps ) => {
 //   try {
 //     const { data }= await axios.post(`${API_BASE_URL}/auth/login`, {
