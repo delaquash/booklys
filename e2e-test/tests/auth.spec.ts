@@ -32,5 +32,19 @@ test("should allow the user to register", async ({ page }) => {
 
   // get the sign in button
   await page.getByRole("link", { name: "Sign In" }).click();
-  await page.getByRole("link", {name:"Create account here"});
+  await page.getByRole("link", {name:"Create account here"}).click();
+
+  // testing the register page
+  await expect(page.getByRole("heading", {name: "Create an account"})).toBeVisible();
+    // testing the sign in page that has email, password, signin button
+  // auto fill the input fields with this and 
+  await page.locator("[name=First Name]").fill("Chris");
+  await page.locator("[name=Last Name").fill("Blakely");
+  await page.locator("[name=Email").fill("1@1.com");
+  await page.locator("[name=Password").fill("password123");
+  await page.locator("[name=Confirm  Password]").fill("password123");
+
+  // testing the login button
+
+
 })
