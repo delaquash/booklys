@@ -13,31 +13,23 @@ test('should allow the user to sign in', async ({ page }) => {
   // testing the Sign In header is visible in the page
   await expect(page.getByRole("heading", {name: "Sign In"})).toBeVisible()
   
-  
-  // const emailInputField = page.locator("#email");
-  // const passwdInputField = page.locator("#password");
-  // const submitButton = page.locator("button[type=submit]");
-  // entering valid credentials and submitting the form
-  // await emailInputField.fill("1@1.com", {timeout: 60000});
-  // await passwdInputField.fill("password123");
-  // await submitButton.click();
-    await page.locator("[name=email]").fill("1@1.com")
-    await page.locator("[name=password]").fill("password123")
-  });
-
-
-  // testing the email and password input 
-  // await page.locator("[name=email]").fill("local@local.gmail")
-  // await page.locator("[name=password]").fill("Equarshie85")
-
-  // // testing the login button
-  // await page.getByRole("button", {name: "Login"}).click();
+  // auto fill the input fields with this and 
+  await page.locator("[name=email]").fill("piis2@test.com")
+  await page.locator("[name=password]").fill("Equarshie857")
+  // testing the login button
+  await page.getByRole("button", {name: "Login"}).click();
 
   // Testing the response after login
-  // await expect(page.getByText("Sign in Successful!")).toBeVisible();
-  // // testing the link and sign out button
-  // await expect(page.getByRole("link", {name: "My Bookings"})).toBeVisible();
-  //   await expect(page.getByRole("link", {name: "My Hotels"})).toBeVisible();
-  //     await expect(page.getByRole("button", {name: "Sign Out"})).toBeVisible();
-// });
+  await expect(page.getByText("Sign in Successful")).toBeVisible();
+  // testing the link and sign out button
+  await expect(page.getByRole("link", {name: "My Bookings"})).toBeVisible();
+  await expect(page.getByRole("link", {name: "My Hotels"})).toBeVisible();
+  await expect(page.getByRole("button", {name: "Sign Out"})).toBeVisible();
+});
 
+
+test("should allow the user to register", async ({ page }) => {
+  await page.goto(UI_URL)
+
+  
+})
