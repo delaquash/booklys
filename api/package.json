@@ -4,9 +4,9 @@
   "description": "Express api for booklys app",
   "main": "server.ts",
   "scripts": {
-    "dev": "ts-node --files server.ts",
-    "start": "nodemon server",
-    "server": "nodemon server",
+    "dev": "nodemon",
+    "build": "tsc",
+    "start": "node ./dist/index.js",
     "e2e": "cross-env DOTENV_CONFIG_PATH=.env.e2e nodemon"
   },
   "author": "Olaide Emmanuel",
