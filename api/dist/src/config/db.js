@@ -36,55 +36,29 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var cookie_parser_1 = require("cookie-parser");
-var express_1 = require("express");
-var db_1 = require("./src/config/db");
-var logger_1 = require("../logger");
-var auth_1 = require("../src/routes/auth");
-// import hotelRoute from "./routes/hotels";
-// import roomRoute from "./routes/rooms";
-var user_1 = require("../src/routes/user");
-var cors_1 = require("cors");
-var path_1 = require("path");
-/* Loading the environment variables from the .env file. */
-require("dotenv").config();
-var app = (0, express_1["default"])();
-app.get("/", function (req, res) {
-    res.send("Welcome");
-});
-var errorHandlerMiddleware = function (error, req, res, next) {
-    var status = error.status || 500;
-    var message = error.message || "Something went wrong";
-    res.status(status).send({
-        status: status,
-        message: message
-    });
-};
-var corsOptions = {
-    origin: process.env.FRONT_END_URL,
-    credentials: true
-};
-// middleware
-app.use((0, cors_1["default"])(corsOptions));
-app.use(express_1["default"].json());
-app.use((0, cookie_parser_1["default"])());
-app.use("/api/v1/auth", auth_1["default"]);
-app.use("/api/v1/user", user_1["default"]);
-// app.use("/api/v1/room", roomRoute);
-// app.use("/api/v1/hotel", hotelRoute);
-app.use(express_1["default"].static(path_1["default"].join(__dirname, "../client/dist")));
-// error middleware
-app.use(errorHandlerMiddleware);
-var PORT = process.env.PORT || 5000;
-app.listen(PORT, function () { return __awaiter(void 0, void 0, void 0, function () {
+var mongoose_1 = require("mongoose");
+var logger_1 = require("../../logger");
+var connectDB = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var con, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                logger_1["default"].info("Server is running in mode on ".concat(PORT));
-                return [4 /*yield*/, (0, db_1["default"])()];
+                if (!(process.env.MONGO_URI !== undefined)) return [3 /*break*/, 4];
+                _a.label = 1;
             case 1:
-                _a.sent();
-                return [2 /*return*/];
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, mongoose_1["default"].connect(process.env.MONGO_URI)];
+            case 2:
+                con = _a.sent();
+                logger_1["default"].info("MongoDB is connected");
+                return [3 /*break*/, 4];
+            case 3:
+                error_1 = _a.sent();
+                logger_1["default"].error("Could not connect to DB: ${error.message}");
+                process.exit(1);
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
-}); });
+}); };
+exports["default"] = connectDB;

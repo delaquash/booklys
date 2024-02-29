@@ -1,0 +1,10 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var Auth_1 = require("../controllers/Auth");
+var auth_1 = require("../middleware/auth");
+var router = express_1["default"].Router();
+router.post("/login", Auth_1.login);
+router.post("/logout", Auth_1.logout);
+router.get("/validate-token", auth_1["default"], Auth_1.validateToken);
+exports["default"] = router;

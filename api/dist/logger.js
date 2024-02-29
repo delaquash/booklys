@@ -1,17 +1,14 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const dayjs_1 = __importDefault(require("dayjs"));
-const pino_1 = __importDefault(require("pino"));
-const logger = (0, pino_1.default)({
+exports.__esModule = true;
+var dayjs_1 = require("dayjs");
+var pino_1 = require("pino");
+var logger = (0, pino_1["default"])({
     transport: {
         target: "pino-pretty"
     },
     base: {
-        pid: false,
+        pid: false
     },
-    timestamp: () => `,"time": "${(0, dayjs_1.default)().format()}"`
+    timestamp: function () { return ",\"time\": \"".concat((0, dayjs_1["default"])().format(), "\""); }
 });
-exports.default = logger;
+exports["default"] = logger;

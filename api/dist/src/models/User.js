@@ -36,55 +36,46 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var cookie_parser_1 = require("cookie-parser");
-var express_1 = require("express");
-var db_1 = require("./src/config/db");
-var logger_1 = require("../logger");
-var auth_1 = require("../src/routes/auth");
-// import hotelRoute from "./routes/hotels";
-// import roomRoute from "./routes/rooms";
-var user_1 = require("../src/routes/user");
-var cors_1 = require("cors");
-var path_1 = require("path");
-/* Loading the environment variables from the .env file. */
-require("dotenv").config();
-var app = (0, express_1["default"])();
-app.get("/", function (req, res) {
-    res.send("Welcome");
+var mongoose_1 = require("mongoose");
+var bcryptjs_1 = require("bcryptjs");
+var UserSchema = new mongoose_1.Schema({
+    // username: {
+    //   type: String,
+    //   required: true,
+    //   unique: true,
+    // },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    firstName: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    }
+}, { timestamps: true });
+UserSchema.pre("save", function (next) {
+    return __awaiter(this, void 0, void 0, function () {
+        var _a;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    if (!this.isModified("password")) return [3 /*break*/, 2];
+                    _a = this;
+                    return [4 /*yield*/, bcryptjs_1["default"].hash(this.password, 8)];
+                case 1:
+                    _a.password = _b.sent();
+                    _b.label = 2;
+                case 2:
+                    next();
+                    return [2 /*return*/];
+            }
+        });
+    });
 });
-var errorHandlerMiddleware = function (error, req, res, next) {
-    var status = error.status || 500;
-    var message = error.message || "Something went wrong";
-    res.status(status).send({
-        status: status,
-        message: message
-    });
-};
-var corsOptions = {
-    origin: process.env.FRONT_END_URL,
-    credentials: true
-};
-// middleware
-app.use((0, cors_1["default"])(corsOptions));
-app.use(express_1["default"].json());
-app.use((0, cookie_parser_1["default"])());
-app.use("/api/v1/auth", auth_1["default"]);
-app.use("/api/v1/user", user_1["default"]);
-// app.use("/api/v1/room", roomRoute);
-// app.use("/api/v1/hotel", hotelRoute);
-app.use(express_1["default"].static(path_1["default"].join(__dirname, "../client/dist")));
-// error middleware
-app.use(errorHandlerMiddleware);
-var PORT = process.env.PORT || 5000;
-app.listen(PORT, function () { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                logger_1["default"].info("Server is running in mode on ".concat(PORT));
-                return [4 /*yield*/, (0, db_1["default"])()];
-            case 1:
-                _a.sent();
-                return [2 /*return*/];
-        }
-    });
-}); });
+var User = (0, mongoose_1.model)("User", UserSchema);
+exports["default"] = User;

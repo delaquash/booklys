@@ -36,55 +36,59 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var cookie_parser_1 = require("cookie-parser");
-var express_1 = require("express");
-var db_1 = require("./src/config/db");
-var logger_1 = require("../logger");
-var auth_1 = require("../src/routes/auth");
-// import hotelRoute from "./routes/hotels";
-// import roomRoute from "./routes/rooms";
-var user_1 = require("../src/routes/user");
-var cors_1 = require("cors");
-var path_1 = require("path");
-/* Loading the environment variables from the .env file. */
-require("dotenv").config();
-var app = (0, express_1["default"])();
-app.get("/", function (req, res) {
-    res.send("Welcome");
-});
-var errorHandlerMiddleware = function (error, req, res, next) {
-    var status = error.status || 500;
-    var message = error.message || "Something went wrong";
-    res.status(status).send({
-        status: status,
-        message: message
-    });
-};
-var corsOptions = {
-    origin: process.env.FRONT_END_URL,
-    credentials: true
-};
-// middleware
-app.use((0, cors_1["default"])(corsOptions));
-app.use(express_1["default"].json());
-app.use((0, cookie_parser_1["default"])());
-app.use("/api/v1/auth", auth_1["default"]);
-app.use("/api/v1/user", user_1["default"]);
-// app.use("/api/v1/room", roomRoute);
-// app.use("/api/v1/hotel", hotelRoute);
-app.use(express_1["default"].static(path_1["default"].join(__dirname, "../client/dist")));
-// error middleware
-app.use(errorHandlerMiddleware);
-var PORT = process.env.PORT || 5000;
-app.listen(PORT, function () { return __awaiter(void 0, void 0, void 0, function () {
+exports.register = void 0;
+var User_1 = require("../../../src/models/User");
+var jsonwebtoken_1 = require("jsonwebtoken");
+var express_validator_1 = require("express-validator");
+// Validation middleware array
+var userValidationRules = [
+    (0, express_validator_1.check)("firstName", "First Name is required").isString(),
+    (0, express_validator_1.check)("lastName", "Last Name is required").isString(),
+    (0, express_validator_1.check)("email", "Email is required").isEmail(),
+    (0, express_validator_1.check)("password", "Password with 6 or more characters required").isLength({
+        min: 6
+    }),
+];
+var register = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var errors, user, token, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                logger_1["default"].info("Server is running in mode on ".concat(PORT));
-                return [4 /*yield*/, (0, db_1["default"])()];
+                errors = (0, express_validator_1.validationResult)(req);
+                if (!errors.isEmpty()) {
+                    return [2 /*return*/, res.status(400).json({ message: errors.array() })];
+                }
+                _a.label = 1;
             case 1:
+                _a.trys.push([1, 4, , 5]);
+                return [4 /*yield*/, User_1["default"].findOne({
+                        email: req.body.email
+                    })];
+            case 2:
+                user = _a.sent();
+                if (user) {
+                    return [2 /*return*/, res.status(400).json({ message: "User already exists" })];
+                }
+                user = new User_1["default"](req.body);
+                return [4 /*yield*/, user.save()];
+            case 3:
                 _a.sent();
-                return [2 /*return*/];
+                token = jsonwebtoken_1["default"].sign({ userId: user.id }, process.env.JWT_SECRET_KEY, {
+                    expiresIn: "60d"
+                });
+                res.cookie("auth_token", token, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production",
+                    maxAge: 86400000
+                });
+                return [2 /*return*/, res.status(200).send({ message: "User registered successfully" })];
+            case 4:
+                error_1 = _a.sent();
+                console.log(error_1);
+                next(error_1);
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
     });
-}); });
+}); };
+exports.register = register;
