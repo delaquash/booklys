@@ -77,14 +77,16 @@ app.use(express_1["default"].static(path_1["default"].join(__dirname, "../client
 app.use(errorHandlerMiddleware);
 var PORT = process.env.PORT || 5000;
 app.listen(PORT, function () { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                logger_1["default"].info("Server is running in mode on ".concat(PORT));
-                return [4 /*yield*/, (0, db_1["default"])()];
-            case 1:
-                _a.sent();
-                return [2 /*return*/];
-        }
-    });
-}); });
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    logger_1["default"].info("Server is running in mode on ".concat(PORT));
+                    return [4 /*yield*/, (0, db_1["default"])()];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    }); 
+});
+
