@@ -6,13 +6,13 @@ import express, {
   Request,
   Response,
 } from "express";
-import connectDB from "./src/config/db";
-import logger from "./logger";
-import authRoute from "./src/routes/auth";
+import connectDB from "./config/db";
+import logger from "../logger";
+import authRoute from "./routes/auth";
 // import hotelRoute from "./routes/hotels";
 // import roomRoute from "./routes/rooms";
-import userRoute from "./src/routes/user";
-import ErrorException from "./src/utils/error";
+import userRoute from "./routes/user";
+import ErrorException from "./utils/error";
 import cors from "cors";
 import path from "path"
 /* Loading the environment variables from the .env file. */
