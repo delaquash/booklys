@@ -15,6 +15,7 @@ import userRoute from "./routes/user";
 import ErrorException from "./utils/error";
 import cors from "cors";
 import path from "path"
+
 /* Loading the environment variables from the .env file. */
 require("dotenv").config();
 
@@ -52,7 +53,7 @@ app.use("/api/v1/user", userRoute);
 // app.use("/api/v1/room", roomRoute);
 // app.use("/api/v1/hotel", hotelRoute);
 
-app.use(express.static(path.join(__dirname, "../client/dist")))
+app.use(express.static(path.join(__dirname, "../../client/dist")))
 
 // error middleware
 app.use(errorHandlerMiddleware);

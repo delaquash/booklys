@@ -37,7 +37,7 @@ const errorHandlerMiddleware = (error, req, res, next) => {
     });
 };
 const corsOptions = {
-    origin: process.env.FRONT_END_URL,
+    origin: process.env.FRONT_END_URL, // Allow only this origin to send requests
     credentials: true, // Allowing credentials
 };
 // middleware
@@ -48,7 +48,7 @@ app.use("/api/v1/auth", auth_1.default);
 app.use("/api/v1/user", user_1.default);
 // app.use("/api/v1/room", roomRoute);
 // app.use("/api/v1/hotel", hotelRoute);
-app.use(express_1.default.static(path_1.default.join(__dirname, "../client/dist")));
+app.use(express_1.default.static(path_1.default.join(__dirname, "../../client/dist")));
 // error middleware
 app.use(errorHandlerMiddleware);
 const PORT = process.env.PORT || 5000;
