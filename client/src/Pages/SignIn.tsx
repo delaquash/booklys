@@ -1,19 +1,41 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "react-query";
+import * as apiClient from "../Hooks/api-client";
+import { useAppContext } from '../context/AppContext';
 
-interface SignInProps {
+export interface SignInProps {
     email: string
     password: string
 }
 
 const SignIn = () => {
+    const navigate = useNavigate();
+    const { showToast } = useAppContext();
+    const queryClient = useQueryClient();
+    const location = useLocation()
     const {
         register,
         watch,
         handleSubmit,
         formState: { errors },
       } = useForm<SignInProps>();
+
+      const mutation = useMutation(apiClient.signIn, {
+        onSuccess: async () => {
+          showToast({message: "Sign in successful", type: "SUCCESS"});
+          await queryClient.invalidateQueries("validateToken")
+          navigate(location.state?.from?.pathname || "/");
+        }, 
+        onError:(error: Error)=>{
+          showToast({ message: error.message, type: "ERROR"})
+        }
+      })
+
+      const onSubmit = handleSubmit((data)=>{
+        mutation.mutate(data)
+      })
 
   return (
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
@@ -65,3 +87,4 @@ const SignIn = () => {
 }
 
 export default SignIn
+

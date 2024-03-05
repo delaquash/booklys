@@ -2,6 +2,14 @@ import jwt from "jsonwebtoken";
 import ErrorException from "./error";
 import { Response, Request, NextFunction } from "express";
 
+declare global {
+  namespace Express {
+      interface Request {
+          user: any;
+      }
+  }
+}
+
 export const verifyToken = (
   req: Request,
   res: Response,
@@ -19,7 +27,7 @@ export const verifyToken = (
     );
   }
 
-  jwt.verify(token, process.env.JWT_SECRET ?? "", (err: any, user: any) => {
+  jwt.verify(token, process.env.JWT_SECRET as string, (err: any, user: any) => {
     if (err) return next(new ErrorException(403, "Token not valid"));
     req.user = user;
     next();
