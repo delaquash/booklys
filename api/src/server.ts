@@ -21,10 +21,21 @@ require("dotenv").config();
 
 const app = express();
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Welcome");
-});
+// middleware
 
+app.use(express.json());
+app.use(cookieParser());
+app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/user", userRoute);
+// app.use("/api/v1/room", roomRoute);
+// app.use("/api/v1/hotel", hotelRoute);
+
+app.use(express.static(path.join(__dirname, "../../client/dist")))
+const corsOptions = {
+  origin: process.env.FRONT_END_URL, // Allow only this origin to send requests
+  credentials: true, // Allowing credentials
+};
+app.use(cors(corsOptions))
 const errorHandlerMiddleware: ErrorRequestHandler = (
   error: ErrorException,
   req: Request,
@@ -38,22 +49,6 @@ const errorHandlerMiddleware: ErrorRequestHandler = (
     message,
   });
 };
-
-const corsOptions = {
-  origin: process.env.FRONT_END_URL, // Allow only this origin to send requests
-  credentials: true, // Allowing credentials
-};
-
-// middleware
-app.use(cors(corsOptions))
-app.use(express.json());
-app.use(cookieParser());
-app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/user", userRoute);
-// app.use("/api/v1/room", roomRoute);
-// app.use("/api/v1/hotel", hotelRoute);
-
-app.use(express.static(path.join(__dirname, "../../client/dist")))
 
 // error middleware
 app.use(errorHandlerMiddleware);
