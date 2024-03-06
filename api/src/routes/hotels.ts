@@ -12,7 +12,7 @@
 // const router = express.Router();
 
 // // creating new hotel
-// router.post("/", isAdmin, createHotel);
+// router.post("/", isAdmin, createHotel); 
 // // deleting a hotel
 // router.delete("/find/:id", isAdmin, deleteHotel);
 // // updating a hotel

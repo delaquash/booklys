@@ -1,5 +1,8 @@
-// import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
+import multer from "multer";
 // import Hotel from "../models/Hotel";
+
+
 
 // export const createHotel = async (
 //   req: Request,
