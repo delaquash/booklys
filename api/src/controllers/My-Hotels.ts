@@ -1,3 +1,7 @@
+import { NextFunction, Request, Response } from "express";
+import cloudinary from "cloudinary";
+import { HotelType } from "../types/data";
+import Hotel from "../models/Hotel";
 import { body } from "express-validator";
 const validator =  [
     body("name").notEmpty().withMessage("Name is required"),
