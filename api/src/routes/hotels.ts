@@ -1,7 +1,7 @@
 import express from "express";
 import cloudinary from "cloudinary";
 import {
-  createHotel,
+//   createHotel,
 //   deleteHotel,
 //   findAllHotels,
 //   findHotel,
@@ -9,13 +9,11 @@ import {
 //   findHotelByType,
 //   updateHotel,
 } from "../controllers/Hotel";
-import { isAdmin } from "../utils/verifyToken";
 import verifyToken from "../middleware/auth";
-import UploadImage from "../utils/CloudinaryStorage";
 const router = express.Router();
 
 // // creating new hotel
-router.post("/", UploadImage.array("imageFiles", 6),verifyToken, createHotel); 
+
 // // deleting a hotel
 // router.delete("/find/:id", isAdmin, deleteHotel);
 // // updating a hotel
