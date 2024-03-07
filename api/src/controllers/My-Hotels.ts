@@ -5,23 +5,7 @@ import Hotel from "../models/Hotel";
 import { body } from "express-validator";
 
 
-const validator =  [
-    body("name").notEmpty().withMessage("Name is required"),
-    body("city").notEmpty().withMessage("City is required"),
-    body("country").notEmpty().withMessage("Country is required"),
-    body("description").notEmpty().withMessage("Description is required"),
-    body("type").notEmpty().withMessage("Hotel type is required"),
-    body("pricePerNight")
-      .notEmpty()
-      .isNumeric()
-      .withMessage("Price per night is required and must be a number"),
-    body("facilities")
-      .notEmpty()
-      .isArray()
-      .withMessage("Facilities are required"),
-  ]
-
-  export const createHotel =  async (req: Request, res: Response, next: NextFunction) => {
+  export const createHotel = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const imageFiles = req.files as Express.Multer.File[];
         const newHotel: HotelType = req.body;

@@ -1,11 +1,20 @@
 import express from "express";
 import {register} from "../controllers/User";
 import { isAdmin, verifyUser } from "../utils/verifyToken";
+import { check } from "express-validator";
 const router = express.Router()
 
-
+// Validation middleware array
+const userValidationRules = [
+    check("firstName", "First Name is required").isString(),
+    check("lastName", "Last Name is required").isString(),
+    check("email", "Email is required").isEmail(),
+    check("password", "Password with 6 or more characters required").isLength({
+      min: 6,
+    }),
+  ];
 // register a user
-router.post("/register", register)
+router.post("/register", userValidationRules,register)
 // privately update a user
 // router.put("/:id", verifyUser, updateUser);
 // privately delete user
