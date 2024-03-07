@@ -1,11 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import cloudinary from "cloudinary";
-import UploadImage from "../utils/CloudinaryStorage";
 import { HotelType } from "../types/data";
 import Hotel from "../models/Hotel";
 
 
-export const createHotel = UploadImage.array("imageFiles", 6), async (req: Request, res: Response, next: NextFunction) => {
+export const createHotel =  async (req: Request, res: Response, next: NextFunction) => {
     try {
         const imageFiles = req.files as Express.Multer.File[];
         const newHotel: HotelType = req.body;
@@ -24,18 +23,14 @@ export const createHotel = UploadImage.array("imageFiles", 6), async (req: Reque
         // Save the hotel in our database
         const hotel = new Hotel(newHotel);
         await hotel.save();
+
+        // return a successfull return
+        res.status(201).send(hotel)
         
     } catch (error) {
         console.log("Error creating hotel: ", error)
         res.status(500).json({ message: "Server Error"})
     }
-//   const newHotel = new Hotel(req.body);
-//   try {
-//     const savedHotel = await newHotel.save();
-//     res.status(200).json(savedHotel);
-//   } catch (err) {
-//     next(err);
-//   }
 };
 
 // export const updateHotel = async (
