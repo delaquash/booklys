@@ -21,7 +21,9 @@ export const createHotel = UploadImage.array("imageFiles", 6), async (req: Reque
         newHotel.imageUrls = imageUrls;
         newHotel.lastUpdated = new Date();
         newHotel.userId = req.userId;
-     
+        // Save the hotel in our database
+        const hotel = new Hotel(newHotel);
+        await hotel.save();
         
     } catch (error) {
         console.log("Error creating hotel: ", error)
