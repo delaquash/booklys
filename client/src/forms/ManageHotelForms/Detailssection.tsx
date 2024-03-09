@@ -77,7 +77,9 @@ const Detailssection = () => {
                     {[1, 2, 3, 4, 5].map((rating)=>(
                         <option value={rating}>{rating}</option>
                     ))}
-                
+                  {errors.starRating && (
+          <span className="text-red-500">{errors.starRating.message}</span>
+        )}
             </select>
         </label>
     </div>
