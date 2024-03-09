@@ -21,7 +21,11 @@ import path from "path"
 require("dotenv").config();
 
 const app = express();
-
+const corsOptions = {
+  origin: process.env.FRONT_END_URL, // Allow only this origin to send requests
+  credentials: true, // Allowing credentials
+};
+app.use(cors(corsOptions))
 // middleware
 
 app.use(express.json());
@@ -33,11 +37,7 @@ app.use("api/v1/my_hotel", my_hotels)
 // app.use("/api/v1/hotel", hotelRoute);
 
 app.use(express.static(path.join(__dirname, "../../client/dist")))
-const corsOptions = {
-  origin: process.env.FRONT_END_URL, // Allow only this origin to send requests
-  credentials: true, // Allowing credentials
-};
-app.use(cors(corsOptions))
+
 const errorHandlerMiddleware: ErrorRequestHandler = (
   error: ErrorException,
   req: Request,
