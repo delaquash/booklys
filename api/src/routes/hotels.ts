@@ -1,5 +1,6 @@
-// import express from "express";
-// import {
+import express from "express";
+import cloudinary from "cloudinary";
+import {
 //   createHotel,
 //   deleteHotel,
 //   findAllHotels,
@@ -7,12 +8,12 @@
 //   findHotelByCity,
 //   findHotelByType,
 //   updateHotel,
-// } from "../controllers/Hotel";
-// import { isAdmin } from "../utils/verifyToken";
-// const router = express.Router();
+} from "../controllers/Hotel";
+import verifyToken from "../middleware/auth";
+const router = express.Router();
 
 // // creating new hotel
-// router.post("/", isAdmin, createHotel);
+
 // // deleting a hotel
 // router.delete("/find/:id", isAdmin, deleteHotel);
 // // updating a hotel

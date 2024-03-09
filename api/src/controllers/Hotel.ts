@@ -1,19 +1,7 @@
-// import { NextFunction, Request, Response } from "express";
-// import Hotel from "../models/Hotel";
-
-// export const createHotel = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   const newHotel = new Hotel(req.body);
-//   try {
-//     const savedHotel = await newHotel.save();
-//     res.status(200).json(savedHotel);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
+import { NextFunction, Request, Response } from "express";
+import cloudinary from "cloudinary";
+import { HotelType } from "../types/data";
+import Hotel from "../models/Hotel";
 
 // export const updateHotel = async (
 //   req: Request,
