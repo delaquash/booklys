@@ -4,8 +4,6 @@ import jwt from "jsonwebtoken";
 import { check, validationResult } from "express-validator";
 
 
-
-
 const register = async (req: Request, res: Response, next: NextFunction)=>{
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
