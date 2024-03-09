@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 
 export type HotelFormDataProps = {
     name: string;
@@ -10,15 +10,20 @@ export type HotelFormDataProps = {
     pricePerNight: number;
     starRating: number;
     facilities: string[];
-    // imageFiles: FileList;
+    imageFiles: FileList;
     adultCount: number;
     childCount: number;
 }
 
 
 const ManageHotelsForms = () => {
+    const formMethods = useForm<HotelFormDataProps>()
   return (
-    <div>ManageHotelsForms</div>
+    <FormProvider {...formMethods}>
+        <form>
+            <DetailsSection />
+        </form>
+    </FormProvider>
   )
 }
 
