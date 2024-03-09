@@ -42,6 +42,7 @@ const Detailssection = () => {
             <span className="text-red-500">{errors.country.message}</span>
           )}
         </label>
+        </div>
         <label className="text-gray-700 text-sm font-bold flex-1">
         Description
         <textarea
@@ -65,7 +66,20 @@ const Detailssection = () => {
           <span className="text-red-500">{errors.pricePerNight.message}</span>
         )}
       </label>
-      </div>
+      <label className="text-gray-700 text-sm font-bold max-w-[50%]">
+        Star Rating
+            <select
+                {...register("starRating", {
+                    required: "This field is required",
+                })}
+                className="border rounded w-full p-2 text-gray-700 font-normal">
+                <option className='font-bold text-sm' value="">Select as rating</option>
+                    {[1, 2, 3, 4, 5].map((rating)=>(
+                        <option value={rating}>{rating}</option>
+                    ))}
+                
+            </select>
+        </label>
     </div>
   )
 }
