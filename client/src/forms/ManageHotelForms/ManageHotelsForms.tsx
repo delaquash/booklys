@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import Detailssection from './Detailssection';
+import TypeSection from './TypeSection';
 
 export type HotelFormDataProps = {
     name: string;
@@ -21,8 +22,9 @@ const ManageHotelsForms = () => {
     const formMethods = useForm<HotelFormDataProps>()
   return (
     <FormProvider {...formMethods}>
-        <form>
+        <form className='flex flex-col gap-10'>
             <Detailssection />
+            <TypeSection/>
         </form>
     </FormProvider>
   )
