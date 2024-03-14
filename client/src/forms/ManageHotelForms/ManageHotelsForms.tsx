@@ -2,6 +2,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import Detailssection from './Detailssection';
 import TypeSection from './TypeSection';
+import FacilitiesSection from './FacilitiesSection';
 
 export type HotelFormDataProps = {
     name: string;
@@ -17,7 +18,6 @@ export type HotelFormDataProps = {
     childCount: number;
 }
 
-
 const ManageHotelsForms = () => {
     const formMethods = useForm<HotelFormDataProps>()
   return (
@@ -25,6 +25,7 @@ const ManageHotelsForms = () => {
         <form className='flex flex-col gap-10'>
             <Detailssection />
             <TypeSection/>
+            <FacilitiesSection />
         </form>
     </FormProvider>
   )
