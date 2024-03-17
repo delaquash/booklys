@@ -7,8 +7,8 @@ const GuestSection = () => {
   return (
     <div>
         <h2 className="mb-3 font-bold text-2xl">Guest</h2>
-        <div>
-            
+        <div className=''>
+
         </div>
     </div>
   )
