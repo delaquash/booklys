@@ -21,6 +21,7 @@ function AddHotel() {
   return (
     <ManageHotelsForms
         onSave={handleSave}
+        isLoading={isLoading}
     />
   )
 }
