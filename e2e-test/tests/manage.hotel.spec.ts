@@ -1,7 +1,10 @@
 import { test, expect } from '@playwright/test';
-import path from "path";
+import path from 'path';
 
-const UI_URL = "http://localhost:5173/"
+const UI_URL = "http://localhost:5173/";
+
+declare const __dirname: string;
+
 
 test('should allow the user to sign in', async ({ page }) => {
     await page.goto(UI_URL);
@@ -52,6 +55,8 @@ test('should allow the user to sign in', async ({ page }) => {
       path.join(__dirname, "file", "2.png"),
     ]);
     
+    await page.getByRole("button", {name: "Save"}).click();
+    await expect(page.getByText("Hotel Saved")).toBeVisible();
   })
 
   // 07032781683
