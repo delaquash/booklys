@@ -15,7 +15,7 @@ import userRoute from "./src/routes/user";
 import my_hotels from "./src/routes/my_hotels"
 import ErrorException from "./src/utils/error";
 import cors from "cors";
-import path from "path"
+import path from "path";
 
 /* Loading the environment variables from the .env file. */
 require("dotenv").config();

@@ -3,7 +3,7 @@ import path from 'path';
 
 const UI_URL = "http://localhost:5173/";
 
-declare const __dirname: string;
+// declare const __dirname: string;
 
 
 test('should allow the user to sign in', async ({ page }) => {
@@ -32,15 +32,31 @@ test('should allow the user to sign in', async ({ page }) => {
   
 
   test("should allow user to add hotel", async({ page })=> {
-    await page.goto(`${UI_URL}/add_hotel`);
+    await page.goto(`${UI_URL}add-hotels`);
 
+    await page.waitForSelector('[name="name"]'); // Wait for the element to be visible
     await page.locator('[name="name"]').fill("Test Hotel");
-    await page.locator("[name='city']").fill("Test City");
-    await page.locator("[name='country']").fill("Test Country");
-    await page.locator("[name='description']").fill("This is a description for the Test Hotel");
+    await page.waitForSelector('[name="city"]');
+    await page.locator('[name="city"]').fill("Test City");
+    await page.waitForSelector('[name="country"]');
+    await page.locator('[name="country"]').fill("Test Country");
 
-    await page.locator("[name='pricePerNight']").fill("100");
-    await page.selectOption('select[name="starRating"]', '3');
+  //   await page.locator('[name="name"]').fill("Test Hotel");
+  // await page.locator('[name="city"]').fill("Test City");
+  // await page.locator('[name="country"]').fill("Test Country");
+  // await page
+  //   .locator('[name="description"]')
+  //   .fill("This is a description for the Test Hotel");
+  await page.locator('[name="pricePerNight"]').fill("100");
+  await page.selectOption('select[name="starRating"]', "3");
+
+    // await page.locator('[name="name"]').fill("Test Hotel");
+    // await page.locator("[name='city']").fill("Test City");
+    // await page.locator("[name='country']").fill("Test Country");
+    // await page.locator("[name='description']").fill("This is a description for the Test Hotel");
+
+    // await page.locator("[name='pricePerNight']").fill("100");
+    // await page.selectOption('select[name="starRating"]', '3');
 
     await page.getByText("Budget").click();
     await page.getByLabel("Free Wifi").check();
@@ -51,12 +67,11 @@ test('should allow the user to sign in', async ({ page }) => {
     await page.locator("[name='childCount']").fill("4")
 
     await page.setInputFiles('[name="imageFiles"]', [
-      path.join(__dirname, "file", "1.png"),
-      path.join(__dirname, "file", "2.png"),
+      path.join(__dirname, "file", "1.jpeg"),
+      path.join(__dirname, "file", "2.jpeg"),
     ]);
     
     await page.getByRole("button", {name: "Save"}).click();
     await expect(page.getByText("Hotel Saved")).toBeVisible();
-  })
 
-  // 07032781683
+  })

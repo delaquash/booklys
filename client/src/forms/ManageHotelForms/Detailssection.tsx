@@ -75,7 +75,7 @@ const Detailssection = () => {
                 className="border rounded w-full p-2 text-gray-700 font-normal">
                 <option className='font-bold text-sm' value="">Select as rating</option>
                     {[1, 2, 3, 4, 5].map((rating)=>(
-                        <option value={rating}>{rating}</option>
+                        <option key={rating} value={rating}>{rating}</option>
                     ))}
                   {errors.starRating && (
           <span className="text-red-500">{errors.starRating.message}</span>
