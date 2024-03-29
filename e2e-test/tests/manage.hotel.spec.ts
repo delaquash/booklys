@@ -32,31 +32,16 @@ test('should allow the user to sign in', async ({ page }) => {
   
 
   test("should allow user to add hotel", async({ page })=> {
-    await page.goto(`${UI_URL}add-hotels`);
+    await page.goto(`${UI_URL}add-hotel`);
 
-    await page.waitForSelector('[name="name"]'); // Wait for the element to be visible
     await page.locator('[name="name"]').fill("Test Hotel");
-    await page.waitForSelector('[name="city"]');
     await page.locator('[name="city"]').fill("Test City");
-    await page.waitForSelector('[name="country"]');
     await page.locator('[name="country"]').fill("Test Country");
-
-  //   await page.locator('[name="name"]').fill("Test Hotel");
-  // await page.locator('[name="city"]').fill("Test City");
-  // await page.locator('[name="country"]').fill("Test Country");
-  // await page
-  //   .locator('[name="description"]')
-  //   .fill("This is a description for the Test Hotel");
-  await page.locator('[name="pricePerNight"]').fill("100");
-  await page.selectOption('select[name="starRating"]', "3");
-
-    // await page.locator('[name="name"]').fill("Test Hotel");
-    // await page.locator("[name='city']").fill("Test City");
-    // await page.locator("[name='country']").fill("Test Country");
-    // await page.locator("[name='description']").fill("This is a description for the Test Hotel");
-
-    // await page.locator("[name='pricePerNight']").fill("100");
-    // await page.selectOption('select[name="starRating"]', '3');
+    await page
+      .locator('[name="description"]')
+      .fill("This is a description for the Test Hotel");
+    await page.locator('[name="pricePerNight"]').fill("100");
+    await page.selectOption('select[name="starRating"]', "3");
 
     await page.getByText("Budget").click();
     await page.getByLabel("Free Wifi").check();

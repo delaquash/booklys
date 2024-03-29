@@ -36,7 +36,8 @@ app.use("api/v1/my_hotel", my_hotels)
 // app.use("/api/v1/room", roomRoute);
 // app.use("/api/v1/hotel", hotelRoute);
 
-app.use(express.static(path.join(__dirname, "../../client/dist")))
+app.use(express.static(path.join(__dirname, "../../client/dist")));
+app.get
 
 const errorHandlerMiddleware: ErrorRequestHandler = (
   error: ErrorException,
