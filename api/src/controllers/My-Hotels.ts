@@ -9,15 +9,10 @@ import { body } from "express-validator";
     try {
         const imageFiles = req.files as Express.Multer.File[];
         const newHotel: HotelType = req.body;
-        // upload images to cloudinary
-        const uploadPromises = imageFiles.map(async(image)=> {
-            const b64 = Buffer.from(image.buffer).toString("base64");
-            let dataURI = "data:" + image.mimetype + ";base64," + b64;
-            const res = await cloudinary.v2.uploader.upload(dataURI);
-            return res.url
-        });
+        
+        
         //  add the url of each uploaded file to hotel object
-        const imageUrls = await Promise.all(uploadPromises);
+        const imageUrls = await uploadImages(imageFiles);
         newHotel.imageUrls = imageUrls;
         newHotel.lastUpdated = new Date();
         newHotel.userId = req.userId;
@@ -33,3 +28,18 @@ import { body } from "express-validator";
         res.status(500).json({ message: "Server Error"})
     }
 };
+
+// upload images to cloudinary
+
+async function uploadImages(imageFiles: Express.Multer.File[]) {
+    const uploadPromises = imageFiles.map(async (image) => {
+      const b64 = Buffer.from(image.buffer).toString("base64");
+      let dataURI = "data:" + image.mimetype + ";base64," + b64;
+      const res = await cloudinary.v2.uploader.upload(dataURI);
+      return res.url;
+    });
+  console.log(uploadPromises)
+    const imageUrls = await Promise.all(uploadPromises);
+    return imageUrls;
+  }
+  

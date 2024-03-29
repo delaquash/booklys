@@ -28,16 +28,19 @@ const corsOptions = {
 app.use(cors(corsOptions))
 // middleware
 
+app.use(express.static(path.join(__dirname, "../../client/dist")));
+
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/user", userRoute);
-app.use("api/v1/my_hotel", my_hotels)
+app.use("/api/v1/my_hotel", my_hotels)
 // app.use("/api/v1/room", roomRoute);
 // app.use("/api/v1/hotel", hotelRoute);
 
-app.use(express.static(path.join(__dirname, "../../client/dist")));
-app.get
+app.get("*", (req: Request, res: Response)=> {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"))
+})
 
 const errorHandlerMiddleware: ErrorRequestHandler = (
   error: ErrorException,
