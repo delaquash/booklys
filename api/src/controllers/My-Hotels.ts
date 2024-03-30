@@ -38,7 +38,7 @@ async function uploadImages(imageFiles: Express.Multer.File[]) {
       const res = await cloudinary.v2.uploader.upload(dataURI);
       return res.url;
     });
-  console.log(uploadPromises)
+
     const imageUrls = await Promise.all(uploadPromises);
     return imageUrls;
   }
