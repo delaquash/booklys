@@ -60,7 +60,7 @@ const ManageHotelsForms = ({isLoading, onSave}: Props) => {
         </form>
         <span className="flex justify-end">
           <button
-          disabled={isLoading}
+            disabled={isLoading}
             type='submit'
             className='bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl disabled:bg-gray-500'
           >

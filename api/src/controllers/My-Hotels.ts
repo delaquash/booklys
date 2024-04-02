@@ -4,13 +4,10 @@ import { HotelType } from "../types/data";
 import Hotel from "../models/Hotel";
 import { body } from "express-validator";
 
-
-  export const createHotel = async (req: Request, res: Response, next: NextFunction) => {
+export const createHotel = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const imageFiles = req.files as Express.Multer.File[];
         const newHotel: HotelType = req.body;
-        
-        
         //  add the url of each uploaded file to hotel object
         const imageUrls = await uploadImages(imageFiles);
         newHotel.imageUrls = imageUrls;
@@ -20,8 +17,8 @@ import { body } from "express-validator";
         const hotel = new Hotel(newHotel);
         await hotel.save();
 
-        // return a successfull return
-        res.status(201).send(hotel)
+        // return a successfull response
+        res.status(201).send(hotel);
         
     } catch (error) {
         console.log("Error creating hotel: ", error)
@@ -30,16 +27,20 @@ import { body } from "express-validator";
 };
 
 // upload images to cloudinary
-
 async function uploadImages(imageFiles: Express.Multer.File[]) {
-    const uploadPromises = imageFiles.map(async (image) => {
+  if (!imageFiles || !Array.isArray(imageFiles)) {
+      throw new Error('No image files provided or invalid data format');
+  }
+
+  const uploadPromises = imageFiles.map(async (image) => {
       const b64 = Buffer.from(image.buffer).toString("base64");
       let dataURI = "data:" + image.mimetype + ";base64," + b64;
       const res = await cloudinary.v2.uploader.upload(dataURI);
       return res.url;
-    });
+  });
 
-    const imageUrls = await Promise.all(uploadPromises);
-    return imageUrls;
-  }
+  const imageUrls = await Promise.all(uploadPromises);
+  return imageUrls;
+}
+
   

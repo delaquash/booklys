@@ -77,6 +77,7 @@ export const addMyHotel = async (hotelFormData: FormData) => {
     throw new Error("Error during sign out");
   }
   return res.json();
+  console.log(res.json())
 }
 
 

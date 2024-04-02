@@ -1,9 +1,7 @@
 import { test, expect } from '@playwright/test';
 import path from 'path';
 
-const UI_URL = "http://localhost:5173/";
-
-// declare const __dirname: string;
+const UI_URL = "http://localhost:5173/"
 
 
 test('should allow the user to sign in', async ({ page }) => {
@@ -30,10 +28,11 @@ test('should allow the user to sign in', async ({ page }) => {
     await expect(page.getByRole("button", {name: "Sign Out"})).toBeVisible();
   });
   
-
-  test("should allow user to add hotel", async({ page })=> {
+  test("should allow user to add a hotel", async ({ page }) => {
     await page.goto(`${UI_URL}add-hotel`);
-
+    await page.waitForLoadState('domcontentloaded');
+  
+    await page.waitForSelector('[name="name"]', { timeout: 60000 });
     await page.locator('[name="name"]').fill("Test Hotel");
     await page.locator('[name="city"]').fill("Test City");
     await page.locator('[name="country"]').fill("Test Country");
@@ -44,19 +43,18 @@ test('should allow the user to sign in', async ({ page }) => {
     await page.selectOption('select[name="starRating"]', "3");
 
     await page.getByText("Budget").click();
+  
     await page.getByLabel("Free Wifi").check();
-
-    await page.getByLabel("Parking").check()
-
-    await page.locator("[name='adultCount']").fill("2");
-    await page.locator("[name='childCount']").fill("4")
-
+    await page.getByLabel("Parking").check();
+  
+    await page.locator('[name="adultCount"]').fill("2");
+    await page.locator('[name="childCount"]').fill("4");
+  
     await page.setInputFiles('[name="imageFiles"]', [
-      path.join(__dirname, "file", "1.jpeg"),
-      path.join(__dirname, "file", "2.jpeg"),
+      path.join(__dirname, "files", "1.png"),
+      path.join(__dirname, "files", "2.png"),
     ]);
-    
-    await page.getByRole("button", {name: "Save"}).click();
-    await expect(page.getByText("Hotel Saved")).toBeVisible();
-
-  })
+  
+    await page.getByRole("button", { name: "Save" }).click();
+    await expect(page.getByText("Hotel Saved!")).toBeVisible();
+  });

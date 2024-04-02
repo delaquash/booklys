@@ -13,33 +13,34 @@ const GuestSection = () => {
       <h2 className="mb-3 font-bold text-2xl">Guest</h2>
       <div className="grid grid-cols-2 p-6 gap-5 bg-gray-300">
         <label className="text-gray-700 font-semibold text-sm">
+          Adults
           <input
             className="border rounded w-full py-2 px-3 font-normal"
-            value="number"
-            minLength={1}
+            type="number"
+            min={1}
             {...register("adultCount", {
               required: "This field is required",
             })}
           />
-          {errors.childCount && (
-            <span className="text-red-500 text-sm font-bold">
-              {errors.childCount.message}
+          {errors.adultCount?.message && (
+            <span className="text-red-500 text-sm fold-bold">
+              {errors.adultCount?.message}
             </span>
           )}
         </label>
-
-        <label className="text-gray-700 font-semibold text-sm">
+        <label className="text-gray-700 text-sm font-semibold">
+          Children
           <input
             className="border rounded w-full py-2 px-3 font-normal"
-            value="number"
-            minLength={1}
+            type="number"
+            min={0}
             {...register("childCount", {
               required: "This field is required",
             })}
           />
-          {errors.childCount && (
-            <span className="text-red-500 text-sm font-bold">
-              {errors.childCount.message}
+          {errors.childCount?.message && (
+            <span className="text-red-500 text-sm fold-bold">
+              {errors.childCount?.message}
             </span>
           )}
         </label>
