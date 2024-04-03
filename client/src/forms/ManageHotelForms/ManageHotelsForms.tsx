@@ -49,7 +49,8 @@ const ManageHotelsForms = ({isLoading, onSave}: Props) => {
       });
         onSave(formData)
     });
-      return (
+
+  return (
     <FormProvider {...formMethods}>
         <form className='flex flex-col gap-10' onSubmit={onSubmit}>
             <Detailssection />

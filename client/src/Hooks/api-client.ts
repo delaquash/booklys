@@ -68,7 +68,7 @@ export const signout = async () => {
 }
 
 export const addMyHotel = async (hotelFormData: FormData) => {
-  const res = await fetch(`${API_BASE_URL}/my_hotel`, {
+  const res = await fetch(`${API_BASE_URL}/my_hotel/create-hotel`, {
     credentials: "include",
     method: "POST",
     body: hotelFormData
