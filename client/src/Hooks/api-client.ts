@@ -1,6 +1,7 @@
 import { formProps } from "../Pages/Register";
 import axios from 'axios';
 import { SignInProps } from "../Pages/SignIn";
+import { HotelType } from "../../types/dataTypes";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
@@ -80,7 +81,7 @@ export const addMyHotel = async (hotelFormData: FormData) => {
 }
 
 
-export const fetchAllHotels = async () => {
+export const fetchAllHotels = async ():Promise<HotelType[]> => {
     const res = await fetch(`${API_BASE_URL}/my_hotel/get-hotels`, {
       credentials: "include"
     });
