@@ -26,6 +26,15 @@ export const createHotel = async (req: Request, res: Response, next: NextFunctio
     }
 };
 
+export const getAllHotels = async (req: Request, res: Response) => {
+    try {
+        const hotels = await Hotel.find({userId: req.userId});
+        res.status(200).json(hotels)
+    } catch (error) {
+        res.status(500).json({ message: "Server Error"})
+    }
+}
+
 // upload images to cloudinary
 async function uploadImages(imageFiles: Express.Multer.File[]) {
   if (!imageFiles || !Array.isArray(imageFiles)) {
