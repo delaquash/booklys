@@ -77,31 +77,16 @@ export const addMyHotel = async (hotelFormData: FormData) => {
     throw new Error("Error during sign out");
   }
   return res.json();
-  console.log(res.json())
 }
 
 
+export const fetchAllHotels = async () => {
+    const res = await fetch(`${API_BASE_URL}/my_hotel/get-hotels`, {
+      credentials: "include"
+    });
 
-
-
-
-// export const signin = async(formData: SignInProps ) => {
-//   try {
-//     const { data }= await axios.post(`${API_BASE_URL}/auth/login`, {
-//       withCredentials: true,
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-//     return data;
-//   } catch (error:any) {
-//     if (error.response) {
-//       throw new Error(error.response.data.message);
-//     } else if (error.request) {
-//       throw new Error("No response was received from the server");
-//     } else {
-//       throw new Error("Error: " + error.message);
-//       console.log(error.message)
-//     }
-//   }
-// }
+    if(!res.ok){
+      throw new Error("Error during get hotels")
+    }
+    return res.json()
+}
