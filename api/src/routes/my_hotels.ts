@@ -27,5 +27,6 @@ const validator =  [
   ]
 
 router.post("/create-hotel", UploadImage.array("imageFiles", 6),verifyToken,validator, createHotel); 
-router.get("/get-hotels",getAllHotels)
+router.get("/get-hotels", verifyToken, getAllHotels);
+
 export default router;
