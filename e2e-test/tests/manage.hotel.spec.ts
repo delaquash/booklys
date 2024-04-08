@@ -58,3 +58,9 @@ test('should allow the user to sign in', async ({ page }) => {
     await page.getByRole("button", { name: "Save" }).click();
     await expect(page.getByText("Hotel Saved!")).toBeVisible();
   });
+
+  test("should display list of hotel", async ({ page }) => {
+    await page.goto(`${UI_URL}my-hotel`);
+
+    
+  });
