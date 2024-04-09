@@ -1,7 +1,7 @@
 import express from "express";
 import cloudinary from "cloudinary";
 import {
-  createHotel,getAllHotels
+  createHotel,getAllHotels, editHotels
 } from "../controllers/My-Hotels";
 import { isAdmin } from "../utils/verifyToken";
 import verifyToken from "../middleware/auth";
@@ -28,5 +28,6 @@ const validator =  [
 
 router.post("/create-hotel", UploadImage.array("imageFiles", 6),verifyToken,validator, createHotel); 
 router.get("/get-hotels", verifyToken, getAllHotels);
+router.put("/:id", verifyToken, editHotels )
 
 export default router;

@@ -35,6 +35,19 @@ export const getAllHotels = async (req: Request, res: Response) => {
     }
 }
 
+export const editHotels = async(req: Request, res: Response) => {
+    const id = req.params.id.toString();
+    try {
+        const hotel = await Hotel.find({
+            _id: id,
+            userId: req.userId
+        });
+        res.status(200).json(hotel)
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching hotels" })
+    }
+}
+
 // upload images to cloudinary
 async function uploadImages(imageFiles: Express.Multer.File[]) {
   if (!imageFiles || !Array.isArray(imageFiles)) {
