@@ -60,7 +60,8 @@ test('should allow the user to sign in', async ({ page }) => {
   });
 
   test("should display list of hotel", async ({ page }) => {
-    await page.goto(`${UI_URL}my-hotel`);
-
+    await page.goto(`${UI_URL}my-hotels`);
+    await expect(page.getByText("Olaide Emmanuel")).toBeVisible()
+    await page.getByRole("link", { name: "Add Hotel" }).click();
     
   });
