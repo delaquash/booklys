@@ -27,6 +27,7 @@ test('should allow the user to sign in', async ({ page }) => {
     await expect(page.getByRole("link", {name: "My Hotels"})).toBeVisible();
     await expect(page.getByRole("button", {name: "Sign Out"})).toBeVisible();
   });
+
   
   test("should allow user to add a hotel", async ({ page }) => {
     await page.goto(`${UI_URL}add-hotel`);
@@ -59,9 +60,17 @@ test('should allow the user to sign in', async ({ page }) => {
     await expect(page.getByText("Hotel Saved!")).toBeVisible();
   });
 
+
+
   test("should display list of hotel", async ({ page }) => {
     await page.goto(`${UI_URL}my-hotels`);
-    await expect(page.getByText("Olaide Emmanuel")).toBeVisible()
+    await expect(page.getByText("Olaide Emmanuel")).toBeVisible();
+    await expect(page.getByText("Lorem Ipsum is simply dummy text of the printing and typesetting industry")).toBeVisible();
+    await expect(page.getByText("Lagos, Nigeria")).toBeVisible();
+    await expect(page.getByText("Boutique")).toBeVisible();
+    await expect(page.getByText("£1000 per night")).toBeVisible();
+    await expect(page.getByText("2 adults, 3 children")).toBeVisible();
+    await expect(page.getByText("2 Star Rating")).toBeVisible();
     await page.getByRole("link", { name: "Add Hotel" }).click();
-    
+    await page.getByRole("link", {name: "View Details"}).click();
   });
