@@ -38,7 +38,7 @@ export const getAllHotels = async (req: Request, res: Response) => {
 export const editHotels = async(req: Request, res: Response) => {
     const id = req.params.id.toString();
     try {
-        const hotel = await Hotel.find({
+        const hotel = await Hotel.findOne({
             _id: id,
             userId: req.userId
         });
