@@ -21,7 +21,7 @@ const MyHotels = () => {
       <span className="flex justify-between">
         <h1 className="text-3xl font-bold">My Hotels</h1>
         <Link
-          to="/add-hotel"
+          to="/add-hotels"
           className="flex bg-blue-600 text-white text-xl font-bold p-2 hover:bg-blue-500"
         >
           Add Hotel
@@ -55,7 +55,7 @@ const MyHotels = () => {
             </div>
             <span className="flex justify-end">
               <Link
-                to={`/edit-hotel/${hotel._id}`}
+                to={`/edit-hotels/${hotel._id}`}
                 className="flex bg-blue-600 text-white text-xl font-bold p-2 hover:bg-blue-500"
               >
                 View Details

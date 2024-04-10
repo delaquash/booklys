@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import Detailssection from "./Detailssection";
 import TypeSection from "./TypeSection";
 import FacilitiesSection from "./FacilitiesSection";
 import GuestSection from "./GuestSection";
 import ImageUpload from "./ImageUpload";
+import { HotelType } from "../../../types/dataTypes";
 
 export type HotelFormDataProps = {
   name: string;
@@ -21,13 +22,19 @@ export type HotelFormDataProps = {
 };
 
 type Props = {
+  hotel: HotelType
   onSave: (hotelFormData: FormData) => void;
   isLoading: boolean;
 };
 
-const ManageHotelsForms = ({ isLoading, onSave }: Props) => {
+const ManageHotelsForms = ({hotel, isLoading, onSave }: Props) => {
   const formMethods = useForm<HotelFormDataProps>();
-  const { handleSubmit } = formMethods;
+  const { handleSubmit, reset } = formMethods;
+
+  useEffect(()=> {
+    reset(hotel)
+  }, [reset, hotel])
+
   const onSubmit = handleSubmit((formDataJson: HotelFormDataProps) => {
     const formData = new FormData();
     formData.append("name", formDataJson.name);
@@ -49,6 +56,8 @@ const ManageHotelsForms = ({ isLoading, onSave }: Props) => {
     });
     onSave(formData);
   });
+
+ 
 
   return (
     <FormProvider {...formMethods}>
