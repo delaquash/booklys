@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { useFormContext } from "react-hook-form";
 import { HotelFormDataProps } from "../../../types/dataTypes";
+import { StripeIssuingCardCvcDisplayElementOptions } from '@stripe/stripe-js';
 
 function ImageUpload() {
     const {
@@ -9,7 +10,14 @@ function ImageUpload() {
         formState: { errors },
       } = useFormContext<HotelFormDataProps>();
 
-      const existingImageUrls = watch("imageUrls")
+    const existingImageUrls = watch("imageUrls");
+
+    const handleDelete = (
+        event: React.MouseEvent<HTMLButtonElement, MouseEvent>, imageUrl: string
+    ) => {
+        event.preventDefault();
+    }
+
   return (
     <div>
         <h2 className="text-2xl font-bold mb-3">
@@ -21,7 +29,12 @@ function ImageUpload() {
                     {existingImageUrls.map((urls)=> (
                         <div className='relative group w-1/6'>
                             <img key={urls} src={urls} className='min-h-full object-cover'/>
-                            <button className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 text-white'>
+                            <button className='absolute inset-0 flex 
+                                items-center justify-center
+                                 bg-black bg-opacity-50 
+                                 opacity-0 group-hover:opacity-100
+                                  text-white'
+                            >
                                 Delete
                             </button>
                         </div>
@@ -57,4 +70,4 @@ function ImageUpload() {
   )
 }
 
-export default ImageUpload
+export default ImageUpload;
