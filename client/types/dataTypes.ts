@@ -28,3 +28,18 @@ export type HotelType = {
     checkOut: Date;
     totalCost: number;
   };
+
+  export type HotelFormDataProps = {
+    name: string;
+    description: string;
+    city: string;
+    country: string;
+    type: string;
+    pricePerNight: number;
+    starRating: number;
+    facilities: string[];
+    imageFiles: FileList;
+    imageUrls: string[];
+    adultCount: number;
+    childCount: number;
+  };

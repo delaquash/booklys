@@ -7,19 +7,7 @@ import GuestSection from "./GuestSection";
 import ImageUpload from "./ImageUpload";
 import { HotelType } from "../../../types/dataTypes";
 
-export type HotelFormDataProps = {
-  name: string;
-  description: string;
-  city: string;
-  country: string;
-  type: string;
-  pricePerNight: number;
-  starRating: number;
-  facilities: string[];
-  imageFiles: FileList;
-  adultCount: number;
-  childCount: number;
-};
+
 
 type Props = {
   hotel: HotelType
