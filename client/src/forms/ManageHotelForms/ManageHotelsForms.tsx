@@ -5,8 +5,7 @@ import TypeSection from "./TypeSection";
 import FacilitiesSection from "./FacilitiesSection";
 import GuestSection from "./GuestSection";
 import ImageUpload from "./ImageUpload";
-import { HotelType } from "../../../types/dataTypes";
-
+import { HotelFormDataProps, HotelFormDataProps, HotelType } from "../../../types/dataTypes";
 
 
 type Props = {

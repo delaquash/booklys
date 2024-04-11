@@ -7,6 +7,7 @@ function ImageUpload() {
     const {
         register,
         watch,
+        setValue,
         formState: { errors },
       } = useFormContext<HotelFormDataProps>();
 
@@ -16,6 +17,7 @@ function ImageUpload() {
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>, imageUrl: string
     ) => {
         event.preventDefault();
+        setValue("imageUrls", existingImageUrls.filter((url)=> url !== imageUrl))
     }
 
   return (
@@ -29,7 +31,9 @@ function ImageUpload() {
                     {existingImageUrls.map((urls)=> (
                         <div className='relative group w-1/6'>
                             <img key={urls} src={urls} className='min-h-full object-cover'/>
-                            <button className='absolute inset-0 flex 
+                            <button 
+                                onClick={(event)=>handleDelete(event, urls)}
+                                className='absolute inset-0 flex 
                                 items-center justify-center
                                  bg-black bg-opacity-50 
                                  opacity-0 group-hover:opacity-100
@@ -49,7 +53,7 @@ function ImageUpload() {
                 className='w-full text-gray-700 font-normal'
                 {...register("imageFiles", {
                     validate: (imageFiles) => {
-                        const totalLength = imageFiles.length;
+                        const totalLength = imageFiles.length + (existingImageUrls?.length || 0);
                         if(totalLength === 0){
                             return "At least one image should be added";
                         }
