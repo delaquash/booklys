@@ -75,7 +75,9 @@ export const editSingleHotel = async(req: Request, res: Response)=> {
     } catch (error) {
         res.status(500).json({ message: "Something went wrong with the server" })
     }
-}
+};
+
+
 // upload images to cloudinary
 async function uploadImages(imageFiles: Express.Multer.File[]) {
   if (!imageFiles || !Array.isArray(imageFiles)) {
