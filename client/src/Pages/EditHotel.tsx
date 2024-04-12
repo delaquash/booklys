@@ -12,21 +12,25 @@ const EditHotel = () => {
     {
         enabled: !!hotelId,
     })
-    // const { mutate, isLoading } = useMutation(apiClient.updateMyHotelById, {
-    //     onSuccess: () => {
-    //       showToast({ message: "Hotel Saved!", type: "SUCCESS" });
-    //     },
-    //     onError: () => {
-    //       showToast({ message: "Error Saving Hotel", type: "ERROR" });
-    //     },
-    //   });
+    const { mutate, isLoading } = useMutation(apiClient.editSingleHotelById, {
+        onSuccess: () => {
+          showToast({ message: "Hotel Saved!", type: "SUCCESS" });
+        },
+        onError: () => {
+          showToast({ message: "Error Saving Hotel", type: "ERROR" });
+        },
+      });
     
-    //   const handleSave = (hotelFormData: FormData) => {
-    //     mutate(hotelFormData);
-    //   };
+      const handleSave = (hotelFormData: FormData) => {
+        mutate(hotelFormData);
+      };
     
       return (
-        <ManageHotelsForms hotel={hotel} />
+        <ManageHotelsForms 
+            hotel={hotel} 
+            isLoading={isLoading} 
+            onSave={handleSave} 
+        />
       );
 
 }

@@ -48,6 +48,36 @@ export const editHotels = async(req: Request, res: Response) => {
     }
 }
 
+export const editSingleHotel = async(req: Request, res: Response)=> {
+    try {
+        const updatedHotel:HotelType = req.body;
+        updatedHotel.lastUpdated = new Date();
+
+        const hotel = await  Hotel.findOneAndUpdate({
+            _id: req.params.id,
+            userId: req.userId
+        },updatedHotel, {
+            new: true
+        })
+        if(!hotel) {
+            return res.status(404).json({ message: "Hotel not found"})
+        }
+
+        const files = req.files as Express.Multer.File[];
+        const updatedImageUrls = await uploadImages(files);
+
+        hotel.imageUrls = [
+            ...updatedImageUrls,
+            ...(updatedHotel.imageUrls || []),
+        ];
+        await hotel.save();
+        res.status(201).json(hotel);
+    } catch (error) {
+        res.status(500).json({ message: "Something went wrong with the server" })
+    }
+};
+
+
 // upload images to cloudinary
 async function uploadImages(imageFiles: Express.Multer.File[]) {
   if (!imageFiles || !Array.isArray(imageFiles)) {

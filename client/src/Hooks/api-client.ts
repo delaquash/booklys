@@ -103,3 +103,15 @@ export const fetchMyHotelById = async(hotelId:string): Promise<HotelType>=> {
   return res.json()
 
 }
+
+export const editSingleHotelById = async (hotelFormData: FormData) => {
+    const response = await fetch (`${API_BASE_URL}/my_hotel/${hotelFormData.get("hotelId")}`,{
+      method: "PUT",
+      body: hotelFormData,
+      credentials: "include"
+    })
+    if(!response.ok){
+      throw new Error("Error fetching single hotel")
+    }
+    return response.json()
+}
