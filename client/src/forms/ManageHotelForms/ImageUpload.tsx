@@ -42,4 +42,4 @@ function ImageUpload() {
   )
 }
 
-export default ImageUpload
+export default ImageUpload;
