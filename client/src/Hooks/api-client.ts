@@ -89,7 +89,7 @@ export const fetchAllHotels = async ():Promise<HotelType[]> => {
     if(!res.ok){
       throw new Error("Error during get hotels")
     }
-    return res.json()
+    return res.json();
 }
 
 
@@ -100,8 +100,7 @@ export const fetchMyHotelById = async(hotelId:string): Promise<HotelType>=> {
   if(!res.ok){
     throw new Error("Error fetching hotels")
   }
-  return res.json()
-
+  return res.json();
 }
 
 export const editSingleHotelById = async (hotelFormData: FormData) => {
@@ -113,5 +112,5 @@ export const editSingleHotelById = async (hotelFormData: FormData) => {
     if(!response.ok){
       throw new Error("Error fetching single hotel")
     }
-    return response.json()
+    return response.json();
 }

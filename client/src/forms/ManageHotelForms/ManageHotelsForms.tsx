@@ -5,11 +5,11 @@ import TypeSection from "./TypeSection";
 import FacilitiesSection from "./FacilitiesSection";
 import GuestSection from "./GuestSection";
 import ImageUpload from "./ImageUpload";
-import { HotelFormDataProps, HotelFormDataProps, HotelType } from "../../../types/dataTypes";
+import { HotelFormDataProps, HotelType } from "../../../types/dataTypes";
 
 
 type Props = {
-  hotel: HotelType
+  hotel?: HotelType
   onSave: (hotelFormData: FormData) => void;
   isLoading: boolean;
 };
@@ -25,6 +25,9 @@ const ManageHotelsForms = ({hotel, isLoading, onSave }: Props) => {
   const onSubmit = handleSubmit((formDataJson: HotelFormDataProps) => {
     const formData = new FormData();
     formData.append("name", formDataJson.name);
+    if(hotel) {
+      formData.append("hotelId", hotel._id)
+    }
     formData.append("city", formDataJson.city);
     formData.append("country", formDataJson.country);
     formData.append("description", formDataJson.description);
@@ -37,6 +40,11 @@ const ManageHotelsForms = ({hotel, isLoading, onSave }: Props) => {
     formDataJson.facilities.forEach((facility, index) => {
       formData.append(`facilities[${index}]`, facility);
     });
+    if (formDataJson.imageUrls) {
+      formDataJson.imageUrls.forEach((url, index)=> {
+        formData.append(`imageUrls[${index}]`, url)
+      })
+    }
 
     Array.from(formDataJson.imageFiles).forEach((imageFile) => {
       formData.append(`imageFiles`, imageFile);
