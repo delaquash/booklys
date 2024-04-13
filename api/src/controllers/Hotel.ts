@@ -3,22 +3,18 @@ import cloudinary from "cloudinary";
 import { HotelType } from "../types/data";
 import Hotel from "../models/Hotel";
 
-// export const updateHotel = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const updateHotel = await Hotel.findByIdAndUpdate(
-//       req.params.id,
-//       { $set: req.body },
-//       { new: true }
-//     );
-//     res.status(201).json(updateHotel);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
+export const searchHotel = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+    try {
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: error })
+    }
+};
 
 // export const deleteHotel = async (
 //   req: Request,

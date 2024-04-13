@@ -1,7 +1,7 @@
 import express from "express";
 import cloudinary from "cloudinary";
 import {
-//   createHotel,
+  searchHotel,
 //   deleteHotel,
 //   findAllHotels,
 //   findHotel,
@@ -13,16 +13,6 @@ import verifyToken from "../middleware/auth";
 const router = express.Router();
 
 // // creating new hotel
+router.get("/search", searchHotel)
 
-// // deleting a hotel
-// router.delete("/find/:id", isAdmin, deleteHotel);
-// // updating a hotel
-// router.put("/:id", isAdmin, updateHotel);
-// // get all hotels
-// router.get("/", findAllHotels);
-// router.get("/countByCity", findHotelByCity);
-// router.get("/findByType", findHotelByType);
-// // get single hostel
-// router.get("/:id", findHotel);
-
-// export default router;
+export default router;
