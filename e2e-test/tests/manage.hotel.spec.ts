@@ -74,3 +74,18 @@ test('should allow the user to sign in', async ({ page }) => {
     await page.getByRole("link", { name: "Add Hotel" }).click();
     await page.getByRole("link", {name: "View Details"}).click();
   });
+
+  test("should be able to edit hotel", async({ page })=> {
+    await page.goto(`${UI_URL}my-hotels`)
+
+    await page.getByRole("link", {name: "View Details"}).click();
+
+    await page.waitForSelector('[name="name"]', { state: "attached" })
+    await expect(page.locator('[name="name"]')).toHaveValue("Olaide Emmanuel");
+
+    await page.locator('[name="name"]').fill("Olaide Emmanuel Dele");
+
+    await page.getByRole("button", {name: "Save"}).click();
+
+    await expect(page.getByText("Hotel Saved")).toBeVisible()
+  });
