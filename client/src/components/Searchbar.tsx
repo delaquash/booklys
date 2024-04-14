@@ -1,5 +1,6 @@
-import React, { FormEvent, useState } from 'react'
-import { useSearchContext } from '../context/SearchContext'
+import React, { FormEvent, useState } from 'react';
+import { useSearchContext } from '../context/SearchContext';
+import { MdTravelExplore } from "react-icons/md";
 
 const Searchbar = () => { 
     const search = useSearchContext();
@@ -27,9 +28,29 @@ const Searchbar = () => {
             lg:grid-cols-3 2xl:grid-cols-5 
             items-center gap-4'
     >
+        <div className="flex flex-row items-center flex-1 bg-white p-2">
+            <MdTravelExplore  size={25} className='mr-2' />
+            <input 
+                placeholder='Where are you going?'
+                className='text-md w-full focus:outline-none'
+                value={destination}
+                onChange={(e)=> setDestination(e.target.value)}
+            />
+        </div>
+        <div className="flex bg-white px-2 py-1 gap-2">
+            <label className="flex items-center">
+                Adults: 
+                <input 
+                    className='w-full p-1 focus:outline-none font-bold'
+                    type='number'
+                    min={1}
+                    max={20}
 
+                />
+            </label>
+        </div>
     </form>
   )
 }
 
-export default Searchbar
+export default Searchbar;
