@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 type SearchContext = {
     destination: string;
@@ -54,4 +54,9 @@ export const SearchContextProvider = ({
         </SearchContext.Provider>
     )
 };
+
+export const useSearchContext = () => {
+    const context = useContext(SearchContext)
+    return context as SearchContext;
+}
 
