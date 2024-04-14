@@ -49,7 +49,16 @@ export const SearchContextProvider = ({
         }
     }
     return (
-        <SearchContext.Provider value={{ destination,adultCount,checkIn,checkOut,childCount,saveSearchValues,hotelId }}>
+        <SearchContext.Provider 
+            value={{ 
+                destination,
+                adultCount,
+                checkIn,
+                checkOut,
+                childCount,
+                saveSearchValues,
+                hotelId 
+            }}>
             {children}
         </SearchContext.Provider>
     )
