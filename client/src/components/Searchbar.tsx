@@ -45,7 +45,8 @@ const Searchbar = () => {
                     type='number'
                     min={1}
                     max={20}
-
+                    value={adultCount}
+                    onChange={(e)=>setAdultCount(parseInt(e.target.value))}
                 />
             </label>
         </div>
