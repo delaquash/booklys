@@ -49,6 +49,17 @@ const Searchbar = () => {
                     onChange={(e)=>setAdultCount(parseInt(e.target.value))}
                 />
             </label>
+            <label className="flex items-center">
+                Adults: 
+                <input 
+                    className='w-full p-1 focus:outline-none font-bold'
+                    type='number'
+                    min={1}
+                    max={20}
+                    value={adultCount}
+                    onChange={(e)=>setAdultCount(parseInt(e.target.value))}
+                />
+            </label>
         </div>
     </form>
   )
