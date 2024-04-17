@@ -1,7 +1,7 @@
 import { formProps } from "../Pages/Register";
 import axios from 'axios';
 import { SignInProps } from "../Pages/SignIn";
-import { HotelType } from "../../types/dataTypes";
+import { HotelSearchResponse, HotelType, SearchParams } from "../../types/dataTypes";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
@@ -114,3 +114,21 @@ export const editSingleHotelById = async (hotelFormData: FormData) => {
     }
     return response.json();
 }
+
+export const searchHotels =async(searchParams: SearchParams): Promise<HotelSearchResponse>=> {
+  const queryParams = new URLSearchParams()
+  queryParams.append("destination", searchParams.destination || "");
+  queryParams.append("checkIn", searchParams.checkIn || "");
+  queryParams.append("checkOut", searchParams.checkOut || "");
+  queryParams.append("childCount", searchParams.childCount|| "")
+  queryParams.append("destination", searchParams.destination || "");
+  queryParams.append("page", searchParams.page || "");
+
+  const response = await fetch (`${API_BASE_URL}/hotel/search?${queryParams}`);
+
+  if(!response.ok){
+    throw new Error("Error Searching for hotel")
+  }
+  return response.json();
+};
+
