@@ -22,7 +22,14 @@ const App = () => {
           </Layout>
         }
       />
-     
+      <Route
+        path="/search"
+        element={
+          <Layout>
+            <Searchbar />
+          </Layout>
+        }
+      />
       <Route path='/register' 
         element={
           <Layout>
