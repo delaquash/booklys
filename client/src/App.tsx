@@ -1,13 +1,13 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import Layout from './layout/Layout'
-import Register from './Pages/Register'
-import SignIn from './Pages/SignIn'
-import AddHotel from './Pages/AddHotel'
-import { useAppContext } from './context/AppContext'
-import MyHotels from './Pages/MyHotels'
-import EditHotel from './Pages/EditHotel'
-import Searchbar from './components/Searchbar'
+import Layout from './layout/Layout';
+import Register from './Pages/Register';
+import SignIn from './Pages/SignIn';
+import AddHotel from './Pages/AddHotel';
+import { useAppContext } from './context/AppContext';
+import MyHotels from './Pages/MyHotels';
+import EditHotel from './Pages/EditHotel';
+import Search from './Pages/Search';
 
 const App = () => {
   const { isLoggedIn } =useAppContext();
@@ -26,7 +26,7 @@ const App = () => {
         path="/search"
         element={
           <Layout>
-            <Searchbar />
+            <Search />
           </Layout>
         }
       />
