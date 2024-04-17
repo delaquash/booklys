@@ -78,6 +78,28 @@ maxDate.setFullYear(maxDate.getFullYear() + 1)
                 className='min-w-full bg-white p-2 focus:outline-none'
             />
         </div>
+        <div>
+            <DatePicker 
+                selected={checkOut}
+                onChange={(date)=>setCheckOut( date as Date)}
+                selectsStart
+                startDate={checkIn}
+                endDate={checkOut}
+                minDate={minDate}
+                maxDate={maxDate}
+                placeholderText='Check-in Date'
+                className='min-w-full bg-white p-2 focus:outline-none'
+                wrapperClassName='min-w-full'
+            />
+        </div>
+        <div className="flex gap-1">
+            <button className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500">
+
+            </button>
+            <button className="w-1/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500">
+                Clear
+            </button>
+        </div>
     </form>
   )
 }
