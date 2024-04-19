@@ -3,6 +3,7 @@ import { useSearchContext } from '../context/SearchContext';
 import { useQuery } from 'react-query';
 import * as apiClient from ".././Hooks/api-client";
 import SearchResultCard from '../components/SearchResultCard';
+import Pagination from '../components/Pagination';
 
 const Search = () => {
 
@@ -41,6 +42,13 @@ const Search = () => {
             {hotelData?.data.map((hotel)=>(
                 <SearchResultCard key={hotel._id} hotel={hotel}/>
             ))}
+            <div>
+                <Pagination 
+                    page={hotelData?.pagination.page || 1}
+                    pages={hotelData?.pagination.pages || 1} 
+                    onPageChange={(page)=>setPage(page)}
+                />
+            </div>
         </div>
     </div>
   )
