@@ -5,36 +5,93 @@ import Hotel from "../models/Hotel";
 
 export const searchHotel = async (
   req: Request,
-  res: Response,
-  next: NextFunction
+  res: Response
 ) => {
     try {
-
-        const query = constructedSearchQuery(req.query)
-        // number of hotels to display per page (5 in this case)
+        const query = constructedSearchQuery(req.query);
+    
+        let sortOptions = {};
+        switch (req.query.sortOption) {
+          case "starRating":
+            sortOptions = { starRating: -1 };
+            break;
+          case "pricePerNightAsc":
+            sortOptions = { pricePerNight: 1 };
+            break;
+          case "pricePerNightDesc":
+            sortOptions = { pricePerNight: -1 };
+            break;
+        };
+    
         const pageSize = 5;
         const pageNumber = parseInt(
-            req.query.page ? req.query.page.toString() : "1"
-        )
-
+          req.query.page ? req.query.page.toString() : "1"
+        );
         const skip = (pageNumber - 1) * pageSize;
-        const hotels = await Hotel.find().skip(skip).limit(pageSize);
-        const total = await Hotel.countDocuments();
-
-        const response:HotelSearchResponse = {
-            data: hotels,
-            pagination: {
-                total,
-                page: pageNumber,
-                pages: Math.ceil(total/pageSize)
-            },
+    
+        const hotels = await Hotel.find(query)
+          .sort(sortOptions)
+          .skip(skip)
+          .limit(pageSize);
+    
+        const total = await Hotel.countDocuments(query);
+    
+        const response: HotelSearchResponse = {
+          data: hotels,
+          pagination: {
+            total,
+            page: pageNumber,
+            pages: Math.ceil(total / pageSize),
+          },
         };
-        res.status(200).json(response)
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({ message: error })
+    
+        res.json(response);
+      } catch (error) {
+        console.log("error", error);
+        res.status(500).json({ message: "Something went wrong" });
+      }
     }
-};
+//     try {
+
+//         const query = constructedSearchQuery(req.query);
+
+//         let sortOptions = {};
+
+//         switch (req.query.sortOption) {
+//         case "starRating":
+//             sortOptions = { starRating: -1 };
+//             break;
+//         case "pricePerNightAsc":
+//             sortOptions = { pricePerNight: 1 };
+//             break;
+//         case "pricePerNightDesc":
+//             sortOptions = { pricePerNight: -1 };
+//             break;
+//         };
+//         // number of hotels to display per page (5 in this case)
+//         const pageSize = 5;
+//         const pageNumber = parseInt(
+//             req.query.page ? req.query.page.toString() : "1"
+//         )
+
+//         const skip = (pageNumber - 1) * pageSize;
+//         const hotels = await Hotel.find(query).sort(sortOptions).skip(skip).limit(pageSize);
+//         const total = await Hotel.countDocuments(query);
+
+//         const response:HotelSearchResponse = {
+//             data: hotels,
+//             pagination: {
+//                 total,
+//                 page: pageNumber,
+//                 pages: Math.ceil(total/pageSize)
+//             },
+//         };
+//         res.status(200).json(response)
+//     } catch (error) {
+//         console.log(error)
+//         res.status(500).json({ message: error })
+//     }
+// };
 
 const constructedSearchQuery = (queryParams: any) => {
 let constructedQuery: any = {};
@@ -82,8 +139,6 @@ let constructedQuery: any = {};
     constructedQuery.starRating = { $in: starRatings };
     }
 }
-
-
 ///// we  arw in total agreement with our mutual disagppointed at you
 
 // export const deleteHotel = async (
