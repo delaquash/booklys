@@ -1,6 +1,7 @@
 import { formProps } from "../Pages/Register";
 import axios from 'axios';
 import { SignInProps } from "../Pages/SignIn";
+import { HotelSearchResponse, HotelType, SearchParams } from "../../types/dataTypes";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
@@ -67,30 +68,67 @@ export const signout = async () => {
   }
 }
 
+export const addMyHotel = async (hotelFormData: FormData) => {
+  const res = await fetch(`${API_BASE_URL}/my_hotel/create-hotel`, {
+    credentials: "include",
+    method: "POST",
+    body: hotelFormData
+  });
+  if (!res.ok) {
+    throw new Error("Error during sign out");
+  }
+  return res.json();
+}
 
 
+export const fetchAllHotels = async ():Promise<HotelType[]> => {
+    const res = await fetch(`${API_BASE_URL}/my_hotel/get-hotels`, {
+      credentials: "include"
+    });
+
+    if(!res.ok){
+      throw new Error("Error during get hotels")
+    }
+    return res.json();
+}
 
 
+export const fetchMyHotelById = async(hotelId:string): Promise<HotelType>=> {
+  const res = await fetch (`${API_BASE_URL}/my_hotel/${hotelId}`, {
+    credentials: "include"
+  })
+  if(!res.ok){
+    throw new Error("Error fetching hotels")
+  }
+  return res.json();
+}
 
+export const editSingleHotelById = async (hotelFormData: FormData) => {
+    const response = await fetch (`${API_BASE_URL}/my_hotel/${hotelFormData.get("hotelId")}`,{
+      method: "PUT",
+      body: hotelFormData,
+      credentials: "include"
+    })
+    if(!response.ok){
+      throw new Error("Error fetching single hotel")
+    }
+    return response.json();
+}
 
+export const searchHotels =async(searchParams: SearchParams): Promise<HotelSearchResponse>=> {
+  const queryParams = new URLSearchParams()
+  queryParams.append("destination", searchParams.destination || "");
+  queryParams.append("checkIn", searchParams.checkIn || "");
+  queryParams.append("checkOut", searchParams.checkOut || "");
+  queryParams.append("childCount", searchParams.childCount|| "")
+  queryParams.append("destination", searchParams.destination || "");
+  queryParams.append("page", searchParams.page || "");
 
-// export const signin = async(formData: SignInProps ) => {
-//   try {
-//     const { data }= await axios.post(`${API_BASE_URL}/auth/login`, {
-//       withCredentials: true,
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-//     return data;
-//   } catch (error:any) {
-//     if (error.response) {
-//       throw new Error(error.response.data.message);
-//     } else if (error.request) {
-//       throw new Error("No response was received from the server");
-//     } else {
-//       throw new Error("Error: " + error.message);
-//       console.log(error.message)
-//     }
-//   }
-// }
+  const response = await fetch (`${API_BASE_URL}/hotel/search?${queryParams}`);
+
+  if(!response.ok){
+    throw new Error("Error Searching for hotel")
+  }
+  return response.json();
+};
+

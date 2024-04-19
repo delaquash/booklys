@@ -1,10 +1,16 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import Layout from './layout/Layout'
-import Register from './Pages/Register'
-import SignIn from './Pages/SignIn'
+import Layout from './layout/Layout';
+import Register from './Pages/Register';
+import SignIn from './Pages/SignIn';
+import AddHotel from './Pages/AddHotel';
+import { useAppContext } from './context/AppContext';
+import MyHotels from './Pages/MyHotels';
+import EditHotel from './Pages/EditHotel';
+import Search from './Pages/Search';
 
 const App = () => {
+  const { isLoggedIn } =useAppContext();
   return (
     // <Router>
     <Routes>
@@ -20,7 +26,7 @@ const App = () => {
         path="/search"
         element={
           <Layout>
-            <p>Search Page</p>
+            <Search />
           </Layout>
         }
       />
@@ -31,14 +37,45 @@ const App = () => {
           </Layout>  
         }/>
         <Route path='/sign-in' 
-        element={
-          <Layout>
-            <SignIn /> 
-          </Layout>  
-        }/>
+          element={
+            <Layout>
+              <SignIn /> 
+            </Layout>  
+          }/>
+        {isLoggedIn && (
+          <>
+            <Route 
+              path='/add-hotels'
+              element={
+                <Layout>
+                  <AddHotel />
+                </Layout>
+              }
+            />
+          
+        
+            <Route 
+              path='/edit-hotels/:hotelId'
+              element={
+                <Layout>
+                  <EditHotel />
+                </Layout>
+              }
+            />
+          
+     
+            <Route 
+              path='/my-hotels'
+              element={
+                <Layout>
+                  <MyHotels />
+                </Layout>
+              }
+            />
+          </>
+        )}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
-    // </Router>
   );
 }
 
