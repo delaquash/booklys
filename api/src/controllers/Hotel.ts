@@ -9,6 +9,8 @@ export const searchHotel = async (
   next: NextFunction
 ) => {
     try {
+
+        const query = constructedSearchQuery(req.query)
         // number of hotels to display per page (5 in this case)
         const pageSize = 5;
         const pageNumber = parseInt(
@@ -33,6 +35,54 @@ export const searchHotel = async (
         res.status(500).json({ message: error })
     }
 };
+
+const constructedSearchQuery = (queryParams: any) => {
+let constructedQuery: any = {};
+
+  if (queryParams.destination) {
+    constructedQuery.$or = [
+      { city: new RegExp(queryParams.destination, "i") },
+      { country: new RegExp(queryParams.destination, "i") },
+    ];
+  }
+
+  if (queryParams.adultCount) {
+    constructedQuery.adultCount = {
+      $gte: parseInt(queryParams.adultCount),
+    };
+  }
+
+  if (queryParams.childCount) {
+    constructedQuery.childCount = {
+      $gte: parseInt(queryParams.childCount),
+    };
+  }
+
+  if (queryParams.facilities) {
+    constructedQuery.facilities = {
+      $all: Array.isArray(queryParams.facilities)
+        ? queryParams.facilities
+        : [queryParams.facilities],
+    };
+  }
+
+  if (queryParams.types) {
+    constructedQuery.type = {
+      $in: Array.isArray(queryParams.types)
+        ? queryParams.types
+        : [queryParams.types],
+    };
+  }
+
+  if (queryParams.stars) {
+    const starRatings = Array.isArray(queryParams.stars)
+      ? queryParams.stars.map((star: string) => parseInt(star))
+      : parseInt(queryParams.stars);
+
+    constructedQuery.starRating = { $in: starRatings };
+    }
+}
+
 
 ///// we  arw in total agreement with our mutual disagppointed at you
 
