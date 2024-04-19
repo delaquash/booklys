@@ -9,6 +9,7 @@ export const searchHotel = async (
   next: NextFunction
 ) => {
     try {
+        // number of hotels to display per page (5 in this case)
         const pageSize = 5;
         const pageNumber = parseInt(
             req.query.page ? req.query.page.toString() : "1"
