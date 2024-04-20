@@ -9,7 +9,7 @@ export const searchHotel = async (
 ) => {
     try {
         const query = constructedSearchQuery(req.query);
-    
+
         let sortOptions = {};
         switch (req.query.sortOption) {
           case "starRating":
@@ -21,7 +21,7 @@ export const searchHotel = async (
           case "pricePerNightDesc":
             sortOptions = { pricePerNight: -1 };
             break;
-        };
+        }
     
         const pageSize = 5;
         const pageNumber = parseInt(
