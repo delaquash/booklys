@@ -4,11 +4,13 @@ import { useQuery } from 'react-query';
 import * as apiClient from ".././Hooks/api-client";
 import SearchResultCard from '../components/SearchResultCard';
 import Pagination from '../components/Pagination';
+import StarRatingFilter from '../components/StarRatingFilter';
 
 const Search = () => {
 
     const search = useSearchContext();
     const [page, setPage] = useState<number>(1)
+    const [selectedStars, setSelectedStars] = useState<string[]>([])
 
     const searchParams = {
         destination: search.destination,
@@ -22,6 +24,9 @@ const Search = () => {
     const { data: hotelData } = useQuery(["searchHotels", searchParams], ()=> 
         apiClient.searchHotels(searchParams)    
     )
+
+    
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
         <div className="rounded-lg border border-slate-300 p-5 h-fit sticky top-10">
@@ -30,6 +35,7 @@ const Search = () => {
                     Filter By:
                 </h3>
                 {/* Filter conditions */}
+                <StarRatingFilter />
             </div>
         </div>
         <div className="flex flex-col gap-5">
