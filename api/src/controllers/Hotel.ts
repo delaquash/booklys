@@ -1,12 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import cloudinary from "cloudinary";
-import { HotelSearchResponse, HotelType } from "../types/data";
+import { HotelSearchResponse } from "../types/data";
 import Hotel from "../models/Hotel";
 
-export const searchHotel = async (
-  req: Request,
-  res: Response
-) => {
+export const searchHotel = async (req: Request, res: Response) => {
     try {
         const query = constructedSearchQuery(req.query);
 
