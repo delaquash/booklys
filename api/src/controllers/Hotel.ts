@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import cloudinary from "cloudinary";
-import { HotelSearchResponse } from "../types/data";
+import { HotelSearchResponse, HotelQuery } from "../types/data";
 import Hotel from "../models/Hotel";
 
 export const searchHotel = async (req: Request, res: Response) => {
@@ -135,6 +135,15 @@ let constructedQuery: any = {};
 
     constructedQuery.starRating = { $in: starRatings };
     }
+
+
+  if (queryParams.maxPrice) {
+    constructedQuery.pricePerNight = {
+      $lte: parseInt(queryParams.maxPrice).toString(),
+    };
+  }
+
+  return constructedQuery;
 }
 ///// we  arw in total agreement with our mutual disagppointed at you
 
