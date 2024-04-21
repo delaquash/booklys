@@ -1,9 +1,9 @@
 type StarRatingProps = {
-    SelectedStars: string[];
+    selectedStars: string[];
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const StarRatingFilter = ({SelectedStars, onChange}: StarRatingProps) => {
+const StarRatingFilter = ({selectedStars, onChange}: StarRatingProps) => {
   return (
     <div className="border-b border-slate-300 pb-5">
         <div className="text-md font-semibold mb-2">Property Rating</div>
@@ -14,7 +14,7 @@ const StarRatingFilter = ({SelectedStars, onChange}: StarRatingProps) => {
                     className="rounded"
                     value={star}
                     onChange={onChange}
-                    checked={SelectedStars.includes(star)}
+                    checked={selectedStars.includes(star)}
                 />
                 <span>{star} Stars</span>
             </label>

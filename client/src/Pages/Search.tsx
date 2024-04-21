@@ -18,14 +18,23 @@ const Search = () => {
         checkOut: search.checkOut.toISOString(),
         adultCount: search.adultCount.toString(),
         childCount: search.childCount.toString(),
-        page: page.toString()
+        page: page.toString(),
+        stars: selectedStars,
     }
 
     const { data: hotelData } = useQuery(["searchHotels", searchParams], ()=> 
         apiClient.searchHotels(searchParams)    
     )
 
-    
+    const handleStarChange= (event: React.ChangeEvent<HTMLInputElement>) => {
+        const starRating = event?.target.value;
+
+        setSelectedStars((prevStars) =>
+            event.target.checked 
+            ? [...prevStars, starRating]
+            : prevStars.filter((star)=> star !== starRating) 
+        )
+    }
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
@@ -35,7 +44,11 @@ const Search = () => {
                     Filter By:
                 </h3>
                 {/* Filter conditions */}
-                <StarRatingFilter />
+                <StarRatingFilter 
+                    selectedStars={selectedStars}
+                    onChange={handleStarChange}
+
+                />
             </div>
         </div>
         <div className="flex flex-col gap-5">
