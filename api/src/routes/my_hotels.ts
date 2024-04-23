@@ -30,6 +30,6 @@ const validator =  [
 router.post("/create-hotel", UploadImage.array("imageFiles", 6),verifyToken,validator, createHotel); 
 router.get("/get-hotels", verifyToken, getAllHotels);
 router.get("/:id", verifyToken, editHotels )
-router.put("/:hotelId", verifyToken, UploadImage.array("imageFiles"), editSingleHotel)
+router.put("/:id", verifyToken, UploadImage.array("imageFiles"), editSingleHotel)
 
 export default router;

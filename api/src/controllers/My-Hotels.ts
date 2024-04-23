@@ -54,9 +54,10 @@ export const editSingleHotel = async(req: Request, res: Response)=> {
         updatedHotel.lastUpdated = new Date();
 
         const hotel = await  Hotel.findOneAndUpdate({
-            _id: req.params.id,
+            _id: req.params.hotelId,
             userId: req.userId
-        },updatedHotel, {
+        },
+        updatedHotel, {
             new: true
         })
         if(!hotel) {

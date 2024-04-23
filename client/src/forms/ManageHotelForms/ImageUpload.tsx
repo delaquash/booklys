@@ -29,7 +29,7 @@ function ImageUpload() {
             {existingImageUrls && (
                 <div className="flex flex-wrap gap-4">
                     {existingImageUrls.map((urls)=> (
-                        <div className='relative group w-1/6'>
+                        <div key={urls} className='relative group w-1/6'>
                             <img key={urls} src={urls} className='min-h-full object-cover'/>
                             <button 
                                 onClick={(event)=>handleDelete(event, urls)}

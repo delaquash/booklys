@@ -7,7 +7,8 @@ import { useAppContext } from '../context/AppContext';
 
 const EditHotel = () => {
     const { hotelId } = useParams();
-    const {showToast} = useAppContext()
+    const {showToast} = useAppContext();
+    
     const { data: hotel } = useQuery("editHotels", () => apiClient.fetchMyHotelById(hotelId || ""),
     {
         enabled: !!hotelId,
