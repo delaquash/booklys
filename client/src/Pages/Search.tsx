@@ -6,6 +6,7 @@ import SearchResultCard from '../components/SearchResultCard';
 import Pagination from '../components/Pagination';
 import StarRatingFilter from '../components/StarRatingFilter';
 import HotelRatingFilter from '../components/HotelRatingFilter';
+import FacilityRatingFilter from '../components/FacilitiesRating';
 
 const Search = () => {
 
@@ -23,7 +24,8 @@ const Search = () => {
         childCount: search.childCount.toString(),
         page: page.toString(),
         stars: selectedStars,
-        type: selectedHotelType
+        type: selectedHotelType,
+        facilities: selectedFacility
     }
 
     const { data: hotelData } = useQuery(["searchHotels", searchParams], ()=> 
@@ -44,7 +46,9 @@ const Search = () => {
         const FacilityRating = event.target.value;
 
         setSelectedFacility((prevFacility)=>
-        
+        event.target.checked 
+        ?[...prevFacility, FacilityRating]
+        :prevFacility.filter((facility)=> facility !== FacilityRating)
          )
     }
 
@@ -73,6 +77,10 @@ const Search = () => {
                 <HotelRatingFilter 
                     selectedHotelTypes={selectedHotelType}
                     onChange={handleHotelRating}
+                />
+                <FacilityRatingFilter
+                    onChange={handleFacilityRating}
+                    selectedHotelFacility={selectedFacility}
                 />
 
             </div>
