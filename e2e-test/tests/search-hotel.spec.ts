@@ -23,3 +23,9 @@ test.beforeEach('should allow the user to sign in', async ({ page }) => {
     // Testing the response after login
     await expect(page.getByText("Sign in Successful")).toBeVisible();
   });
+
+  test("should allow user to search for hotel", async ({ page })=> {
+    await page.goto(UI_URL);
+
+    
+  })
