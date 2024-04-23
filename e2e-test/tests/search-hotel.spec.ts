@@ -27,5 +27,9 @@ test.beforeEach('should allow the user to sign in', async ({ page }) => {
   test("should allow user to search for hotel", async ({ page })=> {
     await page.goto(UI_URL);
 
-    
+    await page.getByPlaceholder("Where are you going").fill("Olaide")
+    await page.getByRole("button", {name: "Search"}).click();
+
+    await expect(page.getByText("Hotels found in Olaide")).toBeVisible()
+    await expect(page.getByText("Olaide Emmanuel")).toBeVisible()
   })
