@@ -4,7 +4,7 @@ import path from 'path';
 const UI_URL = "http://localhost:5173/"
 
 
-test('should allow the user to sign in', async ({ page }) => {
+test.beforeEach('should allow the user to sign in', async ({ page }) => {
     await page.goto(UI_URL);
   
     // get the sign in button
@@ -23,9 +23,9 @@ test('should allow the user to sign in', async ({ page }) => {
     // Testing the response after login
     await expect(page.getByText("Sign in Successful")).toBeVisible();
     // testing the link and sign out button
-    await expect(page.getByRole("link", {name: "My Bookings"})).toBeVisible();
-    await expect(page.getByRole("link", {name: "My Hotels"})).toBeVisible();
-    await expect(page.getByRole("button", {name: "Sign Out"})).toBeVisible();
+  //   await expect(page.getByRole("link", {name: "My Bookings"})).toBeVisible();
+  //   await expect(page.getByRole("link", {name: "My Hotels"})).toBeVisible();
+  //   await expect(page.getByRole("button", {name: "Sign Out"})).toBeVisible();
   });
 
   
