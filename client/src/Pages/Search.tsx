@@ -7,6 +7,7 @@ import Pagination from '../components/Pagination';
 import StarRatingFilter from '../components/StarRatingFilter';
 import HotelRatingFilter from '../components/HotelRatingFilter';
 import FacilityRatingFilter from '../components/FacilitiesRating';
+import PriceFilter from '../components/PriceFilter';
 
 const Search = () => {
 
@@ -15,6 +16,7 @@ const Search = () => {
     const [selectedStars, setSelectedStars] = useState<string[]>([])
     const [selectedHotelType, setSelectedHotelType] = useState<string[]>([])
     const [selectedFacility, setSelectedFacility] = useState<string[]>([])
+    const [price, setPrice] = useState<number | undefined>()
 
     const searchParams = {
         destination: search.destination,
@@ -25,7 +27,8 @@ const Search = () => {
         page: page.toString(),
         stars: selectedStars,
         type: selectedHotelType,
-        facilities: selectedFacility
+        facilities: selectedFacility,
+        maxPrice: price?.toString()
     }
 
     const { data: hotelData } = useQuery(["searchHotels", searchParams], ()=> 
@@ -81,6 +84,10 @@ const Search = () => {
                 <FacilityRatingFilter
                     onChange={handleFacilityRating}
                     selectedHotelFacility={selectedFacility}
+                />
+                <PriceFilter 
+                    onChange={(value?: number)=>setPrice(value)}
+                    selectedPrice={price}
                 />
 
             </div>

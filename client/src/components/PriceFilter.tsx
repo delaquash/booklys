@@ -8,6 +8,7 @@ const PriceFilter = ({onChange, selectedPrice}: FilterProps) => {
     <div>
         <h4 className="font-semibold text-sm mb-2">Price Filter</h4>
         <select
+        className="w-full rounded-md p-2 border"
             value={selectedPrice}
             onChange={(event)=>onChange(event.target.value ? parseInt(event.target.value ): undefined)}
         >
