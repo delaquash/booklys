@@ -8,7 +8,7 @@ type StarRatingProps = {
 const HotelRatingFilter = ({selectedHotelTypes, onChange}: StarRatingProps) => {
   return (
     <div className="border-b border-slate-300 pb-5">
-        <div className="text-md font-semibold mb-2"> Rating</div>
+        <div className="text-md font-semibold mb-2">Property Rating</div>
         {hotelTypes.map((hotelType)=> (
             <label className="flex items-center space-x-2">
                 <input 
