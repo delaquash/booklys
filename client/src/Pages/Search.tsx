@@ -13,6 +13,7 @@ const Search = () => {
     const [page, setPage] = useState<number>(1)
     const [selectedStars, setSelectedStars] = useState<string[]>([])
     const [selectedHotelType, setSelectedHotelType] = useState<string[]>([])
+    const [selectedFacility, setSelectedFacility] = useState<string[]>([])
 
     const searchParams = {
         destination: search.destination,
@@ -39,6 +40,13 @@ const Search = () => {
         )
     }
 
+    const handleFacilityRating = (event: React.ChangeEvent<HTMLInputElement>)=> {
+        const FacilityRating = event.target.value;
+
+        setSelectedFacility((prevFacility)=>
+        
+         )
+    }
 
     const handleHotelRating =  (event: React.ChangeEvent<HTMLInputElement>) => {
         const hotelRating = event.target.value;
