@@ -3,7 +3,7 @@ import cloudinary from "cloudinary";
 import { HotelSearchResponse, HotelQuery } from "../types/data";
 import Hotel from "../models/Hotel";
 import { validationResult } from "express-validator";
-import { restart } from "nodemon";
+
 
 export const searchHotel = async (req: Request, res: Response) => {
     try {
@@ -97,6 +97,14 @@ export const SearchHotelById = async(req: Request, res: Response)=> {
   const error = validationResult(req);
   if(!error.isEmpty()) {
     return res.status(400).json({ error: error.array()})
+  }
+  const id = req.params.id.toString()
+  try {
+    const hotel = await Hotel.find();
+    res.status(200).json(hotel)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({msg: "Server error"})
   }
 }
 
