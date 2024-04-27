@@ -115,6 +115,11 @@ export const editSingleHotelById = async (hotelFormData: FormData) => {
     return response.json();
 }
 
+export const fetchSingleHotelById = async(hotelId: string) => {
+  const response = await fetch (`${API_BASE_URL}/`)
+}
+
+
 export const searchHotels =async(searchParams: SearchParams): Promise<HotelSearchResponse>=> {
   const queryParams = new URLSearchParams()
   queryParams.append("destination", searchParams.destination || "");
