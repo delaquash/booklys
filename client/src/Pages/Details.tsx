@@ -23,6 +23,7 @@ const Details = () => {
                 <AiFillStar className='fill-yellow-500'/>
             ))}
         </span>
+        <h1 className="text-3xl font-bold">{hotel.name}</h1>
       </div>
     </div>
   )
