@@ -90,6 +90,12 @@ export const searchHotel = async (req: Request, res: Response) => {
 //     }
 // };
 
+
+export const SearchHotelById = async(req: Request, res: Response)=> {
+  
+}
+
+
 const constructedSearchQuery = (queryParams: any) => {
 let constructedQuery: any = {};
 
