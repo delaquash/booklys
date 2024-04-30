@@ -78,7 +78,7 @@ maxDate.setFullYear(maxDate.getFullYear() + 1)
           maxDate={maxDate}
           placeholderText="Check-in Date"
           className="min-w-full bg-white p-2 focus:outline-none"
-          // wrapperClassName="min-w-full"
+          wrapperClassName="min-w-full"
         />
       </div>
       <div>
