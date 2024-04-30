@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useSearchContext } from "../../context/SearchContext";
+import { useAppContext } from "../../context/AppContext";
 
 interface Props {
   pricePerNight: number;
@@ -17,7 +18,8 @@ interface IFormInputs {
 }
 
 const GuestInfoForms = ({ pricePerNight, hotelId }: Props) => {
-    const search = useSearchContext()
+  const search = useSearchContext();
+  const { isLoggedIn } = useAppContext();
   const {
     watch,
     register,
@@ -26,11 +28,11 @@ const GuestInfoForms = ({ pricePerNight, hotelId }: Props) => {
     formState: { errors },
   } = useForm<IFormInputs>({
     defaultValues: {
-        checkIn: search.checkIn,
-        checkOut: search.checkOut,
-        adultCount: search.adultCount,
-        childCount: search.childCount,
-    }
+      checkIn: search.checkIn,
+      checkOut: search.checkOut,
+      adultCount: search.adultCount,
+      childCount: search.childCount,
+    },
   });
   const checkIn = watch("checkIn");
   const checkOut = watch("checkOut");
@@ -59,7 +61,7 @@ const GuestInfoForms = ({ pricePerNight, hotelId }: Props) => {
             />
           </div>
           <div>
-          <DatePicker
+            <DatePicker
               selected={checkIn}
               onChange={(date) => setValue("checkIn", date as Date)}
               selectsStart
@@ -73,41 +75,50 @@ const GuestInfoForms = ({ pricePerNight, hotelId }: Props) => {
             />
           </div>
           <div className="flex bg-white px-2 py-1 gap-2">
-        <label className="items-center flex">
-          Adults:
-          <input
-            className="w-full p-1 focus:outline-none font-bold"
-            type="number"
-            min={1}
-            max={20}
-            {...register("adultCount", {
-                required: "Adults count is required",
-                min: {
+            <label className="items-center flex">
+              Adults:
+              <input
+                className="w-full p-1 focus:outline-none font-bold"
+                type="number"
+                min={1}
+                max={20}
+                {...register("adultCount", {
+                  required: "Adults count is required",
+                  min: {
                     value: 1,
-                    message: "There must be atleast one adult."
-                },
-                valueAsNumber: true
-            })}
-          />
-        </label>
-        <label className="items-center flex">
-          Children:
-          <input
-            className="w-full p-1 focus:outline-none font-bold"
-            type="number"
-            min={0}
-            max={20}
-            {...register("childCount", {
-                valueAsNumber: true,
-              })}
-          />
-           {errors.adultCount && (
-              <span className="text-red-500 font-semibold text-sm">
-                {errors.adultCount.message}
-              </span>
-            )}
-        </label>
-      </div>
+                    message: "There must be atleast one adult.",
+                  },
+                  valueAsNumber: true,
+                })}
+              />
+            </label>
+            <label className="items-center flex">
+              Children:
+              <input
+                className="w-full p-1 focus:outline-none font-bold"
+                type="number"
+                min={0}
+                max={20}
+                {...register("childCount", {
+                  valueAsNumber: true,
+                })}
+              />
+              {errors.adultCount && (
+                <span className="text-red-500 font-semibold text-sm">
+                  {errors.adultCount.message}
+                </span>
+              )}
+            </label>
+          </div>
+          {isLoggedIn ? (
+            <button className="bg-blue-600 text-white h-full p-2 font-bold hover:bg-blue-500 text-xl">
+              Book Now
+            </button>
+          ) : (
+            <button className="bg-blue-600 text-white h-full p-2 font-bold hover:bg-blue-500 text-xl">
+              Sign in to Book
+            </button>
+          )}
         </div>
       </form>
     </div>
