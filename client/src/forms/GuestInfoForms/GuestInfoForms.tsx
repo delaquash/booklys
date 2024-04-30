@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useSearchContext } from "../../context/SearchContext";
 import { useAppContext } from "../../context/AppContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface Props {
   pricePerNight: number;
@@ -21,7 +21,8 @@ interface IFormInputs {
 const GuestInfoForms = ({ pricePerNight, hotelId }: Props) => {
   const search = useSearchContext();
   const { isLoggedIn } = useAppContext();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation()
   const {
     watch,
     register,
@@ -54,10 +55,21 @@ const GuestInfoForms = ({ pricePerNight, hotelId }: Props) => {
         navigate("/sign-in", { state: { from: location }})
   }
 
+  const onSubmit = (data: IFormInputs) => {
+    search.saveSearchValues(
+        "",
+        data.checkIn,
+        data.checkOut,
+        data.adultCount,
+        data.childCount,
+    )
+    navigate(`/hotel/${hotelId}/booking`)
+}
+
   return (
     <div className="flex flex-col p-4 gap-4 bg-blue-200">
       <h3 className="text-md font-bold">{pricePerNight}</h3>
-      <form>
+      <form onSubmit={isLoggedIn ? handleSubmit(onSubmit) : handleSubmit(onSignInClick)}>
         <div className="flex flex-col gap-4 items-center">
           <div>
             <DatePicker
