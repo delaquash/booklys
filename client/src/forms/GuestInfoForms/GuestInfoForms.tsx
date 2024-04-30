@@ -88,8 +88,14 @@ const GuestInfoForms = ({ pricePerNight, hotelId }: Props) => {
             type="number"
             min={0}
             max={20}
-            value={childCount}
-            onChange={(event) => setChildCount(parseInt(event.target.value))}
+            {...register("childCount", {
+                required: "Children count is required",
+                min: {
+                    message: "There must be atleast one child.",
+                    value: 1
+                },
+                valueAsNumber: true
+            })}
           />
         </label>
       </div>
