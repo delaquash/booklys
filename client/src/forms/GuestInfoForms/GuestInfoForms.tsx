@@ -89,14 +89,14 @@ const GuestInfoForms = ({ pricePerNight, hotelId }: Props) => {
             min={0}
             max={20}
             {...register("childCount", {
-                required: "Children count is required",
-                min: {
-                    message: "There must be atleast one child.",
-                    value: 1
-                },
-                valueAsNumber: true
-            })}
+                valueAsNumber: true,
+              })}
           />
+           {errors.adultCount && (
+              <span className="text-red-500 font-semibold text-sm">
+                {errors.adultCount.message}
+              </span>
+            )}
         </label>
       </div>
         </div>
