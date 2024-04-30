@@ -62,8 +62,6 @@ const App = () => {
                 </Layout>
               }
             />
-          
-        
             <Route 
               path='/edit-hotels/:hotelId'
               element={
@@ -72,8 +70,6 @@ const App = () => {
                 </Layout>
               }
             />
-          
-     
             <Route 
               path='/my-hotels'
               element={
@@ -89,4 +85,4 @@ const App = () => {
   );
 }
 
-export default App
+export default App;

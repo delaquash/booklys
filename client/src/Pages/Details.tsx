@@ -32,7 +32,7 @@ const Details = () => {
       </div>
       <div className="flex flex-col lg:flex-row gap-4">
         {hotel.imageUrls.map((image) => (
-          <div className="h-[300px]">
+          <div className="h-[300px]" key={image}>
             <img
               src={image}
               alt={hotel.name}
@@ -43,7 +43,7 @@ const Details = () => {
       </div>
       <div className="flex flex-col lg:flex-row lg:flex-wrap gap-2">
         {hotel.facilities.map((facility) => (
-          <div className="border border-slate-300 rounded-sm p-3">
+          <div key={facility} className="border border-slate-300 rounded-sm p-3">
             {facility}
           </div>
         ))}
