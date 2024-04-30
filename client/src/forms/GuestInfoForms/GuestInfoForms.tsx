@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useSearchContext } from "../../context/SearchContext";
 
 interface Props {
   pricePerNight: number;
@@ -16,13 +17,21 @@ interface IFormInputs {
 }
 
 const GuestInfoForms = ({ pricePerNight, hotelId }: Props) => {
+    const search = useSearchContext()
   const {
     watch,
     register,
     setValue,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInputs>();
+  } = useForm<IFormInputs>({
+    defaultValues: {
+        checkIn: search.checkIn,
+        checkOut: search.checkOut,
+        adultCount: search.adultCount,
+        childCount: search.childCount,
+    }
+  });
   const checkIn = watch("checkIn");
   const checkOut = watch("checkOut");
 
