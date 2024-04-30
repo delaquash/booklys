@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useSearchContext } from "../../context/SearchContext";
 import { useAppContext } from "../../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   pricePerNight: number;
@@ -20,6 +21,7 @@ interface IFormInputs {
 const GuestInfoForms = ({ pricePerNight, hotelId }: Props) => {
   const search = useSearchContext();
   const { isLoggedIn } = useAppContext();
+  const navigate = useNavigate()
   const {
     watch,
     register,
@@ -40,6 +42,17 @@ const GuestInfoForms = ({ pricePerNight, hotelId }: Props) => {
   const minDate = new Date();
   const maxDate = new Date();
   maxDate.setMonth(maxDate.getMonth() + 1);
+
+  const onSignInClick = (data: IFormInputs) => {
+        search.saveSearchValues(
+            "",
+            data.checkIn,
+            data.checkOut,
+            data.adultCount,
+            data.childCount,
+        )
+        navigate("/sign-in", { state: { from: location }})
+  }
 
   return (
     <div className="flex flex-col p-4 gap-4 bg-blue-200">
