@@ -36,4 +36,9 @@ test.beforeEach('should allow the user to sign in', async ({ page }) => {
     await expect(page.getByText("Hotels found in Olaide")).toBeVisible();
     // actual result from search
     await expect(page.getByText("Olaide Emmanuel")).toBeVisible()
-  })
+  });
+
+   test("should show hotel detail", async({ page })=> {
+    await page.goto(UI_URL);
+    
+   })

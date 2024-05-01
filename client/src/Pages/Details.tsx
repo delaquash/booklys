@@ -61,4 +61,15 @@ const Details = () => {
   );
 };
 
+
+
+// const { data: hotel } = useQuery(
+//     "fetchHotelById",
+//     () => apiClient.fetchHotelById(hotelId || ""),
+//     {
+//       enabled: !!hotelId,
+//     }
+//   );
+
+
 export default Details;
