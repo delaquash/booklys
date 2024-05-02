@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { formProps } from "../Pages/Register";
 import { SignInProps } from "../Pages/SignIn";
-import { HotelSearchResponse, HotelType, SearchParams } from "../../types/dataTypes";
+import { HotelSearchResponse, HotelType, SearchParams, UserType } from "../../types/dataTypes";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
-export const fetchCurrentUser = async () => {
+export const fetchCurrentUser = async (): Promise<UserType> => {
   const res = await fetch (`${API_BASE_URL}/user/currentUser`, {
     credentials: "include"
   })
