@@ -1,19 +1,24 @@
-import React from 'react';
-
+import React from "react";
+import { HotelType } from "../../types/dataTypes";
 
 interface Props {
   checkIn: Date;
   checkOut: Date;
   adultCount: number;
   childCount: number;
-  hotel: string;
-  numberOfNights: number
+  hotel: HotelType;
+  numberOfNights: number;
 }
 
-const BookingDetails = ({}: Props) => {
-  return (
-    <div>BookingDetails</div>
-  )
-}
+const BookingDetails = ({
+  adultCount,
+  checkIn,
+  checkOut,
+  childCount,
+  hotel,
+  numberOfNights,
+}: Props) => {
+  return <div>BookingDetails</div>;
+};
 
-export default BookingDetails
+export default BookingDetails;
