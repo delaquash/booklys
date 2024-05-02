@@ -1,5 +1,5 @@
-import { formProps } from "../Pages/Register";
 import axios from 'axios';
+import { formProps } from "../Pages/Register";
 import { SignInProps } from "../Pages/SignIn";
 import { HotelSearchResponse, HotelType, SearchParams } from "../../types/dataTypes";
 

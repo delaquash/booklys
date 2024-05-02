@@ -44,53 +44,12 @@ export const searchHotel = async (req: Request, res: Response) => {
           },
         };
     
-        res.json(response);
+        res.status(200).json(response)
       } catch (error) {
         console.log("error", error);
         res.status(500).json({ message: "Something went wrong" });
       }
     }
-//     try {
-
-//         const query = constructedSearchQuery(req.query);
-
-//         let sortOptions = {};
-
-//         switch (req.query.sortOption) {
-//         case "starRating":
-//             sortOptions = { starRating: -1 };
-//             break;
-//         case "pricePerNightAsc":
-//             sortOptions = { pricePerNight: 1 };
-//             break;
-//         case "pricePerNightDesc":
-//             sortOptions = { pricePerNight: -1 };
-//             break;
-//         };
-//         // number of hotels to display per page (5 in this case)
-//         const pageSize = 5;
-//         const pageNumber = parseInt(
-//             req.query.page ? req.query.page.toString() : "1"
-//         )
-
-//         const skip = (pageNumber - 1) * pageSize;
-//         const hotels = await Hotel.find(query).sort(sortOptions).skip(skip).limit(pageSize);
-//         const total = await Hotel.countDocuments(query);
-
-//         const response:HotelSearchResponse = {
-//             data: hotels,
-//             pagination: {
-//                 total,
-//                 page: pageNumber,
-//                 pages: Math.ceil(total/pageSize)
-//             },
-//         };
-//         res.status(200).json(response)
-//     } catch (error) {
-//         console.log(error)
-//         res.status(500).json({ message: error })
-//     }
-// };
 
 
 export const SearchHotelById = async(req: Request, res: Response)=> {

@@ -32,7 +32,7 @@ const Search = () => {
     sortOption
   };
 
-  const { data: hotelData } = useQuery(["searchHotels", searchParams], () =>
+  const { data: hotelData } = useQuery(["searchHotels", searchParams], ()=>
     apiClient.searchHotels(searchParams)
   );
 
