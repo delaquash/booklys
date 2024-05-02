@@ -1,5 +1,5 @@
 import express from "express";
-import {register} from "../controllers/User";
+import {currentUser, register} from "../controllers/User";
 import { isAdmin, verifyUser } from "../utils/verifyToken";
 import { check } from "express-validator";
 import verifyToken from "../middleware/auth";
@@ -16,7 +16,7 @@ const userValidationRules = [
   ];
 // register a user
 router.post("/register", userValidationRules,register);
-router.get("/me", verifyToken, )
+router.get("/currentUser", verifyToken, currentUser)
 // privately update a user
 // router.put("/:id", verifyUser, updateUser);
 // privately delete user

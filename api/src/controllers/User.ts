@@ -3,7 +3,7 @@ import User from "../models/User";
 import jwt from "jsonwebtoken";
 import { check, validationResult } from "express-validator";
 
-const mySelf = async (req: Request, res: Response, next: NextFunction)=>{
+const currentUser = async (req: Request, res: Response, next: NextFunction)=>{
   const userId = req.userId;
 
   try {
@@ -56,4 +56,4 @@ const register = async (req: Request, res: Response, next: NextFunction)=>{
   }
 }
 
-export { register }
+export { register, currentUser }

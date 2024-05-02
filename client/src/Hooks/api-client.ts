@@ -5,6 +5,17 @@ import { HotelSearchResponse, HotelType, SearchParams } from "../../types/dataTy
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
+export const fetchCurrentUser = async () => {
+  const res = await fetch (`${API_BASE_URL}/user/currentUser`, {
+    credentials: "include"
+  })
+  if(!res) {
+    throw new Error("Unable to fetch current user...")
+  }
+  return res.json()
+}
+
+
 export const register = async (formData: formProps) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/user/register`, formData, {
