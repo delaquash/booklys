@@ -31,7 +31,7 @@ const Booking = () => {
         checkOut={search.checkOut}
         hotel={hotel}
         numberOfNights={numberOfNights}
-        adult={search.adultCount}
+        adultCount={search.adultCount}
         childCount={search.childCount}
       />
       {currentUser && <BookingForm currentUser={currentUser} />}
