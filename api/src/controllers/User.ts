@@ -3,6 +3,20 @@ import User from "../models/User";
 import jwt from "jsonwebtoken";
 import { check, validationResult } from "express-validator";
 
+const currentUser = async (req: Request, res: Response, next: NextFunction)=>{
+  const userId = req.userId;
+
+  try {
+    const user = await User.findById(userId).select("-password");
+    if(!user){
+      return res.status(404).json({message: "User not found"})
+    }
+    res.status(200).json(user)
+  } catch (error) {
+    next(error)
+  }
+}
+
 
 const register = async (req: Request, res: Response, next: NextFunction)=>{
   const errors = validationResult(req);
@@ -42,4 +56,4 @@ const register = async (req: Request, res: Response, next: NextFunction)=>{
   }
 }
 
-export { register }
+export { register, currentUser }

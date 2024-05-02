@@ -66,4 +66,4 @@ const SearchResultCard = ({hotel}:SearchResultProps) => {
   )
 }
 
-export default SearchResultCard
+export default SearchResultCard;

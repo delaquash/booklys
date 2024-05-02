@@ -51,6 +51,11 @@ export type SearchParams = {
   adultCount?: string;
   childCount?: string;
   page?: string;
+  facilities?: string[];
+  types?:string[];
+  stars?: string[];
+  maxPrice?: string;
+  sortOption?: string;
 }
 
 export type HotelSearchResponse = {
@@ -60,4 +65,13 @@ export type HotelSearchResponse = {
     page: number;
     pages: number;
   };
+};
+
+
+export type UserType = {
+  _id: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
 };

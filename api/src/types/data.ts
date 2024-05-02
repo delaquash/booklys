@@ -6,6 +6,7 @@ export type UserType = {
     lastName: string;
   };
   
+
   export type HotelType = {
     _id: string;
     userId: string;
@@ -51,3 +52,15 @@ export type UserType = {
     clientSecret: string;
     totalCost: number;
   };
+
+  export interface HotelQuery {
+    $or?: { city: RegExp; country: RegExp }[];
+    adultCount?: { $gte: number };
+    childCount?: { $gte: number };
+    facilities?: { $all: string[] };
+    type?: { $in: string[] };
+    starRating?: { $in: number[] };
+    pricePerNight?: { $lte: string };
+    // Add other properties as needed
+  }
+  
