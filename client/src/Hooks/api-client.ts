@@ -166,3 +166,10 @@ export const searchHotels =async(searchParams: SearchParams): Promise<HotelSearc
   return response.json();
 };
 
+export const fetchMyHotelBookings = async () => {
+  const res = await fetch (`${API_BASE_URL}/booking`)
+  if(!res.ok){
+    throw new Error("Unable to retrieve booked hotels")
+  }
+  return res.json()
+}
