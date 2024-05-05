@@ -12,7 +12,7 @@ export const fetchCurrentUser = async (): Promise<UserType> => {
   if(!res) {
     throw new Error("Unable to fetch current user...")
   }
-  return res.json()
+  return res.json();
 }
 
 
@@ -131,7 +131,7 @@ export const fetchSingleHotelById = async(hotelId: string): Promise<HotelType> =
   if(!res.ok){
     throw new Error("Error fetching single hotel")
   }
-  return res.json()
+  return res.json();
 }
 
 
@@ -166,10 +166,12 @@ export const searchHotels =async(searchParams: SearchParams): Promise<HotelSearc
   return response.json();
 };
 
-export const fetchMyHotelBookings = async () => {
-  const res = await fetch (`${API_BASE_URL}/booking`)
+export const fetchMyHotelBookings = async (): Promise<HotelType[]> => {
+  const res = await fetch (`${API_BASE_URL}/booking`, {
+    credentials: "include"
+  })
   if(!res.ok){
     throw new Error("Unable to retrieve booked hotels")
   }
-  return res.json()
+  return res.json();
 }
