@@ -10,9 +10,9 @@ import connectDB from "./src/config/db";
 import logger from "./logger";
 import authRoute from "./src/routes/auth";
 import hotelRoute from "./src/routes/hotels";
-// import roomRoute from "./routes/rooms";
 import userRoute from "./src/routes/user";
 import my_hotels from "./src/routes/my_hotels"
+import myBooking from "./src/routes/Booking"
 import ErrorException from "./src/utils/error";
 import cors from "cors";
 import path from "path";
@@ -45,6 +45,7 @@ app.use("/api/v1/user", userRoute);
 app.use("/api/v1/my_hotel", my_hotels)
 // app.use("/api/v1/room", roomRoute);
 app.use("/api/v1/hotel", hotelRoute);
+app.use("/api/v1/booking", myBooking)
 
 app.get("*", (req: Request, res: Response)=> {
   res.sendFile(path.join(__dirname, "../client/dist/index.html"))
