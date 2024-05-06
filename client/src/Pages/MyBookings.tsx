@@ -27,8 +27,7 @@ const MyBookings = () => {
                         {hotel.city}, {hotel.country}
                     </div>
                 </div>
-            </div>
-            {hotel.bookings.map((booking)=> (
+                {hotel.bookings.map((booking)=> (
                 <div>
                     <div>
                         <span className="font-bold mr-2">Dates:</span>
@@ -45,6 +44,8 @@ const MyBookings = () => {
                     </div>
                 </div>
             ))}
+            </div>
+            
           </div>
     ))}
     </div>
