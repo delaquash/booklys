@@ -49,3 +49,9 @@ test.beforeEach('should allow the user to sign in', async ({ page }) => {
 
       await expect(page.getByRole("button", {name: "Book now"})).toBeVisible();
    })
+
+   test("should book hotel", async ({ page })=> {
+    await page.goto(UI_URL);
+
+    await page.getByPlaceholder
+   });
