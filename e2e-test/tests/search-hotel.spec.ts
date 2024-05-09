@@ -53,5 +53,23 @@ test.beforeEach('should allow the user to sign in', async ({ page }) => {
    test("should book hotel", async ({ page })=> {
     await page.goto(UI_URL);
 
-    await page.getByPlaceholder
-   });
+      await page.getByPlaceholder("Where are you going?").fill("Olaide");
+      await page.getByRole("button", {name: "Search"}).click();
+
+      await page.getByText("Olaide Emmanue").click();
+      await expect(page).toHaveURL("/detail/");
+
+      await expect(page.getByRole("button", {name: "Book now"})).toBeVisible();
+   })
+
+   test("should book hotels", async ({ page })=> {
+    await page.goto(UI_URL);
+
+      await page.getByPlaceholder("Where are you going?").fill("Olaide");
+      await page.getByRole("button", {name: "Search"}).click();
+
+      await page.getByText("Olaide Emmanue").click();
+      await expect(page).toHaveURL("/detail/");
+
+      await expect(page.getByRole("button", {name: "Book now"})).toBeVisible();
+   })
